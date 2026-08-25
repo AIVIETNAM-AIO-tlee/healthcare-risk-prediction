@@ -4,11 +4,9 @@ from pathlib import Path
 
 import pandas as pd
 
-from config import TARGET_COLUMN
 
-
-def load_raw_dataset(csv_path: str | Path) -> pd.DataFrame:
-	"""Load the raw Kaggle CSV and do minimal, non-destructive normalization.
+def load_raw_dataset(csv_path: str | Path, target_column: str) -> pd.DataFrame:
+	"""Load a raw dataset CSV and do minimal, non-destructive normalization.
 
 	This only strips column-name whitespace and drops columns that are
 	entirely empty; it does not impute, encode, or scale anything -- that is
@@ -17,9 +15,8 @@ def load_raw_dataset(csv_path: str | Path) -> pd.DataFrame:
 	path = Path(csv_path)
 	if not path.exists():
 		raise FileNotFoundError(
-			f"Raw dataset not found: {path}. Download the 2022 update of the "
-			"'Personal Key Indicators of Heart Disease' dataset from Kaggle and "
-			"place 'heart_2022_with_nans.csv' inside data/raw/."
+			f"Raw dataset not found: {path}. Make sure the dataset's CSV file has "
+			f"been placed inside its 'data/raw/<dataset_key>/' folder."
 		)
 
 	df = pd.read_csv(path)
@@ -29,13 +26,13 @@ def load_raw_dataset(csv_path: str | Path) -> pd.DataFrame:
 	if empty_columns:
 		df = df.drop(columns=empty_columns)
 
-	if TARGET_COLUMN not in df.columns:
-		raise ValueError(f"Expected target column '{TARGET_COLUMN}', got {df.columns.tolist()}")
+	if target_column not in df.columns:
+		raise ValueError(f"Expected target column '{target_column}', got {df.columns.tolist()}")
 
 	return df
 
 
-def infer_feature_columns(df: pd.DataFrame, target_column: str = TARGET_COLUMN) -> list[str]:
+def infer_feature_columns(df: pd.DataFrame, target_column: str) -> list[str]:
 	"""Return every column except the target column."""
 	return [column for column in df.columns if column != target_column]
 
@@ -43,7 +40,7 @@ def infer_feature_columns(df: pd.DataFrame, target_column: str = TARGET_COLUMN) 
 def infer_column_types(
 	df: pd.DataFrame,
 	numeric_columns: list[str],
-	target_column: str = TARGET_COLUMN,
+	target_column: str,
 ) -> tuple[list[str], list[str]]:
 	"""Split feature columns into (numeric, categorical) using a known numeric list.
 

@@ -5,7 +5,7 @@ from dataclasses import dataclass
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-from config import RANDOM_STATE, TARGET_COLUMN, TEST_SIZE
+from config import RANDOM_STATE, TEST_SIZE
 
 
 @dataclass(frozen=True)
@@ -16,7 +16,7 @@ class SplitData:
 
 def split_train_test(
 	df: pd.DataFrame,
-	target_column: str = TARGET_COLUMN,
+	target_column: str,
 	test_size: float = TEST_SIZE,
 	random_state: int = RANDOM_STATE,
 ) -> SplitData:

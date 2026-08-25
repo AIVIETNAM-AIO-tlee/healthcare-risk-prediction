@@ -2,21 +2,45 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+import numpy as np
 import pandas as pd
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 
-from config import TARGET_COLUMN
+
+def mark_invalid_zeros_as_missing(df: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
+	"""Replace 0 with NaN in the given numeric columns.
+
+	Some numeric health measurements (e.g. ``Cholesterol``/``RestingBP`` in
+	dataset2) use 0 as a placeholder for "not measured" rather than a genuine
+	reading. Converting those to NaN lets the normal median imputation in
+	``fit_preprocessor``/``transform_features`` handle them, instead of the
+	model seeing physiologically impossible zero values.
+	"""
+	out = df.copy()
+	for column in columns:
+		out[column] = out[column].replace(0, np.nan)
+	return out
 
 
-def clean_target(df: pd.DataFrame, target_column: str = TARGET_COLUMN) -> pd.DataFrame:
+def clean_target(df: pd.DataFrame, target_column: str) -> pd.DataFrame:
 	"""Drop rows with a missing target and encode it to a binary 0/1 integer.
 
-	Mirrors the EDA finding that ~0.7% of rows have a missing target: since a
-	label cannot be reliably imputed, those rows are dropped rather than filled.
+	Handles both a raw "Yes"/"No" string target (dataset1) and datasets whose
+	target is already numeric 0/1 (dataset2, dataset3) -- either way, rows
+	with a missing target are dropped first, since a label cannot be
+	reliably imputed.
+
+	The "is it a string column?" check uses ``is_numeric_dtype`` rather than
+	comparing ``dtype == object``: pandas >= 2.x (and the ``str`` dtype used
+	by default in pandas 3.x) can read text columns with a ``StringDtype``
+	that is not ``object``, so an ``== object`` check silently misses them
+	and this method must be dtype-version agnostic to catch both.
 	"""
 	cleaned = df.dropna(subset=[target_column]).reset_index(drop=True)
-	cleaned[target_column] = cleaned[target_column].map({"Yes": 1, "No": 0}).astype(int)
+	if not pd.api.types.is_numeric_dtype(cleaned[target_column]):
+		cleaned[target_column] = cleaned[target_column].map({"Yes": 1, "No": 0})
+	cleaned[target_column] = cleaned[target_column].astype(int)
 	return cleaned
 
 
@@ -46,11 +70,11 @@ def fit_preprocessor(
 	train_df: pd.DataFrame,
 	numeric_columns: list[str],
 	categorical_columns: list[str],
-	target_column: str = TARGET_COLUMN,
+	target_column: str,
 ) -> tuple[FittedPreprocessor, pd.DataFrame]:
 	"""Fit imputers/encoders/scaler on the training split and transform it.
 
-	Steps (same order as the EDA/preprocessing notebook):
+	Steps (same order as the EDA/preprocessing notebooks):
 	  1. Impute missing numeric values with the column median.
 	  2. Impute missing categorical values with the column mode.
 	  3. Label-encode binary (2-category) columns to 0/1.
@@ -117,7 +141,7 @@ def fit_preprocessor(
 def transform_features(
 	df: pd.DataFrame,
 	fitted: FittedPreprocessor,
-	target_column: str = TARGET_COLUMN,
+	target_column: str,
 ) -> pd.DataFrame:
 	"""Apply an already-fitted preprocessor to another split (e.g. the test set).
 
