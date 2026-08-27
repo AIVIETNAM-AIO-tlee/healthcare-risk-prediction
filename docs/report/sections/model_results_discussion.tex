@@ -1,0 +1,141 @@
+\subsection{Predictive Performance Across Datasets (RQ1)}
+
+Table~\ref{tab:cv_model_results} summarizes the five-fold cross-validation
+performance of AdaBoost, XGBoost, and LightGBM on the three healthcare
+datasets. The values are reported as mean $\pm$ standard deviation across the
+five validation folds. PR-AUC is treated as the primary comparison metric,
+while ROC-AUC, Recall, and F1-score provide complementary views of ranking and
+threshold-based performance.
+
+\begin{table}[h]
+\centering
+\scriptsize
+\begin{tabular}{llcccc}
+\textbf{Dataset} & \textbf{Model} & \textbf{ROC-AUC} & \textbf{PR-AUC} & \textbf{Recall} & \textbf{F1} \\
+\hline
+Dataset 1 & AdaBoost & $0.8716 \pm 0.0042$ & $0.3853 \pm 0.0087$ & $0.6794 \pm 0.0106$ & $0.3765 \pm 0.0082$ \\
+ & XGBoost & $0.8872 \pm 0.0033$ & $0.4138 \pm 0.0084$ & $0.7782 \pm 0.0071$ & $0.3324 \pm 0.0026$ \\
+ & LightGBM & $0.8873 \pm 0.0033$ & $0.4129 \pm 0.0088$ & $0.7771 \pm 0.0084$ & $0.3346 \pm 0.0031$ \\
+\hline
+Dataset 2 & AdaBoost & $0.9241 \pm 0.0419$ & $0.9226 \pm 0.0444$ & $0.8449 \pm 0.0294$ & $0.8578 \pm 0.0190$ \\
+ & XGBoost & $0.9244 \pm 0.0322$ & $0.9214 \pm 0.0324$ & $0.8815 \pm 0.0381$ & $0.8785 \pm 0.0249$ \\
+ & LightGBM & $0.9241 \pm 0.0333$ & $0.9152 \pm 0.0351$ & $0.8769 \pm 0.0366$ & $0.8726 \pm 0.0256$ \\
+\hline
+Dataset 3 & AdaBoost & $0.8324 \pm 0.0030$ & $0.3681 \pm 0.0074$ & $0.7743 \pm 0.0105$ & $0.3825 \pm 0.0027$ \\
+ & XGBoost & $0.8386 \pm 0.0027$ & $0.3800 \pm 0.0053$ & $0.8016 \pm 0.0049$ & $0.3814 \pm 0.0020$ \\
+ & LightGBM & $0.8381 \pm 0.0026$ & $0.3801 \pm 0.0057$ & $0.7970 \pm 0.0053$ & $0.3825 \pm 0.0021$ \\
+\end{tabular}
+\caption{Five-fold cross-validation performance (mean $\pm$ standard deviation).}
+\label{tab:cv_model_results}
+\end{table}
+
+On Dataset 1, XGBoost and LightGBM produced almost identical ROC-AUC, while
+XGBoost achieved a slightly higher mean PR-AUC and Recall. Both gradient-
+boosted models clearly exceeded AdaBoost on ROC-AUC, PR-AUC, and Recall. The
+lower F1 scores of XGBoost and LightGBM indicate that their higher recall at the
+fixed 0.50 threshold came with a precision trade-off.
+
+On Dataset 2, all three models achieved strong discrimination, with mean
+ROC-AUC values close to 0.924. XGBoost achieved the highest mean Recall and F1,
+whereas AdaBoost obtained the highest mean PR-AUC by a small margin. This shows
+that no single model dominated every metric on this relatively small dataset.
+
+On Dataset 3, XGBoost and LightGBM again improved ROC-AUC and PR-AUC over
+AdaBoost. XGBoost achieved the highest mean Recall, while the three models had
+very similar F1 values. Across the three datasets, the aggregated comparison
+ranked XGBoost first with a mean dataset rank of 1.6667, followed by LightGBM at
+2.0000 and AdaBoost at 2.3333. XGBoost also achieved the highest cross-dataset
+mean ROC-AUC (0.8834), PR-AUC (0.5717), and Recall (0.8205). AdaBoost achieved
+the highest cross-dataset mean F1 (0.5389), emphasizing that the preferred model
+depends partly on the evaluation objective and decision threshold.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lccccc}
+\textbf{Model} & \textbf{Mean Rank} & \textbf{ROC-AUC} & \textbf{PR-AUC} & \textbf{Recall} & \textbf{F1} \\
+\hline
+XGBoost & \textbf{1.6667} & \textbf{0.8834} & \textbf{0.5717} & \textbf{0.8205} & 0.5308 \\
+LightGBM & 2.0000 & 0.8832 & 0.5694 & 0.8170 & 0.5299 \\
+AdaBoost & 2.3333 & 0.8760 & 0.5587 & 0.7662 & \textbf{0.5389} \\
+\end{tabular}
+\caption{Unweighted cross-dataset comparison based on the experiment outputs.}
+\label{tab:overall_model_results}
+\end{table}
+
+These results answer RQ1 by showing that XGBoost provides the strongest overall
+performance under the selected protocol, although LightGBM is extremely close
+on several ranking metrics and AdaBoost retains a small advantage in aggregate
+F1. Therefore, the comparison does not support a claim that one algorithm is
+uniformly superior on every metric and dataset.
+
+\begin{table}[h]
+\centering
+\scriptsize
+\begin{tabular}{llcccc}
+\textbf{Dataset} & \textbf{Model} & \textbf{ROC-AUC} & \textbf{PR-AUC} & \textbf{Recall} & \textbf{F1} \\
+\hline
+Dataset 1 & AdaBoost & 0.8695 & 0.3860 & 0.6705 & 0.3657 \\
+ & XGBoost & 0.8850 & 0.4169 & 0.7712 & 0.3255 \\
+ & LightGBM & 0.8850 & 0.4187 & 0.7694 & 0.3259 \\
+\hline
+Dataset 2 & AdaBoost & 0.9256 & 0.9394 & 0.8529 & 0.8832 \\
+ & XGBoost & 0.9224 & 0.9216 & 0.8333 & 0.8586 \\
+ & LightGBM & 0.9189 & 0.9166 & 0.8431 & 0.8643 \\
+\hline
+Dataset 3 & AdaBoost & 0.8326 & 0.3672 & 0.7674 & 0.3788 \\
+ & XGBoost & 0.8384 & 0.3756 & 0.7963 & 0.3773 \\
+ & LightGBM & 0.8385 & 0.3763 & 0.7925 & 0.3789 \\
+\end{tabular}
+\caption{Performance on the untouched hold-out test partitions after refitting on the full development data.}
+\label{tab:holdout_model_results}
+\end{table}
+
+\subsection{Predictive Stability Across Cross-Validation Folds (RQ2)}
+
+The fold-level results also reveal clear differences in stability across the
+three datasets. Dataset 1 and Dataset 3 produced small standard deviations for
+all three models. For example, XGBoost obtained ROC-AUC standard deviations of
+0.0033 on Dataset 1 and 0.0027 on Dataset 3. LightGBM showed similarly small
+variation, indicating that the two gradient-boosted models were not highly
+sensitive to the particular fold assignment on the two larger datasets.
+
+Dataset 2 exhibited noticeably greater fold-to-fold variation. Its development
+partition contains only 734 samples, compared with 353,653 for Dataset 1 and
+183,824 for Dataset 3. XGBoost ROC-AUC ranged from 0.8676 to 0.9465 across the
+five folds, while AdaBoost ranged from 0.8547 to 0.9673 and LightGBM ranged from
+0.8651 to 0.9497. The larger variability is therefore consistent with the
+smaller sample size: each validation fold contains fewer observations, so the
+composition of a single fold has a greater influence on the measured score.
+
+The final hold-out results were generally close to the corresponding
+cross-validation means. For example, Dataset 1 XGBoost achieved a mean CV
+ROC-AUC of 0.8872 and a hold-out ROC-AUC of 0.8850, while Dataset 3 XGBoost
+achieved 0.8386 in CV and 0.8384 on the hold-out set. This agreement provides
+additional evidence that the reported cross-validation estimates are not driven
+by a single unusually favorable split.
+
+Overall, RQ2 is answered by finding that predictive performance is highly stable
+on the two large datasets but less stable on the small Heart Failure Prediction
+dataset. The pattern is observed across all three algorithms, suggesting that
+dataset size and fold composition contribute more to the observed instability
+than the choice among the three boosting methods alone.
+
+\subsection{Discussion}
+
+The experiments highlight three practical findings. First, the modern gradient-
+boosted models consistently provided stronger ranking performance than AdaBoost
+on the larger and more imbalanced datasets. Second, XGBoost and LightGBM were
+very close to one another, so small differences should not be over-interpreted
+without additional repeated validation or statistical testing. Third,
+threshold-dependent metrics can tell a different story from ranking metrics.
+For example, AdaBoost obtained the highest cross-dataset mean F1 even though it
+ranked below XGBoost and LightGBM on ROC-AUC, PR-AUC, and Recall. This reinforces
+the importance of reporting multiple metrics in healthcare risk prediction
+rather than selecting a model from one score alone.
+
+The present subsection reports only the model-performance components associated
+with RQ1 and RQ2. RQ3 requires fold-wise SHAP feature-importance rankings and a
+separate stability analysis. Those results should be integrated after the
+SHAP-analysis component is completed; they are intentionally not inferred from
+the predictive metrics reported here.
