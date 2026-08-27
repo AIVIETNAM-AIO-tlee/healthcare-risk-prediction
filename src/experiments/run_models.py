@@ -72,10 +72,31 @@ def _load_processed_split(
     if feature_columns != [column for column in test_df.columns if column != target]:
         raise ValueError("Train/test feature columns or their order do not match.")
 
-    X_train = train_df[feature_columns]
+    X_train = train_df[feature_columns].copy()
     y_train = train_df[target].astype(int)
-    X_test = test_df[feature_columns]
+    X_test = test_df[feature_columns].copy()
     y_test = test_df[target].astype(int)
+
+    # LightGBM does not allow special JSON characters in feature names.
+    # Sanitize feature names consistently for both train and test sets.
+    safe_feature_names = (
+        pd.Index(X_train.columns)
+        .astype(str)
+        .str.replace(r'[^A-Za-z0-9_]+', '_', regex=True)
+    )
+
+    # Ensure sanitized feature names remain unique.
+    if safe_feature_names.duplicated().any():
+        counts = {}
+        unique_names = []
+        for name in safe_feature_names:
+            count = counts.get(name, 0)
+            unique_names.append(name if count == 0 else f"{name}_{count}")
+            counts[name] = count + 1
+        safe_feature_names = unique_names
+
+    X_train.columns = safe_feature_names
+    X_test.columns = safe_feature_names
 
     non_numeric = X_train.select_dtypes(exclude=[np.number]).columns.tolist()
     if non_numeric:

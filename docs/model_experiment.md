@@ -23,8 +23,6 @@ python -m pip install -r requirements.txt
 
 ## 3. Run all experiments
 
-From the repository root:
-
 ```bash
 python -m src.experiments.run_models --config config.yaml
 ```
