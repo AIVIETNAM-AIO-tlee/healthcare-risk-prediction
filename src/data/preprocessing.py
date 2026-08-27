@@ -93,8 +93,10 @@ def fit_preprocessor(
 
 	# 3) Label-encode binary columns to 0/1, remembering the mapping and a
 	#    fallback code (the training mode) for categories never seen at fit time.
+	#    Single-category columns go through one-hot (step 4) instead: a raw
+	#    string column would survive transform unchanged and poison model input.
 	binary_columns = [c for c in categorical_columns if df[c].nunique() == 2]
-	multi_columns = [c for c in categorical_columns if df[c].nunique() > 2]
+	multi_columns = [c for c in categorical_columns if df[c].nunique() != 2]
 
 	binary_maps: dict[str, dict[str, int]] = {}
 	binary_fallback: dict[str, int] = {}
