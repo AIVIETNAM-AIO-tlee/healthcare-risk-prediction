@@ -1,0 +1,45 @@
+Boosting methods construct an ensemble sequentially so that later weak learners
+focus on errors made by earlier learners. AdaBoost is one of the foundational
+boosting algorithms. It updates observation weights after each boosting round,
+increasing the emphasis on previously misclassified samples, and combines the
+weak learners into a weighted final classifier \cite{freund1997adaboost}. In this
+study, AdaBoost serves as the classical boosting baseline and uses decision
+stumps as weak learners. This configuration keeps each individual learner simple
+and makes the contrast with more modern gradient-boosted tree systems clearer.
+
+XGBoost extends gradient tree boosting with regularization and systems-level
+optimizations for scalable learning. Its design includes a regularized objective,
+sparsity-aware split handling, approximate tree learning, and efficient parallel
+computation \cite{chen2016xgboost}. These properties make XGBoost a strong choice
+for structured tabular classification and provide explicit controls such as tree
+depth, shrinkage, row subsampling, column subsampling, and regularization. Those
+controls are useful in healthcare datasets because sample size, feature sparsity,
+and class prevalence can vary substantially across datasets.
+
+LightGBM is another gradient boosting decision-tree framework designed for high
+efficiency. Ke et al. introduced Gradient-based One-Side Sampling (GOSS) and
+Exclusive Feature Bundling (EFB) to reduce computational cost while preserving
+predictive quality on large and high-dimensional datasets
+\cite{ke2017lightgbm}. LightGBM also grows trees leaf-wise, which can fit complex
+nonlinear interactions efficiently but requires complexity controls such as the
+number of leaves, maximum depth, minimum child samples, and shrinkage. The
+current study therefore compares LightGBM with XGBoost and AdaBoost under one
+consistent evaluation protocol rather than comparing results obtained from
+different preprocessing or validation procedures.
+
+Predictive performance alone does not explain which variables drive model
+outputs. SHAP (SHapley Additive exPlanations) provides additive feature
+attributions for individual predictions and establishes desirable consistency
+properties for feature attribution \cite{lundberg2017shap}. Tree-specific SHAP
+methods make these explanations computationally practical for tree ensembles,
+and prior work has demonstrated their use on medical prediction problems
+\cite{lundberg2020treeexplainer}. This motivates the second stability dimension
+in this project: whether the ordering of important SHAP features remains similar
+when the training subset changes across cross-validation folds.
+
+The main gap addressed by this study is therefore not simply identifying the
+single highest-scoring tree model. Instead, the experiment combines
+cross-dataset model comparison, fold-to-fold predictive variability, and
+fold-to-fold explanation variability. This design directly supports RQ1--RQ3
+and helps distinguish a model that is strong on average from one whose
+performance or explanations are sensitive to the particular training sample.

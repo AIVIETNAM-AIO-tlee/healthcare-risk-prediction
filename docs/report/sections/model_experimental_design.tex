@@ -1,0 +1,104 @@
+\subsection{Model Experimental Design}
+
+The modeling stage consumes the processed development and test files produced by
+the upstream data pipeline. For each of the three datasets, the data pipeline
+creates a stratified 80/20 development--test split. The test partition is held
+out during model comparison and is used only after cross-validation has been
+completed. All three candidate algorithms receive the same processed feature
+matrix for a given dataset so that differences in results are attributable to
+the model rather than to different input representations.
+
+Within the development partition, we apply stratified five-fold
+cross-validation with shuffling and a fixed random seed of 42. Stratification
+preserves approximately the same class proportion in each fold, which is
+particularly important when the positive healthcare outcome is less frequent
+\cite{pedregosa2011scikit}. The exact same fold-generation rule and random seed
+are used for AdaBoost, XGBoost, and LightGBM. For every fold, four folds are used
+for model fitting and the remaining fold is used for validation. Model objects
+are re-created from scratch for every fold to prevent fitted state from leaking
+between folds.
+
+To reduce the effect of class imbalance during fitting, balanced sample weights
+are computed from the training portion of each fold only. Validation and test
+sets remain untouched so that the reported metrics reflect the natural class
+prevalence of each dataset. A fixed probability threshold of 0.50 is used for
+the threshold-dependent metrics. No threshold is optimized on the validation
+folds, which avoids adding a second tuning procedure that could make fold
+comparisons less consistent.
+
+\subsection{Model Configuration and Hyperparameters}
+
+The core comparison uses one fixed, literature-guided configuration per
+algorithm across all three datasets. We intentionally do not select a different
+best hyperparameter configuration for each dataset using the same five folds
+that are later used to quantify stability. Doing so could make the reported
+cross-validation scores optimistic and would confound RQ2 with hyperparameter
+search variability. The selected settings use conservative learning rates,
+moderate ensemble sizes, and regularization/subsampling for the gradient-
+boosted models.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{p{2.3cm}p{5.2cm}p{7.1cm}}
+\textbf{Model} & \textbf{Selected hyperparameters} & \textbf{Rationale} \\
+\hline
+AdaBoost &
+Decision stump (max depth = 1); 200 estimators; learning rate = 0.10 &
+Decision stumps are the standard weak learner for AdaBoost. The larger ensemble
+combined with a smaller learning rate provides gradual boosting while limiting
+the contribution of each individual stump. \\
+\hline
+XGBoost &
+300 estimators; learning rate = 0.05; max depth = 4; subsample = 0.80;
+column sample = 0.80; $L_2$ regularization = 1; histogram tree method &
+A low learning rate and moderate tree depth control model complexity. Row and
+column subsampling reduce variance, while $L_2$ regularization makes leaf
+weights more conservative. The histogram method improves efficiency on the
+larger datasets. \\
+\hline
+LightGBM &
+300 estimators; learning rate = 0.05; 31 leaves; max depth = 6; minimum child
+samples = 20; subsample = 0.80; column sample = 0.80; $L_2$ regularization = 1 &
+The number of leaves and depth cap constrain the leaf-wise tree growth. The
+minimum child size, subsampling, and regularization reduce overfitting while the
+small learning rate supports a smoother boosting process. Deterministic CPU
+settings and a fixed seed are enabled for reproducibility. \\
+\end{tabular}
+\caption{Fixed model configurations used for the cross-dataset comparison.}
+\label{tab:model_hyperparameters}
+\end{table}
+
+\subsection{Evaluation Metrics and Model Comparison}
+
+Each validation fold is evaluated using ROC-AUC, PR-AUC, Recall, and F1-score.
+ROC-AUC measures ranking performance across classification thresholds. PR-AUC
+focuses on the precision--recall trade-off and is especially informative when
+the positive class is relatively rare \cite{saito2015precisionrecall}. Recall
+measures the proportion of positive cases correctly identified, while F1-score
+balances precision and recall at the fixed 0.50 threshold. Because the three
+datasets may have different class prevalence, PR-AUC is used as the primary
+ranking metric, with ROC-AUC, F1-score, and fold variability retained for a more
+complete comparison.
+
+For RQ1, we report the mean five-fold score of every metric for every
+model--dataset pair and rank the three models within each dataset by mean
+PR-AUC. We additionally report the average within-dataset rank across all three
+datasets rather than pooling patient rows across datasets. This prevents the
+largest dataset from dominating the overall comparison.
+
+For RQ2, predictive stability is measured directly from the five fold-level
+scores. For each metric we report the mean, standard deviation, minimum,
+maximum, and range across folds. A smaller standard deviation and range indicate
+that the model is less sensitive to the particular development-data partition.
+After cross-validation, each model is re-fitted once on the full development
+partition and evaluated on the untouched test partition. These test results are
+reported separately from the cross-validation results and are not used to
+select the best model.
+
+The complete experiment configuration is stored in \texttt{config.yaml}. The
+implementation writes fold-level metrics, aggregated cross-validation summaries,
+held-out test metrics, per-dataset rankings, cross-dataset rankings, and an
+experiment metadata file containing package versions and a hash of the
+configuration. This makes the model experiments repeatable and provides the
+fold-level outputs required by the later SHAP stability analysis.
