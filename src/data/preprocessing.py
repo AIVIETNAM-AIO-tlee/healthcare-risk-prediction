@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
+from sklearn.utils.class_weight import compute_class_weight
 
 
 def mark_invalid_zeros_as_missing(df: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
@@ -93,8 +94,10 @@ def fit_preprocessor(
 
 	# 3) Label-encode binary columns to 0/1, remembering the mapping and a
 	#    fallback code (the training mode) for categories never seen at fit time.
+	#    Single-category columns go through one-hot (step 4) instead: a raw
+	#    string column would survive transform unchanged and poison model input.
 	binary_columns = [c for c in categorical_columns if df[c].nunique() == 2]
-	multi_columns = [c for c in categorical_columns if df[c].nunique() > 2]
+	multi_columns = [c for c in categorical_columns if df[c].nunique() != 2]
 
 	binary_maps: dict[str, dict[str, int]] = {}
 	binary_fallback: dict[str, int] = {}
@@ -170,3 +173,165 @@ def transform_features(
 
 	out[fitted.numeric_columns] = fitted.scaler.transform(out[fitted.numeric_columns])
 	return out
+
+
+# ---------------------------------------------------------------------------
+# Class imbalance (reporting only -- see docs/qa-scope-methodology-review-
+# handoff.md, finding F1)
+# ---------------------------------------------------------------------------
+def compute_class_weights(y: pd.Series) -> dict[int, float]:
+	"""Compute sklearn "balanced" class weights for a binary target.
+
+	These are the same per-class weights that
+	``sklearn.utils.class_weight.compute_sample_weight(class_weight="balanced")``
+	derives at model-fit time in ``src/experiments/run_models.py`` (see
+	``config.yaml``'s ``balance_training`` flag) -- that is the project's one
+	chosen class-imbalance policy (F1). This helper exposes the same numbers
+	here purely for EDA/reporting (e.g. printing or plotting how imbalanced a
+	dataset is, and what weight each class would receive). Preprocessing
+	itself deliberately does not resample or re-weight rows: doing so here
+	*in addition to* the balanced sample weights already applied at training
+	time would double-correct for the same imbalance.
+	"""
+	classes = np.unique(y)
+	weights = compute_class_weight(class_weight="balanced", classes=classes, y=y)
+	return {int(cls): float(weight) for cls, weight in zip(classes, weights)}
+
+
+# ---------------------------------------------------------------------------
+# Outlier handling (IQR / Tukey fences) -- see docs/qa-scope-methodology-
+# review-handoff.md, finding F5
+# ---------------------------------------------------------------------------
+@dataclass(frozen=True)
+class FittedOutlierBounds:
+	"""Per-column [lower, upper] IQR clipping bounds, fit on the training
+	split only."""
+
+	bounds: dict[str, tuple[float, float]]
+
+
+def fit_outlier_bounds(
+	train_df: pd.DataFrame,
+	columns: list[str],
+	multiplier: float = 1.5,
+) -> FittedOutlierBounds:
+	"""Compute Tukey IQR clipping bounds per column from the training split.
+
+	``bounds = [Q1 - multiplier*IQR, Q3 + multiplier*IQR]``, the classic
+	Tukey fence. Quantiles ignore NaNs, so this is safe to call before
+	missing-value imputation (e.g. after ``mark_invalid_zeros_as_missing``).
+
+	Only meant for genuinely continuous numeric columns on datasets where a
+	quality reviewer has judged IQR clipping appropriate -- currently
+	``DatasetConfig.iqr_outlier_columns``, empty by default. Mostly-binary or
+	discrete survey data should not go through this: a genuinely high value
+	(e.g. a high BMI) is real disease signal, not noise, and clipping it
+	would destroy that signal.
+	"""
+	bounds: dict[str, tuple[float, float]] = {}
+	for column in columns:
+		q1 = train_df[column].quantile(0.25)
+		q3 = train_df[column].quantile(0.75)
+		iqr = q3 - q1
+		lower = float(q1 - multiplier * iqr)
+		upper = float(q3 + multiplier * iqr)
+		bounds[column] = (lower, upper)
+	return FittedOutlierBounds(bounds=bounds)
+
+
+def apply_outlier_bounds(df: pd.DataFrame, fitted: FittedOutlierBounds) -> pd.DataFrame:
+	"""Clip each fitted column to its [lower, upper] range.
+
+	Values are clipped in place of the original, never dropped, so row
+	counts and any external row alignment are preserved. Missing values are
+	left as NaN (``Series.clip`` is NaN-safe), so downstream median
+	imputation still handles them normally. Always uses ``fitted`` bounds
+	computed on the training split, so a split's own extreme values never
+	influence the bounds applied to it -- avoids leaking test-set
+	information into preprocessing.
+	"""
+	out = df.copy()
+	for column, (lower, upper) in fitted.bounds.items():
+		out[column] = out[column].clip(lower=lower, upper=upper)
+	return out
+
+
+# ---------------------------------------------------------------------------
+# Feature reduction (fit on train only, applied identically to test)
+# ---------------------------------------------------------------------------
+@dataclass(frozen=True)
+class FittedFeatureSelector:
+	"""Which processed feature columns to keep/drop, fit on the training
+	split's already-encoded/scaled features only."""
+
+	kept_columns: list[str]
+	dropped_low_variance: list[str]
+	dropped_correlated: list[str]
+
+	@property
+	def dropped_columns(self) -> list[str]:
+		return self.dropped_low_variance + self.dropped_correlated
+
+
+def fit_feature_selector(
+	train_processed: pd.DataFrame,
+	target_column: str,
+	variance_threshold: float = 1e-4,
+	correlation_threshold: float = 0.9,
+) -> FittedFeatureSelector:
+	"""Fit a lightweight feature-reduction selector on already-encoded/scaled
+	training features (i.e. ``fit_preprocessor``'s output).
+
+	Two simple, leakage-safe hygiene passes, both computed on the training
+	split only and then applied identically to the test split via
+	``apply_feature_selector``:
+
+	  1. Drop near-constant columns (variance below ``variance_threshold``)
+		 -- e.g. a one-hot dummy for a category so rare it carries almost no
+		 signal. A properly standardized numeric column always has variance
+		 ~1, so this step effectively only prunes binary/dummy columns.
+	  2. Among the remaining columns, for every pair whose absolute Pearson
+		 correlation exceeds ``correlation_threshold``, drop the second
+		 column of the pair -- redundant, highly collinear features add
+		 noise/dimensionality without adding information.
+
+	The target column is always excluded from both checks and kept.
+	"""
+	feature_columns = [c for c in train_processed.columns if c != target_column]
+
+	variances = train_processed[feature_columns].var()
+	dropped_low_variance = variances[variances < variance_threshold].index.tolist()
+
+	remaining = [c for c in feature_columns if c not in dropped_low_variance]
+	dropped_correlated: list[str] = []
+	if len(remaining) > 1:
+		corr = train_processed[remaining].corr().abs()
+		for i, col_i in enumerate(remaining):
+			if col_i in dropped_correlated:
+				continue
+			for col_j in remaining[i + 1 :]:
+				if col_j in dropped_correlated:
+					continue
+				if corr.loc[col_i, col_j] > correlation_threshold:
+					dropped_correlated.append(col_j)
+
+	kept_columns = [
+		column
+		for column in feature_columns
+		if column not in dropped_low_variance and column not in dropped_correlated
+	]
+	return FittedFeatureSelector(
+		kept_columns=kept_columns,
+		dropped_low_variance=dropped_low_variance,
+		dropped_correlated=dropped_correlated,
+	)
+
+
+def apply_feature_selector(
+	df: pd.DataFrame,
+	fitted: FittedFeatureSelector,
+	target_column: str,
+) -> pd.DataFrame:
+	"""Keep only ``fitted.kept_columns`` (plus the target, if present), in order."""
+	columns = ([target_column] if target_column in df.columns else []) + fitted.kept_columns
+	return df[columns]

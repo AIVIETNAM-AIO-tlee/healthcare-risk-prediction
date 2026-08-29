@@ -14,6 +14,26 @@ RANDOM_STATE = 42
 TEST_SIZE = 0.2
 
 # ---------------------------------------------------------------------------
+# Cross-validation (on the training split only; test split stays outside CV)
+# ---------------------------------------------------------------------------
+N_SPLITS = 5
+
+# ---------------------------------------------------------------------------
+# Outlier handling (Tukey/IQR clipping)
+# ---------------------------------------------------------------------------
+# See docs/qa-scope-methodology-review-handoff.md, finding F5: IQR clipping is
+# only appropriate for genuinely continuous measurements, and only where a
+# dataset's own config opts specific columns in via
+# ``DatasetConfig.iqr_outlier_columns`` (empty/off by default).
+IQR_MULTIPLIER = 1.5
+
+# ---------------------------------------------------------------------------
+# Feature reduction (fit on train only, applied identically to test)
+# ---------------------------------------------------------------------------
+FEATURE_VARIANCE_THRESHOLD = 1e-4
+FEATURE_CORRELATION_THRESHOLD = 0.9
+
+# ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -46,6 +66,18 @@ class DatasetConfig:
 	# dataset3, whose mostly-binary/discrete features produce genuine
 	# duplicate survey responses).
 	drop_duplicate_rows: bool = False
+	# Continuous numeric columns to IQR-clip (Tukey fences) for outlier
+	# handling, fit on the training split only (see
+	# data.preprocessing.fit_outlier_bounds). Empty by default: only
+	# dataset2's genuinely continuous clinical measurements opt in (see
+	# docs/qa-scope-methodology-review-handoff.md, finding F5) -- the
+	# mostly-binary/discrete survey data in dataset1/dataset3 is excluded,
+	# since IQR clipping there would cut real disease signal (e.g. a
+	# genuinely high BMI) rather than noise. Binary 0/1 flags that happen to
+	# be numeric-typed (e.g. dataset2's FastingBS) must also stay excluded:
+	# their IQR bounds collapse to a single point and would clip away the
+	# entire minority-class signal.
+	iqr_outlier_columns: list[str] = field(default_factory=list)
 
 	@property
 	def raw_path(self) -> Path:
@@ -91,6 +123,9 @@ DATASET2 = DatasetConfig(
 	target_column="HeartDisease",
 	numeric_columns=["Age", "RestingBP", "Cholesterol", "FastingBS", "MaxHR", "Oldpeak"],
 	zero_as_missing_columns=["Cholesterol", "RestingBP"],
+	# FastingBS is deliberately excluded: it is a 0/1 flag, not a continuous
+	# measurement (see the field docstring above).
+	iqr_outlier_columns=["Age", "RestingBP", "Cholesterol", "MaxHR", "Oldpeak"],
 )
 
 DATASET3 = DatasetConfig(
