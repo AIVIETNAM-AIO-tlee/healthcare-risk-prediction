@@ -1,9 +1,20 @@
 from __future__ import annotations
 
-from config import DATASETS, DatasetConfig
+from config import (
+	DATASETS,
+	FEATURE_CORRELATION_THRESHOLD,
+	FEATURE_VARIANCE_THRESHOLD,
+	IQR_MULTIPLIER,
+	DatasetConfig,
+)
 from data.loader import infer_column_types, load_raw_dataset
 from data.preprocessing import (
+	apply_feature_selector,
+	apply_outlier_bounds,
 	clean_target,
+	compute_class_weights,
+	fit_feature_selector,
+	fit_outlier_bounds,
 	fit_preprocessor,
 	mark_invalid_zeros_as_missing,
 	transform_features,
@@ -28,6 +39,12 @@ def process_dataset(spec: DatasetConfig) -> None:
 	df = clean_target(df, target_column=spec.target_column)
 	print(f"Shape after dropping rows with missing target: {df.shape}")
 
+	# Class-imbalance policy (F1) is applied at model-fit time (balanced
+	# sample_weight, see src/experiments/run_models.py + config.yaml's
+	# balance_training flag); reported here only, not resampled.
+	class_weights = compute_class_weights(df[spec.target_column])
+	print(f"Class weights (balanced, informational only): {class_weights}")
+
 	numeric_columns, categorical_columns = infer_column_types(
 		df, spec.numeric_columns, target_column=spec.target_column
 	)
@@ -37,12 +54,40 @@ def process_dataset(spec: DatasetConfig) -> None:
 	split_data = split_train_test(df, target_column=spec.target_column)
 	print(f"Train rows: {len(split_data.train_df)} | Test rows: {len(split_data.test_df)}")
 
+	train_df, test_df = split_data.train_df, split_data.test_df
+	if spec.iqr_outlier_columns:
+		# Outlier handling (F5): bounds fit on the training split only, then
+		# applied identically to both splits.
+		outlier_bounds = fit_outlier_bounds(
+			train_df, spec.iqr_outlier_columns, multiplier=IQR_MULTIPLIER
+		)
+		train_df = apply_outlier_bounds(train_df, outlier_bounds)
+		test_df = apply_outlier_bounds(test_df, outlier_bounds)
+		print(f"Applied IQR outlier clipping to: {spec.iqr_outlier_columns}")
+
 	# Fit every imputer/encoder/scaler on the training split only, then reuse
 	# those exact fitted objects to transform the test split (no data leakage).
 	fitted, train_processed = fit_preprocessor(
-		split_data.train_df, numeric_columns, categorical_columns, target_column=spec.target_column
+		train_df, numeric_columns, categorical_columns, target_column=spec.target_column
 	)
-	test_processed = transform_features(split_data.test_df, fitted, target_column=spec.target_column)
+	test_processed = transform_features(test_df, fitted, target_column=spec.target_column)
+
+	# Feature reduction: drop near-constant and highly-correlated columns,
+	# fit on the processed training features only.
+	selector = fit_feature_selector(
+		train_processed,
+		target_column=spec.target_column,
+		variance_threshold=FEATURE_VARIANCE_THRESHOLD,
+		correlation_threshold=FEATURE_CORRELATION_THRESHOLD,
+	)
+	if selector.dropped_columns:
+		print(
+			f"Feature reduction dropped {len(selector.dropped_columns)} column(s): "
+			f"{selector.dropped_low_variance} (low-variance), "
+			f"{selector.dropped_correlated} (correlated)"
+		)
+	train_processed = apply_feature_selector(train_processed, selector, target_column=spec.target_column)
+	test_processed = apply_feature_selector(test_processed, selector, target_column=spec.target_column)
 
 	print(f"Processed train shape: {train_processed.shape}")
 	print(f"Processed test shape: {test_processed.shape}")
