@@ -76,3 +76,9 @@ models:
       verbosity: -1
       deterministic: true
       force_col_wise: true
+
+shap:
+  output_dir: results/shap_explainability
+  max_explain_samples: 200
+  background_samples: 50
+  top_k: 10

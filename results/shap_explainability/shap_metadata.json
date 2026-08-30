@@ -1,0 +1,9 @@
+{
+  "generated_at_utc": "2026-08-30T06:42:54.434610+00:00",
+  "random_state": 42,
+  "cv_folds": 5,
+  "max_explain_samples_per_fold": 200,
+  "background_samples_for_adaboost": 50,
+  "top_k": 10,
+  "note": "XGBoost/LightGBM use TreeExplainer; AdaBoost uses permutation SHAP because sklearn AdaBoost is not supported by TreeExplainer in SHAP 0.50."
+}
