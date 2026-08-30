@@ -121,21 +121,110 @@ dataset. The pattern is observed across all three algorithms, suggesting that
 dataset size and fold composition contribute more to the observed instability
 than the choice among the three boosting methods alone.
 
+\subsection{SHAP Feature-Importance Stability Across Cross-Validation Folds (RQ3)}
+\label{subsec:shap_results}
+
+Following the fold-wise explainability procedure described in
+Section~\ref{subsec:shap_methodology}, RQ3 evaluates whether the SHAP-based
+global feature-importance rankings remain consistent when the development data
+are repartitioned across cross-validation folds. For each dataset--model pair,
+all ten pairwise combinations of the five folds are compared using Spearman rank
+correlation over the complete feature ranking and top-10 Jaccard similarity over
+the most important features.
+
+Table~\ref{tab:shap_stability_results} shows that the SHAP rankings are highly
+stable across folds for all nine dataset--model combinations. Mean Spearman
+correlations range from 0.9332 to 0.9700, indicating that the overall ordering
+of features changes only modestly when the training and validation samples are
+changed. Mean top-10 Jaccard similarity ranges from 0.7455 to 1.0000, showing
+that the most influential features are also largely preserved across folds.
+
+\begin{table}[h]
+\centering
+\scriptsize
+\begin{tabular}{llcccc}
+\textbf{Dataset} & \textbf{Model} & \textbf{Spearman $\rho$} & \textbf{Std.} & \textbf{Top-10 Jaccard} & \textbf{Std.} \\
+\hline
+Dataset 1 & AdaBoost & 0.9652 & 0.0179 & 0.9273 & 0.0939 \\
+ & XGBoost & 0.9332 & 0.0114 & 0.8545 & 0.0767 \\
+ & LightGBM & 0.9479 & 0.0053 & 0.7455 & 0.1145 \\
+\hline
+Dataset 2 & AdaBoost & 0.9467 & 0.0226 & 0.8061 & 0.0928 \\
+ & XGBoost & 0.9389 & 0.0217 & 0.8727 & 0.0878 \\
+ & LightGBM & 0.9348 & 0.0251 & 0.8364 & 0.0575 \\
+\hline
+Dataset 3 & AdaBoost & 0.9599 & 0.0277 & \textbf{1.0000} & 0.0000 \\
+ & XGBoost & 0.9686 & 0.0162 & \textbf{1.0000} & 0.0000 \\
+ & LightGBM & \textbf{0.9700} & 0.0130 & 0.8727 & 0.0878 \\
+\end{tabular}
+\caption{SHAP feature-ranking stability across the ten pairwise comparisons of five cross-validation folds. Values are pairwise means and standard deviations.}
+\label{tab:shap_stability_results}
+\end{table}
+
+Dataset 3 exhibits the strongest top-feature stability. AdaBoost and XGBoost
+both achieve a mean top-10 Jaccard similarity of 1.0000, meaning that the same
+set of ten features appears in the top-10 for every fold pair. LightGBM also
+shows very high full-ranking stability on this dataset, with the highest mean
+Spearman correlation of 0.9700. The consensus rankings are also strongly aligned
+across the three models: \texttt{Age}, \texttt{GenHlth}, \texttt{Sex},
+\texttt{HighBP}, and \texttt{HighChol} occupy the leading positions for all
+three algorithms.
+
+On Dataset 2, all models remain stable despite the substantially smaller sample
+size observed in the predictive-stability analysis. Mean Spearman correlations
+remain above 0.93 and mean top-10 Jaccard similarity ranges from 0.8061 to
+0.8727. Across the three consensus rankings, \texttt{ST\_Slope\_Up} and
+\texttt{ChestPainType\_ASY} are consistently ranked first and second, while
+features such as \texttt{Sex} and \texttt{ST\_Slope\_Flat} also appear near the
+top for multiple models.
+
+Dataset 1 also shows strong agreement in the complete rankings, with mean
+Spearman correlations between 0.9332 and 0.9652. AdaBoost has the highest
+mean top-10 overlap (0.9273), while LightGBM has a lower top-10 Jaccard value
+(0.7455) despite a high mean Spearman correlation of 0.9479. This combination
+suggests that LightGBM's overall feature ordering is stable, but a small number
+of features close to the top-10 boundary exchange positions across folds. The
+consensus rankings nevertheless show substantial cross-model agreement:
+\texttt{HadAngina}, \texttt{ChestScan}, \texttt{Sex}, and
+\texttt{RemovedTeeth\_None\_of\_them} are among the leading features for all
+three models.
+
+These results answer RQ3 by showing that SHAP-based global feature-importance
+rankings are generally robust to cross-validation fold assignment. The evidence
+is consistent across two complementary stability measures: full-ranking
+correlation remains high, while the set of highest-ranked features is usually
+well preserved. At the same time, the lower top-10 overlap observed for some
+model--dataset combinations shows why reporting both measures is useful: a high
+correlation over the full feature set does not necessarily imply an identical
+membership of the top-10 features.
+
 \subsection{Discussion}
 
-The experiments highlight three practical findings. First, the modern gradient-
-boosted models consistently provided stronger ranking performance than AdaBoost
-on the larger and more imbalanced datasets. Second, XGBoost and LightGBM were
-very close to one another, so small differences should not be over-interpreted
-without additional repeated validation or statistical testing. Third,
-threshold-dependent metrics can tell a different story from ranking metrics.
-For example, AdaBoost obtained the highest cross-dataset mean F1 even though it
-ranked below XGBoost and LightGBM on ROC-AUC, PR-AUC, and Recall. This reinforces
-the importance of reporting multiple metrics in healthcare risk prediction
-rather than selecting a model from one score alone.
+Taken together, the three research questions provide complementary evidence
+about predictive quality and interpretability. RQ1 shows that XGBoost provides
+the strongest overall predictive ranking across the three datasets, with
+LightGBM very close on ROC-AUC and PR-AUC and AdaBoost retaining the highest
+cross-dataset mean F1. RQ2 shows that predictive scores are highly stable on the
+two large datasets but vary more on the smaller Heart Failure Prediction
+dataset. RQ3 extends the stability analysis from prediction metrics to model
+explanations and finds that the SHAP feature rankings remain highly consistent
+across folds for all three boosting methods.
 
-The present subsection reports only the model-performance components associated
-with RQ1 and RQ2. RQ3 requires fold-wise SHAP feature-importance rankings and a
-separate stability analysis. Those results should be integrated after the
-SHAP-analysis component is completed; they are intentionally not inferred from
-the predictive metrics reported here.
+The SHAP results should be interpreted as measures of explanation stability,
+not as evidence of causality. A feature can be consistently important to a
+model because it is predictive under the observed data distribution, but this
+does not establish that changing the feature would causally change a patient's
+risk. In addition, raw SHAP magnitudes are not compared directly between
+AdaBoost and the two gradient-boosted models because AdaBoost is explained with
+permutation SHAP whereas XGBoost and LightGBM use TreeSHAP. The study therefore
+bases RQ3 on within-model fold-to-fold ranking consistency, which is comparable
+across the experimental protocol.
+
+Overall, the combined findings indicate that the strongest models are not only
+competitive in predictive performance but also produce feature-importance
+patterns that are reproducible across data partitions. This is useful for
+healthcare risk-prediction studies because an explanation that changes sharply
+with a different fold would be difficult to trust even if average predictive
+performance were high. The observed stability therefore provides an additional
+criterion, alongside ROC-AUC, PR-AUC, Recall, and F1, for assessing the
+robustness of the evaluated models.

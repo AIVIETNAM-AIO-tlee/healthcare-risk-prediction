@@ -1,0 +1,70 @@
+\subsection{SHAP Explainability and Feature-Ranking Stability (RQ3)}
+\label{subsec:shap_methodology}
+
+To address RQ3, this study uses SHAP (SHapley Additive exPlanations) to quantify
+how strongly each input feature contributes to model predictions. SHAP assigns
+an additive attribution value to each feature for an individual prediction and
+is grounded in Shapley-value principles from cooperative game theory
+\cite{lundberg2017shap}. For tree ensembles, TreeSHAP provides an efficient
+algorithm for obtaining these attributions while preserving the consistency
+properties of SHAP \cite{lundberg2020treeexplainer}.
+
+The explainability analysis follows the same stratified five-fold
+cross-validation partitions used for predictive evaluation. For each dataset,
+model, and fold, the model is fitted only on the training portion of that fold.
+SHAP values are then computed on a deterministic sample of observations from
+the corresponding validation portion. This design keeps the explained
+observations separate from the rows used to fit the model and allows changes in
+feature importance to be measured as the training sample changes across folds.
+The random seed, maximum number of explained validation observations, and other
+SHAP settings are stored in \texttt{config.yaml} so that the analysis is
+reproducible.
+
+For XGBoost and LightGBM, the implementation uses TreeSHAP through
+\texttt{TreeExplainer}. The scikit-learn AdaBoost classifier used in this study
+is not supported by TreeSHAP in the pinned SHAP implementation, so AdaBoost is
+explained using model-agnostic permutation SHAP with a deterministic background
+sample drawn from the fold-training data. This difference is treated as a
+computational implementation detail: the stability analysis compares feature
+rankings \emph{within the same model across folds}, rather than comparing raw
+SHAP magnitudes between different explainer algorithms.
+
+For a feature $j$ in fold $f$, global importance is defined as the mean absolute
+SHAP value across the $N_f$ explained validation observations:
+\begin{equation}
+I_{j,f} = \frac{1}{N_f}\sum_{i=1}^{N_f} |\phi_{i,j,f}|,
+\end{equation}
+where $\phi_{i,j,f}$ is the SHAP value for feature $j$ and observation $i$ in
+fold $f$. Features are sorted in descending order of $I_{j,f}$ to produce one
+feature-importance ranking for every model and fold. Mean absolute SHAP is used
+because positive and negative contributions should not cancel when estimating
+global importance.
+
+Ranking stability is evaluated in two complementary ways. First, Spearman rank
+correlation is computed for every pair of cross-validation folds using the full
+feature-ranking vectors. With five folds, this yields ten pairwise comparisons
+for each dataset--model combination. A Spearman coefficient closer to one
+indicates that the relative ordering of features changes little between folds.
+Second, top-$k$ overlap is measured with the Jaccard index:
+\begin{equation}
+J(A,B) = \frac{|A \cap B|}{|A \cup B|},
+\end{equation}
+where $A$ and $B$ are the sets of the top-$k$ features from two folds. The
+experiment uses $k=10$ as configured in \texttt{config.yaml}. The Spearman
+measure evaluates stability over the complete ranking, whereas top-$k$ Jaccard
+overlap focuses on whether the most influential features remain consistent.
+
+The implementation stores fold-level mean absolute SHAP values and ranks,
+pairwise fold-stability measurements, aggregated stability summaries, and a
+consensus feature ranking. The consensus table reports each feature's average
+rank, rank standard deviation, mean absolute SHAP value, and frequency of
+appearing among the top-$k$ features across folds. These outputs provide the
+evidence required to answer RQ3 without relying on a single fitted model or a
+single data split.
+
+The corresponding empirical stability results are presented in
+Section~\ref{subsec:shap_results} and summarized in
+Table~\ref{tab:shap_stability_results}. This separation keeps the present
+subsection focused on how the explanations are computed, while the Results and
+Discussion section evaluates how stable those explanations are in practice.
+
