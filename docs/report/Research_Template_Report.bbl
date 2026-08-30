@@ -1,0 +1,386 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{none/global//global/global/global}
+  \entry{freund1997adaboost}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=FY}{%
+         family={Freund},
+         familyi={F\bibinitperiod},
+         given={Yoav},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=SRE}{%
+         family={Schapire},
+         familyi={S\bibinitperiod},
+         given={Robert\bibnamedelima E.},
+         giveni={R\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{FY+1}
+    \strng{fullhash}{FYSRE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1006/jcss.1997.1504
+    \endverb
+    \field{number}{1}
+    \field{pages}{119\bibrangedash 139}
+    \field{title}{A Decision-Theoretic Generalization of On-Line Learning and an Application to Boosting}
+    \field{volume}{55}
+    \field{journaltitle}{Journal of Computer and System Sciences}
+    \field{year}{1997}
+  \endentry
+
+  \entry{chen2016xgboost}{inproceedings}{}{}
+    \name{author}{2}{}{%
+      {{hash=CT}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Tianqi},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=GC}{%
+         family={Guestrin},
+         familyi={G\bibinitperiod},
+         given={Carlos},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {ACM}%
+    }
+    \strng{namehash}{CT+1}
+    \strng{fullhash}{CTGC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining}
+    \verb{doi}
+    \verb 10.1145/2939672.2939785
+    \endverb
+    \field{pages}{785\bibrangedash 794}
+    \field{title}{{XGBoost}: A Scalable Tree Boosting System}
+    \field{year}{2016}
+  \endentry
+
+  \entry{ke2017lightgbm}{inproceedings}{}{}
+    \name{author}{8}{}{%
+      {{hash=KG}{%
+         family={Ke},
+         familyi={K\bibinitperiod},
+         given={Guolin},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=MQ}{%
+         family={Meng},
+         familyi={M\bibinitperiod},
+         given={Qi},
+         giveni={Q\bibinitperiod},
+      }}%
+      {{hash=FT}{%
+         family={Finley},
+         familyi={F\bibinitperiod},
+         given={Thomas},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=WT}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Taifeng},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=CW}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Wei},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=MW}{%
+         family={Ma},
+         familyi={M\bibinitperiod},
+         given={Weidong},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=YQ}{%
+         family={Ye},
+         familyi={Y\bibinitperiod},
+         given={Qiwei},
+         giveni={Q\bibinitperiod},
+      }}%
+      {{hash=LTY}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Tie-Yan},
+         giveni={T\bibinithyphendelim Y\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KG+1}
+    \strng{fullhash}{KGMQFTWTCWMWYQLTY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Advances in Neural Information Processing Systems}
+    \field{pages}{3146\bibrangedash 3154}
+    \field{title}{{LightGBM}: A Highly Efficient Gradient Boosting Decision Tree}
+    \field{volume}{30}
+    \field{year}{2017}
+  \endentry
+
+  \entry{lundberg2017shap}{inproceedings}{}{}
+    \name{author}{2}{}{%
+      {{hash=LSM}{%
+         family={Lundberg},
+         familyi={L\bibinitperiod},
+         given={Scott\bibnamedelima M.},
+         giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=LSI}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={Su-In},
+         giveni={S\bibinithyphendelim I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LSM+1}
+    \strng{fullhash}{LSMLSI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Advances in Neural Information Processing Systems}
+    \field{title}{A Unified Approach to Interpreting Model Predictions}
+    \field{volume}{30}
+    \field{year}{2017}
+  \endentry
+
+  \entry{lundberg2020treeexplainer}{article}{}{}
+    \name{author}{10}{}{%
+      {{hash=LSM}{%
+         family={Lundberg},
+         familyi={L\bibinitperiod},
+         given={Scott\bibnamedelima M.},
+         giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=EG}{%
+         family={Erion},
+         familyi={E\bibinitperiod},
+         given={Gabriel},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=CH}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Hugh},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=DA}{%
+         family={DeGrave},
+         familyi={D\bibinitperiod},
+         given={Alex},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=PJM}{%
+         family={Prutkin},
+         familyi={P\bibinitperiod},
+         given={Jordan\bibnamedelima M.},
+         giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=NB}{%
+         family={Nair},
+         familyi={N\bibinitperiod},
+         given={Bala},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=KR}{%
+         family={Katz},
+         familyi={K\bibinitperiod},
+         given={Ronit},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=HJ}{%
+         family={Himmelfarb},
+         familyi={H\bibinitperiod},
+         given={Jonathan},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=BN}{%
+         family={Bansal},
+         familyi={B\bibinitperiod},
+         given={Nisha},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=LSI}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={Su-In},
+         giveni={S\bibinithyphendelim I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LSM+1}
+    \strng{fullhash}{LSMEGCHDAPJMNBKRHJBNLSI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1038/s42256-019-0138-9
+    \endverb
+    \field{number}{1}
+    \field{pages}{56\bibrangedash 67}
+    \field{title}{From Local Explanations to Global Understanding with Explainable AI for Trees}
+    \field{volume}{2}
+    \field{journaltitle}{Nature Machine Intelligence}
+    \field{year}{2020}
+  \endentry
+
+  \entry{pedregosa2011scikit}{article}{}{}
+    \name{author}{16}{}{%
+      {{hash=PF}{%
+         family={Pedregosa},
+         familyi={P\bibinitperiod},
+         given={Fabian},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=VG}{%
+         family={Varoquaux},
+         familyi={V\bibinitperiod},
+         given={Ga{\"e}l},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=GA}{%
+         family={Gramfort},
+         familyi={G\bibinitperiod},
+         given={Alexandre},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=MV}{%
+         family={Michel},
+         familyi={M\bibinitperiod},
+         given={Vincent},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=TB}{%
+         family={Thirion},
+         familyi={T\bibinitperiod},
+         given={Bertrand},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=GO}{%
+         family={Grisel},
+         familyi={G\bibinitperiod},
+         given={Olivier},
+         giveni={O\bibinitperiod},
+      }}%
+      {{hash=BM}{%
+         family={Blondel},
+         familyi={B\bibinitperiod},
+         given={Mathieu},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=PP}{%
+         family={Prettenhofer},
+         familyi={P\bibinitperiod},
+         given={Peter},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=WR}{%
+         family={Weiss},
+         familyi={W\bibinitperiod},
+         given={Ron},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=DV}{%
+         family={Dubourg},
+         familyi={D\bibinitperiod},
+         given={Vincent},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=VJ}{%
+         family={Vanderplas},
+         familyi={V\bibinitperiod},
+         given={Jake},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=PA}{%
+         family={Passos},
+         familyi={P\bibinitperiod},
+         given={Alexandre},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=CD}{%
+         family={Cournapeau},
+         familyi={C\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=BM}{%
+         family={Brucher},
+         familyi={B\bibinitperiod},
+         given={Matthieu},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=PM}{%
+         family={Perrot},
+         familyi={P\bibinitperiod},
+         given={Matthieu},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=DE}{%
+         family={Duchesnay},
+         familyi={D\bibinitperiod},
+         given={{\'{E}}douard},
+         giveni={{\'{E}}\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{PF+1}
+    \strng{fullhash}{PFVGGAMVTBGOBMPPWRDVVJPACDBMPMDE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{2825\bibrangedash 2830}
+    \field{title}{Scikit-learn: Machine Learning in Python}
+    \field{volume}{12}
+    \field{journaltitle}{Journal of Machine Learning Research}
+    \field{year}{2011}
+  \endentry
+
+  \entry{saito2015precisionrecall}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=ST}{%
+         family={Saito},
+         familyi={S\bibinitperiod},
+         given={Takaya},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=RM}{%
+         family={Rehmsmeier},
+         familyi={R\bibinitperiod},
+         given={Marc},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ST+1}
+    \strng{fullhash}{STRM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1371/journal.pone.0118432
+    \endverb
+    \field{number}{3}
+    \field{pages}{e0118432}
+    \field{title}{The Precision-Recall Plot Is More Informative than the ROC Plot When Evaluating Binary Classifiers on Imbalanced Datasets}
+    \field{volume}{10}
+    \field{journaltitle}{PLOS ONE}
+    \field{year}{2015}
+  \endentry
+\enddatalist
+\endinput

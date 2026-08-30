@@ -1,0 +1,31 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {I.}Research Summary}{1}{section.1}%
+\contentsline {section}{\numberline {II.}Introduction and Research Questions}{4}{section.2}%
+\contentsline {subsection}{\numberline {II.1.}Research Context}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {II.2.}Research Problem}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {II.3.}Research Questions}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {II.4.}Contributions}{5}{subsection.2.4}%
+\contentsline {section}{\numberline {III.}Related Work}{5}{section.3}%
+\contentsline {subsection}{\numberline {III.1.}Boosting-Based Tree Ensembles}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {III.2.}AdaBoost}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {III.3.}XGBoost}{6}{subsection.3.3}%
+\contentsline {subsection}{\numberline {III.4.}LightGBM}{6}{subsection.3.4}%
+\contentsline {subsection}{\numberline {III.5.}Explainability and Stability of Tree Models}{6}{subsection.3.5}%
+\contentsline {subsection}{\numberline {III.6.}Research Gap and Motivation}{6}{subsection.3.6}%
+\contentsline {section}{\numberline {IV.}Methodology and Research Architecture}{7}{section.4}%
+\contentsline {section}{\numberline {V.}Data and Experimental Design}{7}{section.5}%
+\contentsline {subsection}{\numberline {V.1.}Model Experimental Design}{7}{subsection.5.1}%
+\contentsline {subsection}{\numberline {V.2.}Model Configuration and Hyperparameters}{7}{subsection.5.2}%
+\contentsline {subsection}{\numberline {V.3.}Evaluation Metrics and Model Comparison}{8}{subsection.5.3}%
+\contentsline {subsection}{\numberline {V.4.}SHAP Explainability and Feature-Ranking Stability (RQ3)}{9}{subsection.5.4}%
+\contentsline {section}{\numberline {VI.}Results and Discussion}{10}{section.6}%
+\contentsline {subsection}{\numberline {VI.1.}Predictive Performance Across Datasets (RQ1)}{10}{subsection.6.1}%
+\contentsline {subsection}{\numberline {VI.2.}Predictive Stability Across Cross-Validation Folds (RQ2)}{11}{subsection.6.2}%
+\contentsline {subsection}{\numberline {VI.3.}SHAP Feature-Importance Stability Across Cross-Validation Folds (RQ3)}{12}{subsection.6.3}%
+\contentsline {subsection}{\numberline {VI.4.}Discussion}{13}{subsection.6.4}%
+\contentsline {section}{\numberline {VII.}Conclusion and Future Work}{13}{section.7}%
+\contentsline {subsection}{\numberline {VII.1.}Conclusion}{13}{subsection.7.1}%
+\contentsline {section}{\numberline {VIII.}References}{14}{section.8}%
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\contentsline {section}{Appendix}{15}{section*.6}%
