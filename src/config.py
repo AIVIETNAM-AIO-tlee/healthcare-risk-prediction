@@ -19,6 +19,21 @@ TEST_SIZE = 0.2
 N_SPLITS = 5
 
 # ---------------------------------------------------------------------------
+# Outlier handling (Tukey/IQR clipping)
+# ---------------------------------------------------------------------------
+# See docs/qa-scope-methodology-review-handoff.md, finding F5: IQR clipping is
+# only appropriate for genuinely continuous measurements, and only where a
+# dataset's own config opts specific columns in via
+# ``DatasetConfig.iqr_outlier_columns`` (empty/off by default).
+IQR_MULTIPLIER = 1.5
+
+# ---------------------------------------------------------------------------
+# Feature reduction (fit on train only, applied identically to test)
+# ---------------------------------------------------------------------------
+FEATURE_VARIANCE_THRESHOLD = 1e-4
+FEATURE_CORRELATION_THRESHOLD = 0.9
+
+# ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -79,6 +94,10 @@ class DatasetConfig:
 	@property
 	def test_csv_path(self) -> Path:
 		return self.processed_dir / "test.csv"
+
+	@property
+	def kfold_indices_path(self) -> Path:
+		return self.processed_dir / "kfold_indices.csv"
 
 
 # ---------------------------------------------------------------------------
