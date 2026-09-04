@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import pandas as pd
+
 from config import (
 	DATASETS,
 	FEATURE_CORRELATION_THRESHOLD,
 	FEATURE_VARIANCE_THRESHOLD,
 	IQR_MULTIPLIER,
+	N_SPLITS,
 	DatasetConfig,
 )
 from data.loader import infer_column_types, load_raw_dataset
@@ -19,7 +22,7 @@ from data.preprocessing import (
 	mark_invalid_zeros_as_missing,
 	transform_features,
 )
-from data.split import split_train_test
+from data.split import split_train_test, stratified_kfold_splits
 
 
 def process_dataset(spec: DatasetConfig) -> None:
@@ -99,6 +102,27 @@ def process_dataset(spec: DatasetConfig) -> None:
 	test_processed.to_csv(spec.test_csv_path, index=False, float_format="%.6f")
 	print(f"Saved: {spec.train_csv_path}")
 	print(f"Saved: {spec.test_csv_path}")
+
+	# Stratified K-Fold validation (train split only -- the held-out test
+	# split above never participates in this). Every training row is
+	# assigned to exactly one of N_SPLITS validation folds; the remaining
+	# folds serve as that fold's training data (e.g. for 5 folds: 4/5 train,
+	# 1/5 validation, rotated across all 5 folds). ``fold_assignment`` is
+	# written row-for-row in the same order as ``train_processed`` /
+	# ``train.csv``, so ``kfold_indices.csv`` can be loaded alongside
+	# ``train.csv`` and joined purely by row position.
+	folds = stratified_kfold_splits(train_processed, target_column=spec.target_column, n_splits=N_SPLITS)
+	fold_assignment = pd.Series(index=train_processed.index, dtype=int, name="fold")
+	for fold_number, (_, val_idx) in enumerate(folds):
+		fold_assignment.iloc[val_idx] = fold_number
+	fold_assignment.to_frame().to_csv(spec.kfold_indices_path, index=False)
+	print(f"Saved: {spec.kfold_indices_path}")
+	for fold_number, (train_idx, val_idx) in enumerate(folds):
+		val_positive_rate = train_processed[spec.target_column].iloc[val_idx].mean() * 100
+		print(
+			f"  Fold {fold_number}: train={len(train_idx)}, val={len(val_idx)}, "
+			f"val positive rate={val_positive_rate:.2f}%"
+		)
 
 
 def main() -> None:
