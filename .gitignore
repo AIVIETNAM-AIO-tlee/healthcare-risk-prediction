@@ -5,6 +5,8 @@ __pycache__/
 
 # Test cache
 .pytest_cache/
+.coverage
+htmlcov/
 
 # Jupyter
 .ipynb_checkpoints/
@@ -15,3 +17,18 @@ venv/
 env/
 build/
 .env
+
+# macOS
+.DS_Store
+
+# Local package build artifacts (editable install)
+*.egg-info/
+
+# Local tooling / session scratch
+.superpowers/
+out/
+local-backup/
+.v2c/
+.video_agent/
+plans/
+docs/journals

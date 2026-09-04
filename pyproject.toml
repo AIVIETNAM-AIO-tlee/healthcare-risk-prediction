@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tree-risk-stability"
+version = "0.0.0a0"
+description = "Comparative study of DT/RF/XGBoost across healthcare datasets: repeated nested CV and SHAP stability"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+# Unpinned on purpose: Phase 1 freezes exact versions via lockfile AFTER the
+# darwin/arm64 TreeExplainer probe gates (phase-01 step 2).
+dev = ["pytest>=8", "numpy", "pandas", "scikit-learn"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
