@@ -1,0 +1,17 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Test cache
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment
+.venv/
+venv/
+env/
+build/
+.env

@@ -1,0 +1,73 @@
+\subsection{Boosting-Based Tree Ensembles}
+\label{subsec:rw_boosting}
+
+Boosting constructs an ensemble sequentially so that later learners focus on
+errors made by earlier learners. This makes boosting well suited to structured
+tabular prediction because nonlinear effects and feature interactions can be
+captured without requiring a single highly complex tree. The three models used
+in this study represent different generations of boosting-based tree methods:
+AdaBoost provides a classical boosting baseline, while XGBoost and LightGBM are
+modern gradient-boosted decision-tree systems designed for stronger predictive
+performance and computational efficiency.
+
+\subsection{AdaBoost}
+\label{subsec:rw_adaboost}
+
+AdaBoost is one of the foundational boosting algorithms. It updates observation
+weights after each boosting round, increasing emphasis on samples that were
+previously misclassified, and combines the weak learners into a weighted final
+classifier \cite{freund1997adaboost}. In this study, AdaBoost serves as the
+classical baseline and uses decision stumps as weak learners. Keeping the base
+learners simple provides a clear comparison with the deeper and more heavily
+regularized gradient-boosting systems used by XGBoost and LightGBM.
+
+\subsection{XGBoost}
+\label{subsec:rw_xgboost}
+
+XGBoost extends gradient tree boosting with both statistical regularization and
+systems-level optimizations for scalable learning. Its design includes a
+regularized objective, sparsity-aware split handling, approximate tree learning,
+and efficient parallel computation \cite{chen2016xgboost}. It also exposes
+controls such as tree depth, shrinkage, row subsampling, column subsampling, and
+regularization. These controls are useful for the present study because the
+three healthcare datasets differ substantially in sample size, dimensionality,
+and class prevalence, while the same fixed model configuration must remain
+reproducible across datasets.
+
+\subsection{LightGBM}
+\label{subsec:rw_lightgbm}
+
+LightGBM is a gradient-boosted decision-tree framework designed for high
+computational efficiency. Ke et al. introduced Gradient-based One-Side Sampling
+(GOSS) and Exclusive Feature Bundling (EFB) to reduce computational cost while
+preserving predictive quality on large and high-dimensional datasets
+\cite{ke2017lightgbm}. LightGBM also grows trees leaf-wise, allowing it to fit
+complex nonlinear relationships efficiently. Because leaf-wise growth can
+increase model complexity, parameters such as the number of leaves, maximum
+depth, minimum child samples, learning rate, subsampling, and regularization are
+controlled explicitly in the experimental configuration.
+
+\subsection{Explainability and Stability of Tree Models}
+\label{subsec:rw_shap_stability}
+
+Predictive performance alone does not show which variables drive model outputs.
+SHAP (SHapley Additive exPlanations) provides additive feature attributions for
+individual predictions and establishes desirable consistency properties for
+feature attribution \cite{lundberg2017shap}. Tree-specific SHAP algorithms make
+these explanations computationally practical for tree ensembles, and prior work
+has demonstrated their use in medical prediction settings
+\cite{lundberg2020treeexplainer}. This motivates evaluating not only predictive
+performance across cross-validation folds but also whether feature-importance
+rankings remain consistent as the training sample changes.
+
+\subsection{Research Gap and Motivation}
+\label{subsec:rw_gap}
+
+The goal of this study is therefore broader than identifying a single model with
+the highest average score. AdaBoost, XGBoost, and LightGBM are evaluated under a
+common preprocessing, cross-validation, metric, and hold-out testing protocol
+across multiple healthcare datasets. The study then examines two forms of
+stability: fold-to-fold variation in predictive performance and fold-to-fold
+variation in SHAP-based feature rankings. This design supports the three research
+questions by separating average predictive strength from sensitivity to the
+particular training sample and from the stability of model explanations.

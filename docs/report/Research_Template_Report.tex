@@ -1,0 +1,228 @@
+\documentclass[12pt]{ai_conquer2026}
+\addbibresource{references.bib}
+\title{%
+  \begin{center}
+        \Large {AI VIET NAM -- AI Conquer 2026}\\[.5ex]  
+        \Huge \textbf{A Comparative Study of Tree-based Models for Healthcare Risk Prediction: Cross-validation and SHAP-based Stability Analysis}\\[.5ex]
+  \end{center}
+}
+
+
+\posttitle{
+\author{
+\begin{minipage}{\textwidth}
+\centering
+{
+\vspace{-1.5em}
+Group \textbf{Numby}
+\\[1cm]
+\begin{tabular}{p{6cm}p{5cm}p{3cm}}
+    \textbf{Name} & \textbf{Position} & \textbf{Role} \\
+    Le Quang Thanh & Tech Leader & Team Leader\\
+    Nguyen Van Vi & AI Engineer (Pipeline) & Member\\
+    Le Thanh Lam & AI Engineer (Data) & Member\\
+    Pham Minh Dang Tran & AI Engineer (Model) & Member\\
+    Tan Du & QA / Reviewer & Member
+\end{tabular}
+\\[1cm]
+}\
+\end{minipage}
+}
+}
+\date{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\href{https://www.facebook.com/aivietnam.edu.vn}{\textcolor{aivnGreen}{\bfseries AI VIET NAM (AI Conquer 2026)}}}
+\rhead{\href{https://aivietnam.edu.vn/}{\textcolor{aivnGreen}{\bfseries aivietnam.edu.vn}}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{1.0pt}
+\renewcommand{\headrule}{{\color{aivnGreen}\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}}
+
+\begin{document}
+\maketitle
+\vspace{-5.5em}
+\setlength{\epigraphwidth}{0.6\textwidth}
+
+\section{Research Summary}
+\label{sec:research_summary}
+
+\newpage
+\setcounter{tocdepth}{2}
+\tableofcontents
+% \listoftables
+% \listoffigures
+\thispagestyle{fancy}
+
+\newpage
+
+\section{Introduction and Research Questions}
+\label{sec:introduction}
+
+\subsection{Research Context}
+
+Healthcare risk prediction has become an important application of machine learning,
+particularly with the increasing availability of structured healthcare data. Machine
+learning models can be used to identify patterns in demographic, clinical, and
+physiological features and estimate the risk of developing a disease or experiencing
+an adverse health outcome. Such predictive models may provide useful
+decision-support information for healthcare-related analysis.
+
+Among machine learning approaches for structured data, tree-based models are
+widely used because they can capture nonlinear relationships and feature
+interactions while requiring relatively few assumptions about the underlying data
+distribution. In particular, boosting-based models such as AdaBoost, XGBoost,
+and LightGBM have demonstrated strong predictive capabilities and are commonly
+applied to classification problems.
+
+However, healthcare datasets can differ substantially in terms of sample size,
+feature distributions, missing values, and class imbalance. As a result, the
+performance of a particular model may vary across datasets. Evaluating multiple
+models across multiple healthcare datasets under a consistent experimental
+protocol can therefore provide a more comprehensive understanding of their
+behavior.
+
+
+\subsection{Research Problem}
+
+Although tree-based models can achieve strong predictive performance,
+comparing models based solely on a single train-test split or a single performance
+metric may provide an incomplete view of their reliability. A model that performs
+well on one particular split may exhibit considerable variation when trained on
+different subsets of the data.
+
+Cross-validation provides a systematic approach for evaluating this variability by
+repeatedly training and evaluating models on different data partitions. Therefore,
+model comparison should consider not only average predictive performance but
+also the consistency of performance across cross-validation folds.
+
+Furthermore, predictive performance does not indicate why a model produces its
+predictions. In healthcare-related machine learning, identifying influential
+features can provide additional insight into model behavior. SHapley Additive
+exPlanations (SHAP) can be used to quantify the contribution of individual
+features to model predictions. However, feature importance obtained from a
+single training run may not necessarily remain consistent when the training data
+changes.
+
+This raises a second stability concern: whether the explanations produced by a
+model remain consistent across different cross-validation folds. A feature that
+appears highly important in one fold but substantially decreases in importance
+in other folds may indicate that the corresponding interpretation is sensitive to
+the training data.
+
+Therefore, this study considers both predictive stability and explanation
+stability when comparing tree-based models for healthcare risk prediction.
+
+
+\subsection{Research Questions}
+
+Based on the research problem described above, this study investigates the
+following research questions:
+
+\begin{itemize}
+    \item \textbf{RQ1:} How do AdaBoost, XGBoost, and LightGBM compare in
+    healthcare risk prediction across multiple datasets?
+
+    \item \textbf{RQ2:} How stable is the predictive performance of these models
+    across cross-validation folds?
+
+    \item \textbf{RQ3:} How stable are SHAP-based feature importance rankings
+    across cross-validation folds?
+\end{itemize}
+
+
+\subsection{Contributions}
+
+This study makes the following contributions:
+
+\begin{itemize}
+    \item \textbf{Systematic comparison of boosting-based tree models.}
+    We provide a controlled empirical comparison of AdaBoost, XGBoost, and
+    LightGBM for healthcare risk prediction across multiple datasets using a
+    consistent experimental protocol.
+
+    \item \textbf{Evaluation of predictive stability.}
+    In addition to reporting predictive performance, we analyze the variability
+    of model performance across cross-validation folds to assess the
+    consistency of the models.
+
+    \item \textbf{Analysis of SHAP explanation stability.}
+    We investigate the stability of SHAP-based feature importance rankings
+    across cross-validation folds, providing an empirical assessment of
+    whether model explanations remain consistent under different training
+    subsets.
+
+    \item \textbf{Multi-dataset evaluation.}
+    By evaluating the models across multiple healthcare datasets, the study
+    examines whether observed performance and explanation patterns are
+    consistent across different data characteristics.
+
+    \item \textbf{Reproducible experimental framework.}
+    The experiments are conducted using a standardized and reproducible
+    pipeline, enabling consistent comparison across models, datasets, and
+    cross-validation folds.
+\end{itemize}
+
+\section{Related Work}
+\label{sec:related_work}
+\input{sections/model_related_work}
+
+
+\section{Methodology and Research Architecture}
+\label{sec:methodology}
+
+
+\section{Data and Experimental Design}
+\label{sec:experiments}
+\input{sections/model_experimental_design}
+
+\section{Results and Discussion}
+\label{sec:results}
+\input{sections/model_results_discussion}
+
+
+% -----------------------------------------------------------------------
+% Section commented out per team request (2026-08-05): the required report
+% structure (see the mucluc/TOC image supplied by the team) has no separate
+% Error Analysis and Limitations section. Kept in source, not rendered.
+% -----------------------------------------------------------------------
+\iffalse
+\fi
+
+% -----------------------------------------------------------------------
+% Section commented out per team request (2026-08-05): the required report
+% structure has no separate Replicate the Results section. The repository
+% link, structure, and reproduction commands are kept in the Appendix
+% instead. Kept in source, not rendered.
+% -----------------------------------------------------------------------
+\iffalse
+\newpage
+\fi
+
+\section{Conclusion and Future Work}
+\label{sec:conclusion_future_work}
+
+\subsection{Conclusion}
+
+\newpage
+\section{References}
+\label{section:references}
+\nocite{*}
+\vspace{-3.2em}
+\printbibliography
+
+\newpage
+\begin{appendices}
+\begin{enumerate}
+\item \textbf{AIVIETNAM:} Further information about AIVIETNAM can be found \href{https://aivietnam.edu.vn/}{here}.
+\item \textbf{GitHub Repository:}
+\item \textbf{Dataset:}
+\item \textbf{Demo Video / Presentation:}
+\begin{itemize}
+    \item Link demo video: \href{https://youtu.be/a0pVMnRgGaE}{Link demo}
+    \item Link slide presentation: \href{https://drive.google.com/file/d/1foDtkD4MwgivJIOTfOiVh2aazJ1p3nHq/view?usp=sharing}{Link slide presentation}
+\end{itemize}
+\end{enumerate}
+\end{appendices}
+
+\end{document}
