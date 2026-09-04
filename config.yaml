@@ -12,21 +12,26 @@ experiment:
 # The upstream data pipeline already creates one development/train file and one
 # untouched test file per dataset. All model experiments consume those processed
 # numeric files so the three algorithms see exactly the same features and rows.
+# Cross-validation must use each dataset's upstream kfold_indices.csv so model
+# evaluation and SHAP explainability operate on identical, reproducible folds.
 datasets:
   dataset1:
     name: Personal Key Indicators of Heart Disease (2022)
     train_path: data/processed/dataset1/train.csv
     test_path: data/processed/dataset1/test.csv
+    kfold_path: data/processed/dataset1/kfold_indices.csv
     target_column: HadHeartAttack
   dataset2:
     name: Heart Failure Prediction
     train_path: data/processed/dataset2/train.csv
     test_path: data/processed/dataset2/test.csv
+    kfold_path: data/processed/dataset2/kfold_indices.csv
     target_column: HeartDisease
   dataset3:
     name: Heart Disease Health Indicators (BRFSS 2015)
     train_path: data/processed/dataset3/train.csv
     test_path: data/processed/dataset3/test.csv
+    kfold_path: data/processed/dataset3/kfold_indices.csv
     target_column: HeartDiseaseorAttack
 
 # Fixed, literature-guided configurations are intentionally shared across all
