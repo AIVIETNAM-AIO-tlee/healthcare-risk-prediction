@@ -25,6 +25,7 @@ from src.evaluation.metrics import (
     compute_binary_metrics,
     summarize_fold_metrics,
 )
+from src.evaluation.shap_stability import compute_fold_shap_importance, summarize_shap_stability
 from src.experiment_config import load_experiment_config
 from src.models.factory import build_model
 
@@ -150,7 +151,7 @@ def _run_one_model(
     X_test: pd.DataFrame,
     y_test: pd.Series,
     experiment_config: dict[str, Any],
-) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
     random_state = int(experiment_config["random_state"])
     threshold = float(experiment_config["decision_threshold"])
     balance_training = bool(experiment_config["balance_training"])
@@ -164,6 +165,7 @@ def _run_one_model(
     )
 
     fold_rows: list[dict[str, Any]] = []
+    shap_rows: list[dict[str, Any]] = []
     for fold_index, (train_indices, validation_indices) in enumerate(
         splitter.split(X_dev, y_dev), start=1
     ):
@@ -185,6 +187,19 @@ def _run_one_model(
             validation_score,
             threshold=threshold,
         )
+        shap_importance = compute_fold_shap_importance(model, X_fold_validation)
+        for feature, importance in shap_importance.items():
+            shap_rows.append(
+                {
+                    "dataset_key": dataset_key,
+                    "dataset_name": dataset_name,
+                    "model_key": model_key,
+                    "model_name": model_name,
+                    "fold": fold_index,
+                    "feature": feature,
+                    "mean_abs_shap": float(importance),
+                }
+            )
 
         fold_rows.append(
             {
@@ -230,7 +245,7 @@ def _run_one_model(
     }
     metric_text = ", ".join(f"{name}={test_metrics[name]:.4f}" for name in METRIC_NAMES)
     print(f"    Hold-out test | {metric_text} | fit={final_fit_seconds:.2f}s")
-    return fold_rows, test_row
+    return fold_rows, shap_rows, test_row
 
 
 def _merge_test_metrics(ranked_summary: pd.DataFrame, test_metrics: pd.DataFrame) -> pd.DataFrame:
@@ -286,6 +301,7 @@ def run_experiments(
     output_dir.mkdir(parents=True, exist_ok=True)
 
     all_fold_rows: list[dict[str, Any]] = []
+    all_shap_rows: list[dict[str, Any]] = []
     all_test_rows: list[dict[str, Any]] = []
 
     for dataset_key, dataset_config in datasets.items():
@@ -298,7 +314,7 @@ def run_experiments(
 
         for model_key, model_config in models.items():
             print(f"  -> {model_config.get('display_name', model_key)}")
-            fold_rows, test_row = _run_one_model(
+            fold_rows, shap_rows, test_row = _run_one_model(
                 dataset_key=dataset_key,
                 dataset_name=dataset_config["name"],
                 model_key=model_key,
@@ -310,10 +326,16 @@ def run_experiments(
                 experiment_config=experiment,
             )
             all_fold_rows.extend(fold_rows)
+            all_shap_rows.extend(shap_rows)
             all_test_rows.append(test_row)
 
     fold_metrics = pd.DataFrame(all_fold_rows)
     test_metrics = pd.DataFrame(all_test_rows)
+    shap_fold_importance = pd.DataFrame(all_shap_rows)
+    shap_stability = summarize_shap_stability(
+        shap_fold_importance,
+        top_k=int(experiment.get("shap", {}).get("top_k", 10)),
+    )
     cv_summary = summarize_fold_metrics(fold_metrics)
     ranked_summary = add_dataset_ranks(cv_summary, primary_metric=experiment["primary_metric"])
     model_comparison = _merge_test_metrics(ranked_summary, test_metrics)
@@ -325,6 +347,8 @@ def run_experiments(
         "test_metrics": output_dir / "test_metrics.csv",
         "model_comparison": output_dir / "model_comparison.csv",
         "overall_model_comparison": output_dir / "overall_model_comparison.csv",
+        "shap_fold_importance": output_dir / "shap_fold_importance.csv",
+        "shap_stability": output_dir / "shap_stability.csv",
         "metadata": output_dir / "experiment_metadata.json",
     }
     fold_metrics.to_csv(paths["fold_metrics"], index=False)
@@ -332,6 +356,8 @@ def run_experiments(
     test_metrics.to_csv(paths["test_metrics"], index=False)
     model_comparison.to_csv(paths["model_comparison"], index=False)
     overall_comparison.to_csv(paths["overall_model_comparison"], index=False)
+    shap_fold_importance.to_csv(paths["shap_fold_importance"], index=False)
+    shap_stability.to_csv(paths["shap_stability"], index=False)
     _write_metadata(Path(config_path).expanduser().resolve(), output_dir)
 
     print("\n=== Cross-dataset comparison ===")

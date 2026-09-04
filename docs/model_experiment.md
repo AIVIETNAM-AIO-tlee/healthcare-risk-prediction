@@ -48,9 +48,20 @@ Results are written to `results/model_evaluation/`:
 - `test_metrics.csv`: final hold-out test metrics after refitting on the full development set.
 - `model_comparison.csv`: within-dataset CV rank plus hold-out metrics.
 - `overall_model_comparison.csv`: average within-dataset rank and unweighted cross-dataset means.
+- `shap_fold_importance.csv`: mean absolute SHAP importance for every feature in every validation fold.
+- `shap_stability.csv`: cross-fold explanation stability using mean Kendall's tau, Spearman's rho, and Top-K Jaccard similarity.
 - `experiment_metadata.json`: Python/package versions and SHA-256 hash of `config.yaml`.
 
 The implemented metrics are ROC-AUC, PR-AUC, Recall, and F1. PR-AUC is the primary ranking metric because the healthcare datasets can be class-imbalanced. Recall and F1 use the fixed 0.50 decision threshold from `config.yaml`.
+
+## SHAP stability
+
+For each validation fold, the fitted model explains that fold's validation rows. Feature importance is the mean absolute SHAP value across those rows. The resulting feature rankings are compared across every pair of folds:
+
+- Kendall's tau and Spearman's rho compare the full feature rankings.
+- Top-K Jaccard measures overlap among the most important features; `top_k` is configured under `experiment.shap` and defaults to 10.
+
+The untouched test split is not used for SHAP stability. Higher values indicate more stable explanations.
 
 ## Reproducibility choices
 

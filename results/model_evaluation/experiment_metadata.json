@@ -1,7 +1,7 @@
 {
-  "generated_at_utc": "2026-08-27T04:44:57.323411+00:00",
-  "python": "3.13.14",
-  "platform": "Windows-11-10.0.26200-SP0",
+  "generated_at_utc": "2026-09-04T11:28:01.014381+00:00",
+  "python": "3.11.5",
+  "platform": "Windows-10-10.0.26200-SP0",
   "packages": {
     "pandas": "2.2.3",
     "numpy": "2.3.5",
@@ -9,6 +9,6 @@
     "xgboost": "3.1.3",
     "lightgbm": "4.6.0"
   },
-  "config_path": "D:\\Cert AIO\\Mod3\\healthcare-risk-prediction\\config.yaml",
-  "config_sha256": "3a2179dc206802e82d196bd11b1354dd7a42e33a05418a9d4c8ded2b151859a3"
+  "config_path": "E:\\healthcare-risk-prediction\\config.yaml",
+  "config_sha256": "4dc343f548329ca85727dbf699edf31ba22a6e02de53dca7efadb115c21015ee"
 }
