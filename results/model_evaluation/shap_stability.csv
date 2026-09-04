@@ -1,0 +1,4 @@
+dataset_key,dataset_name,model_key,model_name,n_folds,n_features,top_k,kendall_tau_mean,spearman_rho_mean,top_k_jaccard_mean
+dataset2,Heart Failure Prediction,adaboost,AdaBoost,5,18,10,0.8403295951222349,0.921681644744553,0.8212121212121213
+dataset2,Heart Failure Prediction,xgboost,XGBoost,5,18,10,0.803921568627451,0.9306501547987616,0.8545454545454547
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,5,18,10,0.8457516339869283,0.9479876160990711,0.8545454545454547

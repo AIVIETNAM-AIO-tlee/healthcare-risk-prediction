@@ -8,6 +8,8 @@ experiment:
   cv:
     n_splits: 5
     shuffle: true
+  shap:
+    top_k: 10
 
 # The upstream data pipeline already creates one development/train file and one
 # untouched test file per dataset. All model experiments consume those processed
