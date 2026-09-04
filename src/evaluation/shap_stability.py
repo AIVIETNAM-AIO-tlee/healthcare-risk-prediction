@@ -4,109 +4,46 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
+import shap
 from scipy.stats import kendalltau, spearmanr
 
 
-def _leaf_pos_prob(val_counts: np.ndarray, node_idx: int, classes: np.ndarray) -> float:
-    """Calculate positive class probability for a decision tree node."""
-    counts = val_counts[node_idx][0]
-    total = counts.sum()
-    if total == 0:
-        return 0.0
-    if len(counts) > 1:
-        pos_idx = np.where(classes == 1)[0]
-        idx = int(pos_idx[0]) if len(pos_idx) > 0 else (len(counts) - 1)
-        return float(counts[idx] / total)
-    return 1.0 if (len(classes) > 0 and classes[0] == 1) else 0.0
-
-
-def _compute_adaboost_tree_shap(model: Any, X: pd.DataFrame) -> np.ndarray:
-    """Compute exact Tree SHAP values for an AdaBoostClassifier of decision trees.
-
-    AdaBoost produces an additive model F(x) = sum_m w_m * h_m(x).
-    By SHAP additivity: phi_i(F) = sum_m w_m * phi_i(h_m).
-    For decision stumps (depth <= 1), each tree only splits on a single feature,
-    allowing vectorized computation with zero explainer overhead.
-    For deeper trees, TreeExplainer is applied to each constituent estimator.
-    """
-    import shap
-    from sklearn.tree import DecisionTreeClassifier
-
-    estimators = getattr(model, "estimators_", None)
-    weights = getattr(model, "estimator_weights_", None)
-    if estimators is None or weights is None or len(estimators) == 0:
-        raise ValueError("AdaBoost model has no fitted estimators or weights.")
-
-    n_samples, n_features = X.shape
-    total_shap = np.zeros((n_samples, n_features), dtype=float)
-
-    is_all_stumps = all(
-        isinstance(e, DecisionTreeClassifier) and getattr(e.tree_, "max_depth", 0) <= 1
-        for e in estimators
-    )
-
-    if is_all_stumps:
-        X_mat = X.to_numpy()
-        for tree, weight in zip(estimators, weights):
-            feat = tree.tree_.feature[0]
-            if feat < 0:
-                continue
-            thresh = tree.tree_.threshold[0]
-            val_counts = tree.tree_.value
-            classes = tree.classes_
-            val_root = _leaf_pos_prob(val_counts, 0, classes)
-            val_left = _leaf_pos_prob(val_counts, 1, classes)
-            val_right = _leaf_pos_prob(val_counts, 2, classes)
-
-            mask = X_mat[:, feat] <= thresh
-            total_shap[mask, feat] += weight * (val_left - val_root)
-            total_shap[~mask, feat] += weight * (val_right - val_root)
-        return total_shap
-    else:
-        for tree, weight in zip(estimators, weights):
-            tree_vals = shap.TreeExplainer(tree).shap_values(X)
-            if isinstance(tree_vals, list):
-                tree_vals = tree_vals[-1]
-            elif tree_vals.ndim == 3:
-                tree_vals = tree_vals[:, :, -1]
-            total_shap += float(weight) * tree_vals
-        return total_shap
-
-
 def compute_fold_shap_importance(model: Any, X: pd.DataFrame) -> pd.Series:
-    """Return mean absolute SHAP importance for one fitted binary classifier."""
-    try:
-        import shap
-    except ImportError as exc:
-        raise ImportError(
-            "SHAP is required for explanation stability. Install requirements.txt first."
-        ) from exc
+    """Return mean absolute SHAP importance using one method for every model.
 
+    KernelExplainer is used for all classifiers because TreeExplainer does not
+    support sklearn's AdaBoostClassifier. The same background and evaluation
+    sampling policy is therefore applied to every model in the comparison.
+    """
     if not isinstance(X, pd.DataFrame):
         X = pd.DataFrame(X)
 
-    # 1. Check if model is an AdaBoost tree ensemble
-    if hasattr(model, "estimators_") and hasattr(model, "estimator_weights_"):
-        try:
-            values = _compute_adaboost_tree_shap(model, X)
-            return pd.Series(np.abs(values).mean(axis=0), index=X.columns, name="mean_abs_shap")
-        except Exception:
-            pass  # Fallback to standard flow if unexpected structure
+    if X.empty:
+        raise ValueError("Cannot compute SHAP importance for an empty feature frame.")
+    if not hasattr(model, "predict_proba"):
+        raise TypeError(
+            f"KernelExplainer requires predict_proba(); {type(model).__name__} does not provide it."
+        )
 
-    # 2. Try native TreeExplainer (XGBoost, LightGBM, RandomForest, etc.)
+    background = X.iloc[: min(100, len(X))].copy()
+    evaluation = X.iloc[: min(200, len(X))].copy()
+
+    def positive_class_probability(values: np.ndarray) -> np.ndarray:
+        frame = pd.DataFrame(values, columns=X.columns)
+        probabilities = np.asarray(model.predict_proba(frame))
+        if probabilities.ndim != 2 or probabilities.shape[1] != 2:
+            raise ValueError(
+                f"Expected binary predict_proba output with shape (n, 2), got {probabilities.shape}."
+            )
+        return probabilities[:, 1]
+
     try:
-        values = shap.TreeExplainer(model).shap_values(X)
-    except Exception:
-        # 3. Model-agnostic KernelExplainer fallback
-        try:
-            background = shap.sample(X, min(100, len(X)))
-            explainer = shap.KernelExplainer(model.predict_proba, background)
-            eval_X = shap.sample(X, min(200, len(X))) if len(X) > 200 else X
-            values = explainer.shap_values(eval_X)
-        except Exception as generic_error:
-            raise RuntimeError(
-                f"Unable to compute SHAP values for {type(model).__name__}."
-            ) from generic_error
+        explainer = shap.KernelExplainer(positive_class_probability, background)
+        values = explainer.shap_values(evaluation)
+    except Exception as err:
+        raise RuntimeError(
+            f"KernelExplainer failed for {type(model).__name__} using the positive-class probability: {err}"
+        ) from err
 
     if isinstance(values, list):
         values = values[-1]
@@ -115,7 +52,7 @@ def compute_fold_shap_importance(model: Any, X: pd.DataFrame) -> pd.Series:
         values = values[:, :, -1]
     if values.ndim != 2 or values.shape[1] != X.shape[1]:
         raise ValueError(
-            f"Expected SHAP values with shape (n_samples, {X.shape[1]}), got {values.shape}."
+            f"Expected Kernel SHAP values with shape ({len(evaluation)}, {X.shape[1]}), got {values.shape}."
         )
 
     return pd.Series(np.abs(values).mean(axis=0), index=X.columns, name="mean_abs_shap")
