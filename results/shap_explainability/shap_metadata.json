@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-08-30T06:42:54.434610+00:00",
+  "generated_at_utc": "2026-09-04T21:21:55.180293+00:00",
   "random_state": 42,
   "cv_folds": 5,
   "max_explain_samples_per_fold": 200,

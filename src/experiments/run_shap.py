@@ -7,7 +7,6 @@ from pathlib import Path
 from typing import Any
 
 import pandas as pd
-from sklearn.model_selection import StratifiedKFold
 from sklearn.utils.class_weight import compute_sample_weight
 
 from src.explainability.shap_analysis import (
@@ -17,7 +16,7 @@ from src.explainability.shap_analysis import (
     summarize_rank_stability,
 )
 from src.experiment_config import load_experiment_config
-from src.experiments.run_models import _load_processed_split
+from src.experiments.run_models import _load_kfold_splits, _load_processed_split
 from src.models.factory import build_model
 
 
@@ -70,12 +69,12 @@ def run_shap_experiments(
     for dataset_key, dataset_config in datasets.items():
         print(f"\n=== SHAP: {dataset_config['name']} ({dataset_key}) ===")
         X_dev, y_dev, _, _ = _load_processed_split(project_root, dataset_config)
-        splitter = StratifiedKFold(
-            n_splits=int(cv_config["n_splits"]),
-            shuffle=bool(cv_config["shuffle"]),
-            random_state=random_state if bool(cv_config["shuffle"]) else None,
+        splits = _load_kfold_splits(
+            project_root=project_root,
+            dataset_config=dataset_config,
+            n_rows=len(X_dev),
+            expected_n_splits=int(cv_config["n_splits"]),
         )
-        splits = list(splitter.split(X_dev, y_dev))
 
         for model_key, model_config in models.items():
             model_name = model_config.get("display_name", model_key)

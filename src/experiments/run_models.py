@@ -15,7 +15,6 @@ import numpy as np
 import pandas as pd
 import sklearn
 import xgboost
-from sklearn.model_selection import StratifiedKFold
 from sklearn.utils.class_weight import compute_sample_weight
 
 from src.evaluation.metrics import (
@@ -113,6 +112,49 @@ def _load_processed_split(
     return X_train, y_train, X_test, y_test
 
 
+def _load_kfold_splits(
+    project_root: Path,
+    dataset_config: dict[str, Any],
+    n_rows: int,
+    expected_n_splits: int,
+) -> list[tuple[np.ndarray, np.ndarray]]:
+    """Load upstream fold assignments from data/processed/<dataset>/kfold_indices.csv.
+
+    The file is row-aligned with train.csv and contains one integer `fold` value
+    per development row. Each fold id marks that row as validation for that fold;
+    all remaining rows form the fold's training subset.
+    """
+    kfold_path = project_root / dataset_config["kfold_path"]
+    _assert_real_csv(kfold_path)
+    fold_df = pd.read_csv(kfold_path)
+    if list(fold_df.columns) != ["fold"]:
+        raise ValueError(f"Expected one 'fold' column in {kfold_path}; got {list(fold_df.columns)}")
+    if len(fold_df) != n_rows:
+        raise ValueError(
+            f"K-fold assignment length ({len(fold_df)}) does not match train rows ({n_rows}) "
+            f"for {dataset_config['name']}."
+        )
+    if fold_df["fold"].isna().any():
+        raise ValueError(f"Missing fold assignments found in {kfold_path}.")
+
+    fold_values = fold_df["fold"].astype(int).to_numpy()
+    fold_ids = sorted(np.unique(fold_values).tolist())
+    if len(fold_ids) != expected_n_splits:
+        raise ValueError(
+            f"Expected {expected_n_splits} folds, but {kfold_path} contains {fold_ids}."
+        )
+
+    all_indices = np.arange(n_rows)
+    splits: list[tuple[np.ndarray, np.ndarray]] = []
+    for fold_id in fold_ids:
+        validation_idx = all_indices[fold_values == fold_id]
+        train_idx = all_indices[fold_values != fold_id]
+        if len(validation_idx) == 0 or len(train_idx) == 0:
+            raise ValueError(f"Fold {fold_id} is empty or leaves no training rows.")
+        splits.append((train_idx, validation_idx))
+    return splits
+
+
 def _positive_class_probability(model: Any, X: pd.DataFrame) -> np.ndarray:
     if not hasattr(model, "predict_proba"):
         raise TypeError(f"{type(model).__name__} does not implement predict_proba().")
@@ -157,16 +199,15 @@ def _run_one_model(
     cv_config = experiment_config["cv"]
     model_name = model_config.get("display_name", model_key)
 
-    splitter = StratifiedKFold(
-        n_splits=int(cv_config["n_splits"]),
-        shuffle=bool(cv_config["shuffle"]),
-        random_state=random_state if bool(cv_config["shuffle"]) else None,
+    splits = _load_kfold_splits(
+        project_root=experiment_config["_project_root"],
+        dataset_config=experiment_config["_dataset_config"],
+        n_rows=len(X_dev),
+        expected_n_splits=int(cv_config["n_splits"]),
     )
 
     fold_rows: list[dict[str, Any]] = []
-    for fold_index, (train_indices, validation_indices) in enumerate(
-        splitter.split(X_dev, y_dev), start=1
-    ):
+    for fold_index, (train_indices, validation_indices) in enumerate(splits, start=1):
         X_fold_train = X_dev.iloc[train_indices]
         y_fold_train = y_dev.iloc[train_indices]
         X_fold_validation = X_dev.iloc[validation_indices]
@@ -307,7 +348,11 @@ def run_experiments(
                 y_dev=y_dev,
                 X_test=X_test,
                 y_test=y_test,
-                experiment_config=experiment,
+                experiment_config={
+                    **experiment,
+                    "_project_root": project_root,
+                    "_dataset_config": dataset_config,
+                },
             )
             all_fold_rows.extend(fold_rows)
             all_test_rows.append(test_row)
