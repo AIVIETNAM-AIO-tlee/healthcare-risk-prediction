@@ -1,0 +1,114 @@
+\subsection{Exploratory Data Analysis}
+\label{subsec:data_eda}
+
+\begin{sloppypar}
+
+Before any preprocessing decision is made, each of the three raw datasets is
+examined independently in \texttt{notebooks/\allowbreak 01\_eda.\allowbreak ipynb} to characterize its
+class balance, missingness, numeric-feature relationships, and the strength of
+association between individual features and the target. The purpose of this
+stage is not to fit any model, but to surface the data-quality issues and
+predictive signals that later motivate specific preprocessing choices (see
+Section~\ref{subsec:data_preprocessing}) and the class-imbalance policy adopted
+in the modeling stage (Section~\ref{subsec:data_description} and finding F1 of
+the project's scope review).
+
+\paragraph{Class imbalance.} All three datasets exhibit some degree of class
+imbalance, but to very different extents. Dataset 1 is the most imbalanced,
+with a raw positive rate of 5.64\%, giving balanced class weights of
+approximately $\{0: 0.53, 1: 8.80\}$ -- a positive example is weighted roughly
+16.6$\times$ more than a negative one under scikit-learn's balanced weighting
+scheme \cite{pedregosa2011scikit}. Dataset 3 is imbalanced in the same
+direction but less severely, with a raw positive rate of 9.42\% and balanced
+weights of approximately $\{0: 0.55, 1: 5.31\}$ (about 9.6$\times$). Dataset 2
+is the outlier among the three: its positive rate of 55.34\% is close to
+balanced, giving weights near 1.0 in both directions ($\{0: 1.12, 1: 0.90\}$)
+and requiring very little correction. This spread of imbalance regimes across
+the three datasets is precisely what motivates RQ1/RQ2's design: a class-
+imbalance policy that only worked well on a near-balanced dataset like Dataset
+2 would not generalize to the 17:1 imbalance of Dataset 1.
+
+\paragraph{Missingness.} Dataset 1 is the only one of the three with
+meaningful missing data: 38 of its 40 columns contain at least one missing
+value, led by vaccination/screening-history fields that respondents often
+skip (Table~\ref{tab:d1_missing}). Datasets 2 and 3 report zero missing values
+on the surface, but Dataset 2's completeness is misleading -- its
+\texttt{RestingBP} and \texttt{Cholesterol} columns use an undocumented
+\texttt{0} placeholder for "not measured" (1 and 172 rows respectively) that
+is not distinguishable from a genuine reading without domain knowledge. This
+is why the EDA stage treats "zero missing values" and "no data-quality
+issues" as two separate questions rather than assuming one implies the other.
+
+\paragraph{Numeric feature correlations.} Correlation matrices computed over
+each dataset's numeric columns show no evidence of problematic
+multicollinearity in any of the three datasets, though each has its own
+notable pairwise relationships. In Dataset 1, \texttt{WeightInKilograms} and
+\texttt{BMI} are strongly correlated ($r = 0.86$), which is expected since BMI
+is mathematically derived from weight and height; \texttt{HeightInMeters} and
+\texttt{WeightInKilograms} are moderately correlated ($r = 0.47$), while
+\texttt{HeightInMeters} and \texttt{BMI} are nearly uncorrelated
+($r = -0.03$), confirming that BMI successfully normalizes out the effect of
+height. \texttt{PhysicalHealthDays} and \texttt{MentalHealthDays} are
+moderately correlated ($r = 0.32$). In Dataset 2, no pair of numeric features
+is strongly correlated; the strongest relationships are \texttt{Age}
+$\leftrightarrow$ \texttt{MaxHR} ($r = -0.38$) and \texttt{Age}
+$\leftrightarrow$ \texttt{Oldpeak} ($r = 0.26$), with \texttt{Cholesterol}
+weakly negatively correlated with \texttt{FastingBS} ($r = -0.26$), plausibly
+diluted by the placeholder-zero \texttt{Cholesterol} values noted above. In
+Dataset 3, \texttt{PhysHlth} and \texttt{GenHlth} are the most correlated pair
+($r = 0.52$), \texttt{MentHlth} and \texttt{PhysHlth} are moderately
+correlated ($r = 0.35$), and \texttt{Education} and \texttt{Income} show the
+strongest socioeconomic correlation overall ($r = 0.45$). In all three cases,
+these pairwise relationships are informative but well below the
+$0.9$ correlation threshold later used for feature reduction
+(Section~\ref{subsec:data_preprocessing}), so they surface as candidates for
+the modeling stage rather than as columns to drop outright at the EDA stage.
+
+\paragraph{Outlier detection (Dataset 2 only).} Dataset 2 is the only dataset
+whose numeric columns are genuine continuous clinical measurements rather than
+mostly binary or discrete survey answers, which is why IQR (Tukey-fence)
+outlier detection is examined here and later applied only to Dataset 2 during
+preprocessing (finding F5). Computed on the full raw dataset for exploratory
+purposes, \texttt{Age} has no values outside its fence; \texttt{RestingBP}
+(bounds 90--170) flags 27 potential outliers; \texttt{Cholesterol} (bounds
+105.6--376.6, computed after treating its zero-placeholders as missing) flags
+23; \texttt{MaxHR} (bounds 66--210) flags 2; and \texttt{Oldpeak} (bounds
+$-2.25$--3.75) flags 16, consistent with its long right tail. These
+full-dataset bounds are for exploratory characterization only; the bounds
+actually used to clip Dataset 2's train/test splits in
+Section~\ref{subsec:data_preprocessing} are refit on the training split alone
+to avoid leaking test-set extremes into the fences.
+
+\paragraph{Target rate by category.} Categorical features associated with
+self-reported general health status are, across every dataset that has one,
+by far the strongest single predictors observed during EDA. In Dataset 1, the
+heart-attack rate rises monotonically with self-reported \texttt{GeneralHealth}
+from 1.53\% ("Excellent") to 2.84\% ("Very good"), 5.78\% ("Good"), 11.99\%
+("Fair"), and 21.08\% ("Poor") -- a roughly 14-fold spread across five
+categories, in contrast to BMI, whose distribution is nearly identical between
+positive and negative cases (median around 27--28 in both groups) and is
+therefore a comparatively weak discriminator on its own. In Dataset 2, both
+categorical predictors examined are strong: patients with asymptomatic chest
+pain (\texttt{ASY}) have a heart-disease rate of 79.03\%, far higher than
+\texttt{ATA} (13.87\%), \texttt{NAP} (35.47\%), or \texttt{TA} (43.48\%) --
+counterintuitively, the absence of typical chest-pain symptoms is the
+strongest single warning sign in this dataset -- and a \texttt{Flat} (82.83\%)
+or \texttt{Down} (77.78\%) ST-segment slope is associated with a much higher
+rate than an \texttt{Up}-sloping segment (19.75\%). In Dataset 3, the same
+\texttt{GenHlth} pattern recurs almost identically to Dataset 1 despite the two
+datasets being independent BRFSS survey years: the rate rises from 2.24\%
+("Excellent") to 4.63\%, 10.46\%, 21.31\%, and 34.00\% ("Poor"); \texttt{HighBP}
+is also strongly associated, with 16.47\% of respondents with high blood
+pressure reporting heart disease/attack versus only 4.12\% of those without.
+
+Taken together, these EDA findings motivate three concrete preprocessing
+decisions detailed in Section~\ref{subsec:data_preprocessing}: a shared
+class-imbalance policy applied at model-fit time rather than by resampling
+(F1, since the degree of imbalance varies too much across datasets for a
+single resampling ratio to be appropriate); IQR-based outlier clipping scoped
+to Dataset 2 only (F5, since Datasets 1 and 3 are mostly binary/discrete
+survey data where a genuinely high value is itself a disease signal rather
+than noise); and dataset-specific data-quality handling -- zero-as-missing
+recoding for Dataset 2 and duplicate-row removal for Dataset 3 -- rather than
+a single one-size-fits-all cleaning rule.
+\end{sloppypar}

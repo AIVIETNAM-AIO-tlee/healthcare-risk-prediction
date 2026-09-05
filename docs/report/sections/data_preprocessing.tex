@@ -1,0 +1,170 @@
+\subsection{Data Preprocessing Pipeline}
+\label{subsec:data_preprocessing}
+
+\begin{sloppypar}
+
+All three datasets are processed by the same ordered pipeline
+(\texttt{src/main.py}'s \texttt{process\_dataset()}, backed by
+\texttt{src/data/loader.py}, \texttt{src/\allowbreak data/\allowbreak preprocessing.\allowbreak py}, and
+\texttt{src/data/split.py}), configured per dataset through the
+\texttt{DatasetConfig} registry in \texttt{src/config.py}. Every fitted
+statistic used anywhere in the pipeline -- imputation values, encoders, the
+scaler, outlier bounds, and the feature-reduction selector -- is fit on the
+training split only and then reused, unmodified, to transform the test split,
+so that no information from the held-out test rows leaks into any fitted
+object. The pipeline runs in the following order for each dataset.
+
+\textbf{1. Load and normalize.} \texttt{load\_raw\_dataset()} reads the raw
+CSV, strips whitespace from column names, and drops any fully-empty columns;
+this step is identical for all three datasets.
+
+\textbf{2. Duplicate removal (Dataset 3 only).} Datasets whose
+\texttt{DatasetConfig.\allowbreak drop\_duplicate\_rows} flag is set have exact-duplicate
+rows removed before any further cleaning. Only Dataset 3 opts in: this drops
+23{,}899 of its 253{,}680 rows (9.42\%), leaving 229{,}781 rows.
+
+\textbf{3. Zero-as-missing recoding (Dataset 2 only).} Columns listed in
+\texttt{DatasetConfig.\allowbreak zero\_as\_missing\_columns} have their \texttt{0} values
+converted to \texttt{NaN} before imputation. Only Dataset 2 opts in, for
+\texttt{Cholesterol} (172 rows) and \texttt{RestingBP} (1 row), since a
+\texttt{0} reading is not a physiologically plausible measurement for either
+field.
+
+\textbf{4. Target cleaning.} \texttt{clean\_target()} drops any row with a
+missing target value and casts the target to a binary integer. For Dataset 1
+this drops 3{,}065 rows (0.69\%), leaving 442{,}067 rows (416{,}959 negative /
+25{,}108 positive). Datasets 2 and 3 have no missing target values, so this
+step only performs the type cast; for Dataset 3, applied after duplicate
+removal, the resulting split is 206{,}064 negative / 23{,}717 positive rows
+(89.68\% / 10.32\%), slightly less imbalanced than the pre-duplicate-removal
+figures reported in Section~\ref{subsec:data_description} since a
+disproportionate share of the dropped duplicate rows were negative.
+
+\textbf{5. Class-imbalance-policy computation (informational only).}
+\texttt{compute\_\allowbreak class\_\allowbreak weights()} computes scikit-learn "balanced" class
+weights from the cleaned target column of each dataset (Dataset 1:
+$\{0: 0.53, 1: 8.80\}$; Dataset 2: $\{0: 1.12, 1: 0.90\}$; Dataset 3:
+$\{0: 0.56, 1: 4.84\}$). Per the project's class-imbalance policy (finding F1
+of the scope review), these weights are not used to resample or drop rows at
+the preprocessing stage; they are reported here for traceability and passed as
+\texttt{sample\_weight} at model-fit time in the modeling stage
+described later in this section, so that the reported cross-validation and
+test metrics still reflect each dataset's natural class prevalence.
+
+\textbf{6. Explicit column typing.} \texttt{infer\_\allowbreak column\_\allowbreak types()} splits the
+remaining feature columns into numeric and categorical using each dataset's
+\texttt{DatasetConfig.\allowbreak numeric\_columns} as an explicit allow-list, rather than
+inferring types from pandas dtypes. This matters most for Dataset 3, whose
+columns are all stored as \texttt{float64} regardless of whether they are
+conceptually binary flags, small ordinal scales, or continuous measurements --
+dtype-based inference would have misclassified most of its columns.
+
+\textbf{7. Stratified train/test split.} \texttt{split\_train\_test()}
+performs an 80/20 stratified split of each dataset, preserving each dataset's
+positive rate in both partitions, before any imputer, encoder, scaler, outlier
+bound, or feature selector is fit. The held-out test partition is not touched
+again until final model evaluation. This gives 353{,}653 / 88{,}414 rows for
+Dataset 1, 734 / 184 rows for Dataset 2, and 183{,}824 / 45{,}957 rows for
+Dataset 3 (train / test).
+
+\textbf{8. Outlier clipping (Dataset 2 only).} For datasets with
+\texttt{iqr\_\allowbreak outlier\_\allowbreak columns} configured, \texttt{fit\_\allowbreak outlier\_\allowbreak bounds()}
+computes Tukey-fence (IQR $\times$ 1.5) bounds from the training split only,
+and \texttt{apply\_\allowbreak outlier\_\allowbreak bounds()} clips (rather than drops) values outside
+those bounds in both splits. Only Dataset 2 opts in, on
+\texttt{Age}, \texttt{RestingBP}, \texttt{Cholesterol}, \texttt{MaxHR}, and
+\texttt{Oldpeak} (its binary-valued \texttt{FastingBS} column is deliberately
+excluded, since IQR bounds on a 0/1 flag would collapse to a single point and
+clip away the entire minority signal). Fit on the 734-row training split,
+\texttt{Age} has no values outside its fence, while \texttt{RestingBP}
+(bounds 88.50--172.50), \texttt{Cholesterol} (bounds 109.50--377.50, computed
+after the zero-as-missing recoding above), \texttt{MaxHR} (bounds
+63.50--211.50), and \texttt{Oldpeak} (bounds $-2.25$--3.75) flag 20, 20, 2, and
+13 training values respectively for clipping. These train-only bounds are
+close to, but not identical to, the full-dataset bounds reported during EDA
+(Section~\ref{subsec:data_eda}), which is the expected effect of fitting on
+80\% of the data rather than 100\%.
+
+\textbf{9. Impute, encode, and scale (fit on train only).}
+\texttt{fit\_preprocessor()} fits a median imputer for numeric columns and a
+mode imputer for categorical columns, label-encodes binary categorical columns
+to 0/1, one-hot encodes multi-category columns, and standardizes numeric
+columns to zero mean/unit variance, all fit on the training split only;
+\texttt{transform\_\allowbreak features()} then applies those exact fitted objects to the
+test split. This yields intermediate processed shapes of $353{,}653 \times 133$
+/ $88{,}414 \times 133$ for Dataset 1 (22 binary-encoded and 11 one-hot-encoded
+categorical columns, 6 standardized numeric columns), $734 \times 19$ /
+$184 \times 19$ for Dataset 2 (2 binary, 3 one-hot, 6 numeric), and
+$183{,}824 \times 24$ / $45{,}957 \times 24$ for Dataset 3 (13 binary, 1
+one-hot on \texttt{Diabetes}, 7 numeric/ordinal).
+
+\textbf{10. Feature reduction (fit on processed train only).}
+\texttt{fit\_\allowbreak feature\_\allowbreak selector()} drops near-constant columns (variance below
+$10^{-4}$) and, among pairs of columns correlated above $0.9$, the
+member of the pair contributing less information, fit on the processed
+training features only and then applied identically to the test split via
+\texttt{apply\_\allowbreak feature\_\allowbreak selector()}. No dataset has any near-constant column.
+Two datasets have a highly-correlated one-hot column dropped: Dataset 1 drops
+\texttt{CovidPos\_Yes} ($r \approx 0.93$ with \texttt{CovidPos\_No}, since the
+raw three-category \texttt{CovidPos} column is dominated by two of its three
+categories), and Dataset 3 drops \texttt{Diabetes\_2.0} (correlated with
+\texttt{Diabetes\_0.0} for the same dominant-plus-rare-category reason).
+Dataset 2 drops nothing, since none of its one-hot columns exceed the
+threshold on the 734-row training split -- a useful negative result showing
+that feature reduction is applied uniformly but only actually removes columns
+where the training data calls for it. Table~\ref{tab:processed_dataset_summary}
+summarizes the final shapes written to disk.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrrr}
+\textbf{Dataset} & \textbf{Train rows} & \textbf{Test rows} & \textbf{Final features (excl. target)} \\
+\hline
+Dataset 1 & 353{,}653 & 88{,}414 & 131 \\
+Dataset 2 & 734 & 184 & 18 \\
+Dataset 3 & 183{,}824 & 45{,}957 & 22 \\
+\end{tabular}
+\caption{Final processed train/test row counts and feature counts, after
+feature reduction, for the three datasets.}
+\label{tab:processed_dataset_summary}
+\end{table}
+
+\textbf{11. Persist train/test files.} The final processed train and test
+data frames are written to \texttt{data/\allowbreak processed/\allowbreak <dataset>/\allowbreak train.\allowbreak csv} and
+\texttt{test.csv} with 6 decimal places of floating-point precision -- more
+than sufficient for a standardized $z$-score, while keeping file sizes a
+fraction of full \texttt{float64} output.
+
+\textbf{12. Stratified 5-fold index generation.} Independently of the
+held-out test split above, \texttt{stratified\_\allowbreak kfold\_\allowbreak splits()} partitions
+each dataset's processed training rows into $N\_SPLITS = 5$ stratified folds
+using scikit-learn's \texttt{StratifiedKFold} with shuffling and the project's
+fixed random seed (\texttt{RANDOM\_STATE = 42}); for every fold, 4/5 of the
+training rows serve as that fold's training data and the remaining 1/5 serves
+as its validation data, rotated across all 5 folds. For every dataset, each
+fold's validation positive rate stays close to that dataset's overall training
+positive rate (5.68\% for Dataset 1, 55.31\% for Dataset 2, 10.32\% for
+Dataset 3), confirming that stratification is preserved at the fold level and
+not only across the original train/test split. The resulting fold assignment
+is written row-for-row, in the same row order as \texttt{train.csv}, to
+\texttt{data/\allowbreak processed/\allowbreak <dataset>/\allowbreak kfold\_indices.\allowbreak csv}, so the two files can be
+joined purely by row position. \texttt{config.yaml} points each dataset's
+\texttt{kfold\_path} at this same file, so that the model-evaluation and SHAP
+stability analyses described later in this section (particularly the SHAP
+methodology in Section~\ref{subsec:shap_methodology}) operate on identical,
+reproducible folds across all three candidate
+algorithms -- a prerequisite for the paired statistical comparison used to
+answer RQ2 and RQ3.
+
+The pipeline is covered by a dedicated pytest suite that exercises each of
+these decisions directly against the data used in this study: outlier-bound
+fitting and clipping semantics (\texttt{tests/\allowbreak test\_outliers.\allowbreak py}), the
+train-only feature-reduction policy (\texttt{tests/\allowbreak test\_feature\_reduction.\allowbreak py}),
+and the balanced-sample-weight class-imbalance policy
+(\texttt{tests/\allowbreak test\_imbalance.\allowbreak py}). Together with the leakage-avoidance
+pattern applied consistently at every fitting step above, this test coverage
+is what lets the reproducible experimental framework claimed in the
+Introduction extend all the way down to the data layer, not just the modeling
+layer.
+\end{sloppypar}
