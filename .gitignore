@@ -12,7 +12,8 @@ htmlcov/
 .ipynb_checkpoints/
 
 # Environment
-.venv/
+**/build/
+venv/
 venv/
 env/
 build/
