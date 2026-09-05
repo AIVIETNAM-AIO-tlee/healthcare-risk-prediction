@@ -53,7 +53,7 @@ def compute_fold_shap_importance(
     max_explain_samples: int,
     background_samples: int,
     random_state: int,
-) -> tuple[pd.DataFrame, dict[str, Any]]:
+) -> tuple[pd.DataFrame, dict[str, Any], np.ndarray, pd.DataFrame]:
     """Compute fold-level global SHAP importance using held-out validation rows.
 
     XGBoost and LightGBM use TreeSHAP. sklearn AdaBoost is not supported by
@@ -112,7 +112,7 @@ def compute_fold_shap_importance(
         "n_background": n_background,
         "n_features": explain_frame.shape[1],
     }
-    return importance, metadata
+    return importance, metadata, class_values, explain_frame.reset_index(drop=True)
 
 
 def _spearman_from_rank_vectors(left: np.ndarray, right: np.ndarray) -> float:

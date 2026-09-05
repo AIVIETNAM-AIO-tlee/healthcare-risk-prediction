@@ -121,82 +121,139 @@ dataset. The pattern is observed across all three algorithms, suggesting that
 dataset size and fold composition contribute more to the observed instability
 than the choice among the three boosting methods alone.
 
+
 \subsection{SHAP Feature-Importance Stability Across Cross-Validation Folds (RQ3)}
 \label{subsec:shap_results}
 
 Following the fold-wise explainability procedure described in
-Section~\ref{subsec:shap_methodology}, RQ3 evaluates whether the SHAP-based
-global feature-importance rankings remain consistent when the development data
-are repartitioned across cross-validation folds. For each dataset--model pair,
-all ten pairwise combinations of the five folds are compared using Spearman rank
-correlation over the complete feature ranking and top-10 Jaccard similarity over
-the most important features.
+Section~\ref{subsec:shap_methodology}, RQ3 evaluates whether SHAP-based global
+feature-importance rankings remain consistent when the training and validation
+partitions change across cross-validation folds. For every dataset--model
+combination, all ten unique pairs of the five folds are compared using Kendall's
+$\tau$, Spearman's $\rho$, and top-10 Jaccard similarity.
 
-Table~\ref{tab:shap_stability_results} shows that the SHAP rankings are highly
-stable across folds for all nine dataset--model combinations. Mean Spearman
-correlations range from 0.9332 to 0.9700, indicating that the overall ordering
-of features changes only modestly when the training and validation samples are
-changed. Mean top-10 Jaccard similarity ranges from 0.7455 to 1.0000, showing
-that the most influential features are also largely preserved across folds.
+Table~\ref{tab:shap_stability_results} shows that the SHAP feature rankings are
+generally stable across folds for all nine dataset--model combinations.
+Mean Spearman correlations range from 0.9332 to 0.9700, indicating strong
+agreement in the complete feature ordering. Mean Kendall coefficients range
+from 0.8004 to 0.9599, providing additional evidence that most pairwise feature
+ordering relationships are preserved across folds. Top-10 Jaccard similarity
+ranges from 0.7455 to 1.0000, indicating that the most influential feature sets
+are also largely consistent.
 
 \begin{table}[h]
 \centering
 \scriptsize
-\begin{tabular}{llcccc}
-\textbf{Dataset} & \textbf{Model} & \textbf{Spearman $\rho$} & \textbf{Std.} & \textbf{Top-10 Jaccard} & \textbf{Std.} \\
+\begin{tabular}{llccc}
+\textbf{Dataset} &
+\textbf{Model} &
+\textbf{Kendall $\tau$} &
+\textbf{Spearman $\rho$} &
+\textbf{Top-10 Jaccard} \\
 \hline
-Dataset 1 & AdaBoost & 0.9652 & 0.0179 & 0.9273 & 0.0939 \\
- & XGBoost & 0.9332 & 0.0114 & 0.8545 & 0.0767 \\
- & LightGBM & 0.9479 & 0.0053 & 0.7455 & 0.1145 \\
+Dataset 1 & AdaBoost & 0.9599 & 0.9652 & 0.9273 \\
+          & XGBoost  & 0.8004 & 0.9332 & 0.8545 \\
+          & LightGBM & 0.8198 & 0.9479 & 0.7455 \\
 \hline
-Dataset 2 & AdaBoost & 0.9467 & 0.0226 & 0.8061 & 0.0928 \\
- & XGBoost & 0.9389 & 0.0217 & 0.8727 & 0.0878 \\
- & LightGBM & 0.9348 & 0.0251 & 0.8364 & 0.0575 \\
+Dataset 2 & AdaBoost & 0.8562 & 0.9467 & 0.8061 \\
+          & XGBoost  & 0.8222 & 0.9389 & 0.8727 \\
+          & LightGBM & 0.8170 & 0.9348 & 0.8364 \\
 \hline
-Dataset 3 & AdaBoost & 0.9599 & 0.0277 & \textbf{1.0000} & 0.0000 \\
- & XGBoost & 0.9686 & 0.0162 & \textbf{1.0000} & 0.0000 \\
- & LightGBM & \textbf{0.9700} & 0.0130 & 0.8727 & 0.0878 \\
+Dataset 3 & AdaBoost & 0.9130 & 0.9599 & \textbf{1.0000} \\
+          & XGBoost  & 0.9004 & 0.9686 & \textbf{1.0000} \\
+          & LightGBM & 0.8988 & \textbf{0.9700} & 0.8727 \\
 \end{tabular}
-\caption{SHAP feature-ranking stability across the ten pairwise comparisons of five cross-validation folds. Values are pairwise means and standard deviations.}
+\caption{Mean SHAP feature-ranking stability across the ten pairwise comparisons
+of five cross-validation folds.}
 \label{tab:shap_stability_results}
 \end{table}
 
-Dataset 3 exhibits the strongest top-feature stability. AdaBoost and XGBoost
-both achieve a mean top-10 Jaccard similarity of 1.0000, meaning that the same
-set of ten features appears in the top-10 for every fold pair. LightGBM also
-shows very high full-ranking stability on this dataset, with the highest mean
-Spearman correlation of 0.9700. The consensus rankings are also strongly aligned
-across the three models: \texttt{Age}, \texttt{GenHlth}, \texttt{Sex},
-\texttt{HighBP}, and \texttt{HighChol} occupy the leading positions for all
-three algorithms.
+Dataset 3 demonstrates particularly strong explanation stability. AdaBoost and
+XGBoost both obtain a mean top-10 Jaccard score of 1.0000, indicating that the
+same set of ten most influential features is retained across every fold pair.
+LightGBM achieves the highest overall mean Spearman correlation of 0.9700,
+showing that its complete feature ranking is also highly consistent. The high
+Kendall coefficients for all three models further confirm that the relative
+ordering of feature pairs changes only modestly across partitions.
 
-On Dataset 2, all models remain stable despite the substantially smaller sample
-size observed in the predictive-stability analysis. Mean Spearman correlations
-remain above 0.93 and mean top-10 Jaccard similarity ranges from 0.8061 to
-0.8727. Across the three consensus rankings, \texttt{ST\_Slope\_Up} and
-\texttt{ChestPainType\_ASY} are consistently ranked first and second, while
-features such as \texttt{Sex} and \texttt{ST\_Slope\_Flat} also appear near the
-top for multiple models.
+Dataset 1 also exhibits strong overall stability, although the different
+metrics reveal some variation near the top of the ranking. AdaBoost achieves
+the strongest agreement on this dataset, with mean Kendall $\tau=0.9599$,
+Spearman $\rho=0.9652$, and top-10 Jaccard similarity of 0.9273. LightGBM,
+however, obtains a high Spearman correlation of 0.9479 while its top-10 Jaccard
+similarity is lower at 0.7455. This result indicates that the complete ranking
+remains similar across folds even though several features near the top-10
+boundary exchange positions or move into and out of the top feature set.
 
-Dataset 1 also shows strong agreement in the complete rankings, with mean
-Spearman correlations between 0.9332 and 0.9652. AdaBoost has the highest
-mean top-10 overlap (0.9273), while LightGBM has a lower top-10 Jaccard value
-(0.7455) despite a high mean Spearman correlation of 0.9479. This combination
-suggests that LightGBM's overall feature ordering is stable, but a small number
-of features close to the top-10 boundary exchange positions across folds. The
-consensus rankings nevertheless show substantial cross-model agreement:
-\texttt{HadAngina}, \texttt{ChestScan}, \texttt{Sex}, and
-\texttt{RemovedTeeth\_None\_of\_them} are among the leading features for all
-three models.
+The difference between the Kendall and Spearman measurements is also
+informative. For example, Dataset 1 XGBoost achieves Spearman
+$\rho=0.9332$ but Kendall $\tau=0.8004$. Both values indicate positive and
+strong ranking agreement, but Kendall's lower value suggests that some
+pairwise feature orderings change across folds even though the overall ranking
+structure remains similar. Reporting both statistics therefore provides a more
+complete view of explanation robustness than relying on a single correlation
+measure.
 
-These results answer RQ3 by showing that SHAP-based global feature-importance
-rankings are generally robust to cross-validation fold assignment. The evidence
-is consistent across two complementary stability measures: full-ranking
-correlation remains high, while the set of highest-ranked features is usually
-well preserved. At the same time, the lower top-10 overlap observed for some
-model--dataset combinations shows why reporting both measures is useful: a high
-correlation over the full feature set does not necessarily imply an identical
-membership of the top-10 features.
+Dataset 2 remains reasonably stable despite being substantially smaller than
+Datasets 1 and 3. All three models obtain mean Spearman correlations greater
+than 0.93, while mean Kendall coefficients range from 0.8170 to 0.8562.
+Top-10 Jaccard similarity ranges from 0.8061 to 0.8727. These values indicate
+that the majority of important features remain consistently ranked even though
+some movement occurs between folds.
+
+The SHAP beeswarm plots complement the global importance rankings by showing
+both the magnitude and direction of feature contributions. Features appearing
+near the top of the beeswarm plots have large absolute effects on the model
+output, while the horizontal distribution of SHAP values indicates whether
+particular feature values tend to increase or decrease the predicted risk.
+The corresponding mean absolute SHAP bar plots provide a simpler view of
+global importance, and the violin plots show the distribution of SHAP effects
+for the leading features.
+
+The feature-ranking heatmaps provide a direct visualization of explanation
+stability across folds. Features whose heatmap cells remain at similar rank
+values across all five folds can be considered highly stable, whereas large
+changes in rank indicate sensitivity to the particular training partition.
+This visualization is especially useful for distinguishing small changes near
+the top-10 cutoff that may reduce Jaccard similarity without substantially
+changing the complete ranking.
+
+The fold-correlation heatmaps provide an additional model-level view of
+stability. High off-diagonal Spearman correlations indicate that different
+training folds produce similar global feature orderings. A fold with
+substantially lower correlations to the other folds would suggest that the
+corresponding training partition produces a noticeably different explanation.
+Together with the ranking heatmaps, these plots allow the numerical stability
+scores to be visually inspected rather than interpreted only from aggregated
+statistics.
+
+Overall, RQ3 is answered by finding that SHAP-based global feature-importance
+rankings are robust to cross-validation partitioning for the evaluated boosting
+models. This conclusion is supported by three complementary measures:
+Kendall's $\tau$ shows strong pairwise ordering agreement, Spearman's $\rho$
+shows high consistency in complete feature rankings, and top-10 Jaccard
+similarity shows that the most influential feature sets are generally
+preserved.
+
+At the same time, the results demonstrate why multiple stability metrics are
+necessary. A model can maintain a high full-ranking correlation while still
+showing changes in the membership of its top-10 features. Consequently,
+explanation stability should not be judged from a single correlation
+coefficient alone. Combining rank correlations, top-feature overlap,
+feature-ranking heatmaps, and fold-correlation heatmaps provides a more
+complete assessment of the reproducibility of model explanations.
+
+The observed SHAP stability should be interpreted as evidence of explanation
+robustness rather than causal validity. A feature that is consistently
+important across folds is repeatedly used by the model under the observed data
+distribution, but this does not imply that changing that feature would
+causally alter a patient's health outcome. In addition, because AdaBoost uses
+permutation SHAP while XGBoost and LightGBM use TreeSHAP, raw SHAP magnitudes
+are not used for direct cross-model comparisons. RQ3 therefore focuses on
+within-model fold-to-fold ranking stability, which remains comparable across
+the experimental protocol.
+
+
 
 \subsection{Discussion}
 
