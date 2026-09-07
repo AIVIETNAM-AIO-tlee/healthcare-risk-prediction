@@ -23,6 +23,7 @@ from src.explainability.shap_stability import (
     summarize_rank_stability,
 )
 from src.experiment_config import load_experiment_config
+from src.data.pipeline import load_clean_raw_split, preprocess_fold
 from src.experiments.run_models import _load_kfold_splits, _load_processed_split
 from src.models.factory import build_model
 
@@ -230,6 +231,7 @@ def run_shap_experiments(
     max_explain_samples = int(shap_config["max_explain_samples"])
     background_samples = int(shap_config["background_samples"])
     top_k = int(shap_config["top_k"])
+    preprocessing_config = config["preprocessing"]
 
     output_dir = project_root / shap_config["output_dir"]
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -242,11 +244,24 @@ def run_shap_experiments(
     for dataset_key, dataset_config in datasets.items():
         print(f"\n=== SHAP: {dataset_config['name']} ({dataset_key}) ===")
         X_dev, y_dev, _, _ = _load_processed_split(project_root, dataset_config)
+        raw_dev = None
+        dataset_spec = None
+        try:
+            raw_dev, _, dataset_spec = load_clean_raw_split(
+                project_root,
+                dataset_key,
+                random_state=random_state,
+                test_size=float(preprocessing_config["test_size"]),
+            )
+        except (FileNotFoundError, KeyError):
+            pass
         splits = _load_kfold_splits(
             project_root=project_root,
             dataset_config=dataset_config,
             n_rows=len(X_dev),
             expected_n_splits=int(cv_config["n_splits"]),
+            y=y_dev,
+            random_state=random_state,
         )
 
         for model_key, model_config in models.items():
@@ -255,9 +270,20 @@ def run_shap_experiments(
             model_shap_values: list[np.ndarray] = []
             model_feature_values: list[pd.DataFrame] = []
             for fold_index, (train_idx, validation_idx) in enumerate(splits, start=1):
-                X_train = X_dev.iloc[train_idx]
-                y_train = y_dev.iloc[train_idx]
-                X_validation = X_dev.iloc[validation_idx]
+                if raw_dev is not None and dataset_spec is not None:
+                    fold_train, fold_validation = preprocess_fold(
+                        raw_dev.iloc[train_idx],
+                        raw_dev.iloc[validation_idx],
+                        dataset_spec,
+                        preprocessing_config,
+                    )
+                    target = dataset_spec.target_column
+                    X_train, y_train = fold_train.drop(columns=target), fold_train[target].astype(int)
+                    X_validation = fold_validation.drop(columns=target)
+                else:
+                    X_train = X_dev.iloc[train_idx]
+                    y_train = y_dev.iloc[train_idx]
+                    X_validation = X_dev.iloc[validation_idx]
 
                 model = build_model(model_key, model_config, random_state=random_state)
                 _fit_for_shap(model, X_train, y_train, balance_training)

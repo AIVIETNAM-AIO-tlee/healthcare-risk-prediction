@@ -64,4 +64,10 @@ The implemented metrics are ROC-AUC, PR-AUC, Recall, and F1. PR-AUC is the prima
 
 ## Methodology note
 
-The repository currently provides processed development/test CSVs before the model CV stage. This protects the final test split from preprocessing leakage, but the preprocessing objects are fitted once on the entire development split before that split is divided into five CV folds. A stricter future protocol could re-fit preprocessing components inside each training fold. The model module intentionally consumes the team's existing processed files so that the implementation stays within the AI Engineer (Model) scope.
+The model and SHAP runners use the persisted fold assignments from
+`kfold_indices.csv`, but fit outlier bounds, imputers, encoders, scaling, and
+feature selection separately on each fold's training rows before transforming
+the validation rows. After cross-validation, preprocessing is fitted once on
+the complete development split before the final hold-out evaluation. The
+processed CSVs remain reproducible pipeline artifacts and compatible inputs for
+model-only fixtures.

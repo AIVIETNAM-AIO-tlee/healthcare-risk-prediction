@@ -9,6 +9,28 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.utils.class_weight import compute_class_weight
 
 
+def sanitize_feature_names(
+	df: pd.DataFrame,
+	target_column: str,
+) -> pd.DataFrame:
+	"""Normalize feature names for estimators with restricted name syntax."""
+	out = df.copy()
+	feature_columns = [column for column in out.columns if column != target_column]
+	safe_names = (
+		pd.Index(feature_columns)
+		.astype(str)
+		.str.replace(r"[^A-Za-z0-9_]+", "_", regex=True)
+	)
+	counts: dict[str, int] = {}
+	unique_names: list[str] = []
+	for name in safe_names:
+		count = counts.get(name, 0)
+		unique_names.append(name if count == 0 else f"{name}_{count}")
+		counts[name] = count + 1
+	out = out.rename(columns=dict(zip(feature_columns, unique_names)))
+	return out
+
+
 def mark_invalid_zeros_as_missing(df: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
 	"""Replace 0 with NaN in the given numeric columns.
 

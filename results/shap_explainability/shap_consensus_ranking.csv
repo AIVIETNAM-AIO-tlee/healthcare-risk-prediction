@@ -130,322 +130,322 @@ dataset1,Personal Key Indicators of Heart Disease (2022),adaboost,AdaBoost,Tetan
 dataset1,Personal Key Indicators of Heart Disease (2022),adaboost,AdaBoost,TetanusLast10Tdap_Yes_received_tetanus_shot_but_not_Tdap,0.0,129.0,0.0,0.0,5,129
 dataset1,Personal Key Indicators of Heart Disease (2022),adaboost,AdaBoost,CovidPos_No,0.0,130.0,0.0,0.0,5,130
 dataset1,Personal Key Indicators of Heart Disease (2022),adaboost,AdaBoost,CovidPos_Tested_positive_using_home_test_without_a_health_professional,0.0,131.0,0.0,0.0,5,131
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadAngina,0.3681681004565718,1.2,0.4472135954999579,1.0,5,1
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,ChestScan,0.32273613731600526,1.8,0.4472135954999579,1.0,5,2
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,Sex,0.27196459055971345,3.0,0.0,1.0,5,3
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RemovedTeeth_None_of_them,0.19478782722629617,4.0,0.0,1.0,5,4
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_18_to_24,0.1459892203962251,5.8,1.3038404810405297,1.0,5,5
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,GeneralHealth_Very_good,0.13209710388388113,6.0,1.0,1.0,5,6
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,GeneralHealth_Excellent,0.12644906027400094,6.6,0.8944271909999159,1.0,5,7
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_30_to_34,0.11366251531886529,8.6,1.140175425099138,1.0,5,8
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_25_to_29,0.1046399428321172,9.8,2.4899799195977463,0.8,5,9
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadStroke,0.09730035696972492,11.4,1.8165902124584952,0.2,5,10
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_80_or_older,0.0936591368968683,12.4,3.361547262794322,0.2,5,11
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,SmokerStatus_Never_smoked,0.09331784013667568,12.4,1.51657508881031,0.0,5,12
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_40_to_44,0.09053515362270277,12.6,5.319774431308154,0.4,5,13
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadDiabetes_Yes,0.08664810674814846,14.0,2.5495097567963922,0.2,5,14
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadArthritis,0.08584361281249067,14.2,2.6832815729997477,0.2,5,15
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,DifficultyWalking,0.0834529179079083,15.0,1.4142135623730951,0.0,5,16
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_35_to_39,0.08131244415969144,15.2,2.04939015319192,0.0,5,17
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,LastCheckupTime_Within_past_year_anytime_less_than_12_months_ago_,0.06645882111419714,18.8,1.3038404810405297,0.0,5,18
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RemovedTeeth_1_to_5,0.059882797745056913,20.4,1.1401754250991383,0.0,5,19
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_70_to_74,0.05949503187614612,20.8,3.1144823004794873,0.0,5,20
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AlcoholDrinkers,0.05714110111698709,21.0,2.1213203435596424,0.0,5,21
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_75_to_79,0.05764918172402019,21.2,4.711687595755899,0.0,5,22
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,SleepHours,0.05130939066957467,23.6,1.673320053068151,0.0,5,23
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadCOPD,0.04603672057357374,25.6,3.0495901363953815,0.0,5,24
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,MentalHealthDays,0.047918345782561066,25.6,3.6469165057620936,0.0,5,25
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,TetanusLast10Tdap_No_did_not_receive_any_tetanus_shot_in_the_past_10_years,0.0441048074377068,26.8,1.9235384061671341,0.0,5,26
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_45_to_49,0.0443969657330347,27.0,3.3166247903554,0.0,5,27
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,GeneralHealth_Fair,0.04310124108319553,27.2,3.1144823004794877,0.0,5,28
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,WeightInKilograms,0.04082474355894983,28.6,3.847076812334269,0.0,5,29
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,BMI,0.03957755343631354,30.0,3.9370039370059056,0.0,5,30
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,PhysicalHealthDays,0.03950688250869004,30.4,4.33589667773576,0.0,5,31
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,TetanusLast10Tdap_Yes_received_Tdap,0.038826902233421376,30.4,1.9493588689617924,0.0,5,32
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HIVTesting,0.037283786322639186,31.0,3.5355339059327378,0.0,5,33
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadDiabetes_No,0.033547343307841856,33.2,1.3038404810405289,0.0,5,34
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_50_to_54,0.025256916614116387,37.8,4.207136793592525,0.0,5,35
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RemovedTeeth_All,0.026666082677381325,37.8,4.324349662087931,0.0,5,36
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HeightInMeters,0.025983880517187873,38.4,2.701851217221259,0.0,5,37
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RaceEthnicityCategory_Black_only_Non_Hispanic,0.02549882717334309,38.4,2.3021728866442674,0.0,5,38
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,DeafOrHardOfHearing,0.024029336551422812,39.2,1.7888543819998322,0.0,5,39
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,GeneralHealth_Poor,0.02254371500271845,40.6,2.966479394838265,0.0,5,40
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadKidneyDisease,0.022342891726497567,41.0,3.391164991562634,0.0,5,41
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,CovidPos_Tested_positive_using_home_test_without_a_health_professional,0.021160594953144242,41.2,6.1400325732035,0.0,5,42
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,CovidPos_No,0.02107036544634982,41.6,4.393176527297759,0.0,5,43
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_65_to_69,0.018302084045633195,44.6,2.4083189157584592,0.0,5,44
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,PhysicalActivities,0.017607055726860422,45.2,3.5637059362410923,0.0,5,45
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,SmokerStatus_Current_smoker_now_smokes_every_day,0.016832416706076325,45.8,3.5637059362410928,0.0,5,46
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,BlindOrVisionDifficulty,0.015307388058361123,46.6,3.3615472627943226,0.0,5,47
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,FluVaxLast12,0.015868974098514725,47.0,2.23606797749979,0.0,5,48
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,PneumoVaxEver,0.014192933426789383,48.4,2.966479394838265,0.0,5,49
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadDepressiveDisorder,0.013535823080337572,49.6,5.176871642217914,0.0,5,50
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,GeneralHealth_Good,0.012408239506789213,51.0,3.4641016151377553,0.0,5,51
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadAsthma,0.011380436411725696,52.0,4.4721359549995805,0.0,5,52
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,DifficultyConcentrating,0.009696135184985405,53.6,2.302172886644268,0.0,5,53
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Washington,0.007618490201897646,58.0,4.472135954999579,0.0,5,54
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,LastCheckupTime_5_or_more_years_ago,0.007521364725262769,58.6,5.941380311005179,0.0,5,55
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Maryland,0.006866158508537332,58.6,4.39317652729776,0.0,5,56
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_60_to_64,0.006929139896857667,58.8,2.774887385102322,0.0,5,57
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_55_to_59,0.007629782277454861,59.0,6.2048368229954285,0.0,5,58
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_New_Jersey,0.007288415982789326,59.6,5.458937625582472,0.0,5,59
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RaceEthnicityCategory_White_only_Non_Hispanic,0.005810808057667924,62.4,3.714835124201341,0.0,5,60
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,TetanusLast10Tdap_Yes_received_tetanus_shot_but_not_sure_what_type,0.00665720312597171,63.0,13.322912594474229,0.0,5,61
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RaceEthnicityCategory_Multiracial_Non_Hispanic,0.0052322097735934825,64.8,7.854934754662193,0.0,5,62
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,DifficultyErrands,0.006009566757557149,65.2,10.03493896344168,0.0,5,63
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Illinois,0.0050455852788954,66.2,9.23038460737146,0.0,5,64
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_New_York,0.004575346635235006,66.4,5.856620185738529,0.0,5,65
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,ECigaretteUsage_Not_at_all_right_now_,0.004410445796994649,69.4,9.343446901438462,0.0,5,66
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RemovedTeeth_6_or_more_but_not_all,0.0042341016404959155,71.0,13.341664064126334,0.0,5,67
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,LastCheckupTime_Within_past_5_years_2_years_but_less_than_5_years_ago_,0.004655636454098154,72.2,15.056560032092323,0.0,5,68
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Colorado,0.003758476936900702,72.2,8.67179335547152,0.0,5,69
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Puerto_Rico,0.003800058130725785,72.2,10.2810505299799,0.0,5,70
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RaceEthnicityCategory_Hispanic,0.0033909058270208082,73.0,4.527692569068709,0.0,5,71
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,SmokerStatus_Former_smoker,0.0030432333917504322,76.2,4.764451699828637,0.0,5,72
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadSkinCancer,0.003345671734723205,76.4,12.300406497347964,0.0,5,73
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,ECigaretteUsage_Never_used_e_cigarettes_in_my_entire_life,0.0031254983867290897,77.0,8.631338250816034,0.0,5,74
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Delaware,0.003102661439624263,77.0,4.47213595499958,0.0,5,75
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_South_Dakota,0.002798439633152032,77.8,6.534523701081816,0.0,5,76
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Maine,0.0029123928853860863,78.2,9.731392500562292,0.0,5,77
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Oklahoma,0.003577445035699515,78.8,16.67932852365466,0.0,5,78
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_South_Carolina,0.003213802687875661,80.0,18.069310999592652,0.0,5,79
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Minnesota,0.003181495129102501,82.8,22.061278294786092,0.0,5,80
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Texas,0.0024079791287385235,83.6,7.86129760281342,0.0,5,81
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RaceEthnicityCategory_Other_race_only_Non_Hispanic,0.002353994423513249,84.4,3.2093613071762435,0.0,5,82
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Hawaii,0.0020913887239829357,86.4,9.396807968666806,0.0,5,83
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Georgia,0.0027867266972947135,88.2,22.873565528793275,0.0,5,84
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Massachusetts,0.0021043312428643906,88.2,8.288546314040842,0.0,5,85
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,ECigaretteUsage_Use_them_every_day,0.001994105792066498,88.8,5.449770637375486,0.0,5,86
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Mississippi,0.0025066588663048444,88.8,17.369513522260778,0.0,5,87
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,DifficultyDressingBathing,0.0019616478039235375,90.2,11.627553482998907,0.0,5,88
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Tennessee,0.0018818763740550634,91.6,14.188023118109163,0.0,5,89
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_California,0.0017713468263164324,92.0,9.746794344808963,0.0,5,90
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,LastCheckupTime_Within_past_2_years_1_year_but_less_than_2_years_ago_,0.002017629247027958,92.2,16.2234398325386,0.0,5,91
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Arizona,0.0019131178561801834,92.4,17.155174146594955,0.0,5,92
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Vermont,0.0017919609605897065,93.6,18.00833140521353,0.0,5,93
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,TetanusLast10Tdap_Yes_received_tetanus_shot_but_not_Tdap,0.0017663685247743769,94.4,16.516658257650064,0.0,5,94
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Virginia,0.0018392332542119818,95.0,22.20360331117452,0.0,5,95
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,SmokerStatus_Current_smoker_now_smokes_some_days,0.001560424436378398,95.8,9.471008394041261,0.0,5,96
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Missouri,0.0016473258436471906,96.6,22.578751072634642,0.0,5,97
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Kansas,0.0015883101986601893,97.2,19.40876090841453,0.0,5,98
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HighRiskLastYear,0.0013645449925989916,99.4,8.018728078691781,0.0,5,99
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Connecticut,0.0013642695359034336,99.8,11.366617790706258,0.0,5,100
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_District_of_Columbia,0.0012230020518558963,101.6,14.39791651594077,0.0,5,101
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_New_Hampshire,0.0012341687930777503,102.2,12.637246535539298,0.0,5,102
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Indiana,0.0012128794663090474,102.4,12.300406497347964,0.0,5,103
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadDiabetes_No_pre_diabetes_or_borderline_diabetes,0.001275277261857222,103.2,14.88959368149447,0.0,5,104
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Wisconsin,0.001202882714004439,103.2,12.336936410632909,0.0,5,105
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Ohio,0.0011203638649110877,103.8,10.963576058932595,0.0,5,106
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Florida,0.0011270480015516447,104.0,10.14889156509222,0.0,5,107
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,ECigaretteUsage_Use_them_some_days,0.0010782561688667991,105.4,12.381437719424994,0.0,5,108
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Nevada,0.0011134604159091699,107.8,17.369513522260778,0.0,5,109
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_North_Carolina,0.0009831106860194634,108.8,12.833549781724463,0.0,5,110
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Rhode_Island,0.0008311221206219816,109.4,8.502940667792524,0.0,5,111
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Iowa,0.0008679628681643589,109.8,10.779610382569492,0.0,5,112
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Utah,0.0008467130154001306,110.2,3.7013511046643504,0.0,5,113
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Alabama,0.0009560820769518794,110.6,16.195678435928517,0.0,5,114
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_North_Dakota,0.0009187350189133845,111.4,17.558473737771173,0.0,5,115
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Michigan,0.0007031591922995503,112.4,11.802542099056458,0.0,5,116
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Louisiana,0.0008026301498563895,112.8,11.344602240713424,0.0,5,117
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Oregon,0.000767013081060916,113.2,12.988456413292537,0.0,5,118
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Kentucky,0.0007444446467036809,113.4,10.430723848324238,0.0,5,119
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadDiabetes_Yes_but_only_during_pregnancy_female_,0.0006286446428026575,116.8,9.984988733093292,0.0,5,120
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Pennsylvania,0.0005975714842016747,117.0,11.874342087037917,0.0,5,121
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Montana,0.0005879221077940629,118.4,10.922453936730516,0.0,5,122
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Alaska,0.0005124598043417,119.0,12.489995996796797,0.0,5,123
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Arkansas,0.0005796973455052757,120.2,14.989996664442591,0.0,5,124
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Guam,0.0005216322382268661,120.6,12.012493496356198,0.0,5,125
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Idaho,0.000468233344541367,121.4,3.9749213828703573,0.0,5,126
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_New_Mexico,0.00040830224524383797,122.4,5.813776741499455,0.0,5,127
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_West_Virginia,0.0004662542154186577,122.4,4.219004621945798,0.0,5,128
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Wyoming,0.0004164876947724344,122.6,6.877499545619761,0.0,5,129
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Nebraska,0.0004729502458790093,123.0,3.24037034920393,0.0,5,130
-dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Virgin_Islands,0.0002587531049855914,127.8,3.8340579025361614,0.0,5,131
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadAngina,0.6973514556884766,1.0,0.0,1.0,5,1
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,ChestScan,0.29915032386779783,2.0,0.0,1.0,5,2
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,Sex,0.28641762137413024,3.0,0.0,1.0,5,3
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RemovedTeeth_None_of_them,0.17280811071395874,4.0,0.0,1.0,5,4
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,GeneralHealth_Very_good,0.13915509581565857,5.6,0.5477225575051662,1.0,5,5
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadStroke,0.13702116906642914,5.8,0.8366600265340755,1.0,5,6
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,GeneralHealth_Excellent,0.11220023483037948,7.6,0.8944271909999159,1.0,5,7
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_80_or_older,0.11005522757768631,8.2,0.8366600265340756,1.0,5,8
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_18_to_24,0.09842684119939804,10.0,3.9370039370059056,0.6,5,9
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadDiabetes_Yes,0.09428515881299973,10.2,0.8366600265340756,0.6,5,10
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,SmokerStatus_Never_smoked,0.09225335121154785,10.4,1.51657508881031,0.4,5,11
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,DifficultyWalking,0.08003777116537095,12.6,1.816590212458495,0.2,5,12
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadArthritis,0.0759001299738884,13.6,2.3021728866442674,0.0,5,13
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_30_to_34,0.0768409937620163,14.0,1.8708286933869707,0.0,5,14
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_25_to_29,0.06608144864439965,16.6,4.277849927241488,0.0,5,15
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_75_to_79,0.06212326735258102,17.0,3.5355339059327378,0.0,5,16
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_40_to_44,0.065753173828125,17.2,6.058052492344385,0.2,5,17
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_35_to_39,0.06036953330039978,18.2,0.44721359549995815,0.0,5,18
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RemovedTeeth_1_to_5,0.05870858058333397,19.2,2.5884358211089564,0.0,5,19
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,LastCheckupTime_Within_past_year_anytime_less_than_12_months_ago_,0.05711649730801582,19.6,3.911521443121589,0.0,5,20
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_70_to_74,0.05508456081151962,20.0,2.5495097567963922,0.0,5,21
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadCOPD,0.054757504165172576,20.8,1.7888543819998317,0.0,5,22
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AlcoholDrinkers,0.05164824947714806,21.8,2.7748873851023212,0.0,5,23
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,SleepHours,0.04960209056735039,23.4,1.1401754250991378,0.0,5,24
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,GeneralHealth_Fair,0.04201546534895897,26.2,5.540758070878027,0.0,5,25
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,TetanusLast10Tdap_No_did_not_receive_any_tetanus_shot_in_the_past_10_years,0.03732395134866238,27.8,2.16794833886788,0.0,5,26
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,MentalHealthDays,0.03592808358371258,28.4,3.361547262794322,0.0,5,27
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_45_to_49,0.03479140400886536,29.4,3.6469165057620936,0.0,5,28
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,PhysicalHealthDays,0.03536576181650162,29.6,3.847076812334269,0.0,5,29
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RemovedTeeth_All,0.03234743289649487,31.0,4.795831523312719,0.0,5,30
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,TetanusLast10Tdap_Yes_received_Tdap,0.03186158165335655,31.6,2.0736441353327724,0.0,5,31
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadDiabetes_No,0.031074486672878265,32.4,7.1274118724821856,0.0,5,32
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadKidneyDisease,0.02865852303802967,33.0,2.449489742783178,0.0,5,33
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,GeneralHealth_Poor,0.029198500514030456,33.4,3.7815340802378072,0.0,5,34
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HIVTesting,0.02836734354496002,33.4,3.0495901363953815,0.0,5,35
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,DeafOrHardOfHearing,0.02590129114687443,36.2,3.6331804249169894,0.0,5,36
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,BMI,0.025216252356767655,36.8,5.263078946776308,0.0,5,37
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,WeightInKilograms,0.023125835135579108,38.6,4.219004621945798,0.0,5,38
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,GeneralHealth_Good,0.022824701853096485,38.8,7.395944834840238,0.0,5,39
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RaceEthnicityCategory_Black_only_Non_Hispanic,0.02198411338031292,39.8,2.1679483388678795,0.0,5,40
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,SmokerStatus_Current_smoker_now_smokes_every_day,0.019721576198935508,40.8,3.8340579025361636,0.0,5,41
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_50_to_54,0.021249116584658622,41.0,1.87082869338697,0.0,5,42
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HeightInMeters,0.0192984564229846,42.0,3.4641016151377544,0.0,5,43
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,BlindOrVisionDifficulty,0.01878204494714737,42.6,2.3021728866442683,0.0,5,44
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,PhysicalActivities,0.01688339076936245,43.0,3.9999999999999996,0.0,5,45
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,CovidPos_Tested_positive_using_home_test_without_a_health_professional,0.015364487282931804,44.4,4.33589667773576,0.0,5,46
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,CovidPos_No,0.01224368680268526,48.0,2.1213203435596424,0.0,5,47
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_65_to_69,0.011335163284093142,48.2,1.6431676725154987,0.0,5,48
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadDepressiveDisorder,0.009072608407586813,50.2,2.1679483388678795,0.0,5,49
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,PneumoVaxEver,0.008674557227641344,50.6,2.9664793948382644,0.0,5,50
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,DifficultyConcentrating,0.008208506554365159,51.6,1.6733200530681513,0.0,5,51
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,FluVaxLast12,0.007710947934538126,53.0,4.847679857416329,0.0,5,52
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadAsthma,0.0082842867821455,53.0,5.000000000000001,0.0,5,53
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,DifficultyErrands,0.006997644761577248,55.8,7.5960516059331775,0.0,5,54
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_55_to_59,0.006288113864138722,56.0,4.415880433163923,0.0,5,55
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Washington,0.004305941658094526,57.4,2.701851217221259,0.0,5,56
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RaceEthnicityCategory_Multiracial_Non_Hispanic,0.0044659935403615235,58.2,5.167204273105525,0.0,5,57
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_New_Jersey,0.004498848179355264,60.2,4.4944410108488455,0.0,5,58
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RaceEthnicityCategory_White_only_Non_Hispanic,0.00397372804582119,60.4,7.092249290598857,0.0,5,59
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Maryland,0.003355918265879154,61.6,4.61519230368573,0.0,5,60
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_South_Dakota,0.003635582560673356,62.6,4.159326868617085,0.0,5,61
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Maine,0.0029625140829011797,64.6,5.549774770204644,0.0,5,62
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,LastCheckupTime_5_or_more_years_ago,0.003099035727791488,67.0,7.071067811865476,0.0,5,63
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Colorado,0.0025990810245275497,67.8,3.9623225512317903,0.0,5,64
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,TetanusLast10Tdap_Yes_received_tetanus_shot_but_not_sure_what_type,0.002773500350303948,69.4,15.533834040570925,0.0,5,65
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_New_York,0.002476762467995286,69.6,7.162401831787992,0.0,5,66
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Illinois,0.002479947987012565,71.4,11.610340218959994,0.0,5,67
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_60_to_64,0.002044404111802578,72.0,7.3484692283495345,0.0,5,68
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,ECigaretteUsage_Never_used_e_cigarettes_in_my_entire_life,0.002517052460461855,72.4,9.18150314491042,0.0,5,69
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RemovedTeeth_6_or_more_but_not_all,0.0021829869598150252,73.4,13.183322798141598,0.0,5,70
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RaceEthnicityCategory_Hispanic,0.0017075399635359644,76.6,4.449719092257398,0.0,5,71
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadSkinCancer,0.0017090922454372048,77.6,13.794926603646719,0.0,5,72
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RaceEthnicityCategory_Other_race_only_Non_Hispanic,0.0017654463183134795,78.0,8.0,0.0,5,73
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Oklahoma,0.0025084991939365864,78.0,19.949937343260004,0.0,5,74
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Arizona,0.0018962978152558207,78.6,14.741099009232657,0.0,5,75
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,LastCheckupTime_Within_past_5_years_2_years_but_less_than_5_years_ago_,0.0022420494875404983,80.0,23.010866998007703,0.0,5,76
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Texas,0.0015932522248476744,81.4,10.945318634009702,0.0,5,77
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,SmokerStatus_Former_smoker,0.0014860524795949459,81.6,12.218837915284743,0.0,5,78
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Delaware,0.0013241374806966632,82.2,13.516656391282572,0.0,5,79
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Puerto_Rico,0.00140867258887738,82.2,11.32254388377453,0.0,5,80
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Minnesota,0.0013182617374695837,82.6,12.381437719424994,0.0,5,81
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Hawaii,0.0013604409294202923,83.0,12.409673645990857,0.0,5,82
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,LastCheckupTime_Within_past_2_years_1_year_but_less_than_2_years_ago_,0.001472790795378387,83.2,11.300442469213317,0.0,5,83
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_South_Carolina,0.001746375672519207,84.0,16.55294535724685,0.0,5,84
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,ECigaretteUsage_Not_at_all_right_now_,0.0013851100113242865,84.6,13.48332303254654,0.0,5,85
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,DifficultyDressingBathing,0.001234667416429147,85.2,14.27235089254745,0.0,5,86
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Massachusetts,0.0011309036635793746,85.6,10.478549517943788,0.0,5,87
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,SmokerStatus_Current_smoker_now_smokes_some_days,0.0011764446971938014,85.8,12.377398757412642,0.0,5,88
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HighRiskLastYear,0.0009907224331982434,88.8,7.293833011524187,0.0,5,89
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,ECigaretteUsage_Use_them_every_day,0.0009055272385012358,91.0,9.746794344808963,0.0,5,90
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_California,0.0009018019831273705,91.0,8.860022573334675,0.0,5,91
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Mississippi,0.0012339253531536087,91.4,21.51278689523977,0.0,5,92
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Kansas,0.0008098376390989869,94.0,14.7648230602334,0.0,5,93
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Vermont,0.0008715969139302615,94.2,20.571825392998065,0.0,5,94
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Florida,0.0008309273194754496,95.4,13.95707705789432,0.0,5,95
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,ECigaretteUsage_Use_them_some_days,0.0007041409844532609,96.8,10.61602562167217,0.0,5,96
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_New_Hampshire,0.000755906495032832,98.0,15.459624833740307,0.0,5,97
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Ohio,0.0007627333689015359,98.2,18.061007723823163,0.0,5,98
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Kentucky,0.0006282265181653202,99.6,12.361229712289955,0.0,5,99
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,TetanusLast10Tdap_Yes_received_tetanus_shot_but_not_Tdap,0.0007094059517839923,99.6,16.964669168598604,0.0,5,100
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Georgia,0.0007015140894509386,101.0,20.65187642806338,0.0,5,101
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadDiabetes_No_pre_diabetes_or_borderline_diabetes,0.0006057366816094145,101.4,16.425589791541732,0.0,5,102
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Virginia,0.0006033839512383565,101.4,14.570518178843193,0.0,5,103
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Nevada,0.0004878004489000887,103.2,12.676750372236569,0.0,5,104
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Connecticut,0.0004878239240497351,105.6,12.177848742696717,0.0,5,105
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_North_Dakota,0.0005466778035042808,106.0,17.592612085759182,0.0,5,106
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_North_Carolina,0.000444199179764837,106.4,11.502173707608488,0.0,5,107
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Indiana,0.000480950006749481,107.4,14.976648490233053,0.0,5,108
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_District_of_Columbia,0.00046887062781024723,107.8,14.237275020171522,0.0,5,109
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Michigan,0.0004263523267582059,108.2,10.848963084092414,0.0,5,110
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Pennsylvania,0.00040774708904791626,108.2,11.670475568716128,0.0,5,111
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Utah,0.0003884636476868764,108.8,8.927485648266257,0.0,5,112
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Guam,0.0003526387270539999,109.4,11.886967653695372,0.0,5,113
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Missouri,0.0003897739472449757,110.8,13.255187663703596,0.0,5,114
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Oregon,0.00034131251159124075,112.2,10.73312629199899,0.0,5,115
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Nebraska,0.00028154439860372804,113.4,12.340988615179901,0.0,5,116
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Iowa,0.0002765690092928708,113.8,5.449770637375484,0.0,5,117
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Tennessee,0.00032096212889882737,114.4,13.722244714331545,0.0,5,118
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadDiabetes_Yes_but_only_during_pregnancy_female_,0.0002692058726097457,115.8,9.959919678390985,0.0,5,119
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Louisiana,0.00022575596667593346,115.8,13.881642554107206,0.0,5,120
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Wisconsin,0.0002417607218376361,116.0,10.535653752852738,0.0,5,121
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Idaho,0.00027868098259205,117.0,12.18605760695394,0.0,5,122
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_West_Virginia,0.00023448013671441005,117.4,10.597169433391162,0.0,5,123
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Alabama,0.0001868128005298786,118.0,6.0827625302982185,0.0,5,124
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Alaska,0.0002193036394601222,119.0,12.589678312014172,0.0,5,125
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Rhode_Island,0.00013423942582448944,122.2,3.4928498393145957,0.0,5,126
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Arkansas,0.0001332043182628695,122.6,10.454664030948102,0.0,5,127
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Wyoming,0.00012158718236605637,122.6,9.126883367283709,0.0,5,128
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_New_Mexico,0.00012843465665355325,123.0,4.743416490252569,0.0,5,129
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Montana,0.00011084452526120004,125.2,7.049822692805826,0.0,5,130
-dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Virgin_Islands,7.174374113674275e-05,127.4,3.781534080237808,0.0,5,131
-dataset2,Heart Failure Prediction,adaboost,AdaBoost,ST_Slope_Up,0.10819853631381497,1.0,0.0,1.0,5,1
-dataset2,Heart Failure Prediction,adaboost,AdaBoost,ChestPainType_ASY,0.07683909194819108,2.0,0.0,1.0,5,2
-dataset2,Heart Failure Prediction,adaboost,AdaBoost,Sex,0.03025199715872621,3.4,0.8944271909999159,1.0,5,3
-dataset2,Heart Failure Prediction,adaboost,AdaBoost,ExerciseAngina,0.027199747583013523,4.4,0.8944271909999159,1.0,5,4
-dataset2,Heart Failure Prediction,adaboost,AdaBoost,FastingBS,0.02419527939146173,5.2,1.7888543819998317,1.0,5,5
-dataset2,Heart Failure Prediction,adaboost,AdaBoost,MaxHR,0.021177731025770186,5.8,1.0954451150103324,1.0,5,6
-dataset2,Heart Failure Prediction,adaboost,AdaBoost,Cholesterol,0.015866369330949467,6.6,1.1401754250991378,1.0,5,7
-dataset2,Heart Failure Prediction,adaboost,AdaBoost,ST_Slope_Flat,0.009401994298499135,8.6,1.5165750888103102,0.8,5,8
-dataset2,Heart Failure Prediction,adaboost,AdaBoost,Oldpeak,0.009602814390789308,9.2,0.8366600265340753,1.0,5,9
-dataset2,Heart Failure Prediction,adaboost,AdaBoost,Age,0.005536992366701838,9.8,1.9235384061671346,0.6,5,10
-dataset2,Heart Failure Prediction,adaboost,AdaBoost,RestingBP,0.002716971290302986,11.0,1.224744871391589,0.2,5,11
-dataset2,Heart Failure Prediction,adaboost,AdaBoost,ChestPainType_ATA,0.0019071159837698117,11.6,1.1401754250991378,0.2,5,12
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadAngina,0.3683020493630841,1.2,0.4472135954999579,1.0,5,1
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,ChestScan,0.32302590741935366,1.8,0.4472135954999579,1.0,5,2
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,Sex,0.27320268214677434,3.0,0.0,1.0,5,3
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RemovedTeeth_None_of_them,0.19423821908304334,4.0,0.0,1.0,5,4
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_18_to_24,0.1467658738665224,5.8,1.3038404810405297,1.0,5,5
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,GeneralHealth_Very_good,0.13110514008157742,6.0,1.0,1.0,5,6
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,GeneralHealth_Excellent,0.12660731282159327,6.6,0.8944271909999159,1.0,5,7
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_30_to_34,0.11315291181579964,8.6,1.140175425099138,1.0,5,8
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_25_to_29,0.10451202492469655,9.8,2.4899799195977463,0.8,5,9
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadStroke,0.09725155022317525,11.2,1.4832396974191326,0.2,5,10
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_40_to_44,0.09173869429311696,11.8,3.5637059362410923,0.4,5,11
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_80_or_older,0.09332730052562899,12.2,3.3466401061363023,0.2,5,12
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,SmokerStatus_Never_smoked,0.0921714613795261,12.8,1.6431676725154982,0.0,5,13
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadDiabetes_Yes,0.08599741756708931,14.0,2.5495097567963922,0.2,5,14
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadArthritis,0.08567630762348204,14.2,2.6832815729997477,0.2,5,15
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_35_to_39,0.08120133496543538,15.0,2.0,0.0,5,16
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,DifficultyWalking,0.08313684172404706,15.2,1.4832396974191326,0.0,5,17
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,LastCheckupTime_Within_past_year_anytime_less_than_12_months_ago_,0.06521116692607265,19.0,1.732050807568877,0.0,5,18
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RemovedTeeth_1_to_5,0.060299520383873616,20.4,0.5477225575051664,0.0,5,19
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_70_to_74,0.05913531619553154,21.2,3.1144823004794873,0.0,5,20
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_75_to_79,0.05676311536250435,21.4,4.61519230368573,0.0,5,21
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AlcoholDrinkers,0.056436302457702814,21.4,2.6076809620810595,0.0,5,22
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,SleepHours,0.050283534069119104,24.4,2.5099800796022262,0.0,5,23
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadCOPD,0.04622405772151948,25.2,2.86356421265527,0.0,5,24
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,MentalHealthDays,0.04726519500023214,25.8,3.768288736283355,0.0,5,25
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,TetanusLast10Tdap_No_did_not_receive_any_tetanus_shot_in_the_past_10_years,0.04548052987638542,26.2,2.7748873851023217,0.0,5,26
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,GeneralHealth_Fair,0.043965930420406356,27.0,3.3166247903554003,0.0,5,27
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_45_to_49,0.044012952999683705,27.4,3.049590136395381,0.0,5,28
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,WeightInKilograms,0.04044658058974189,28.8,3.420526275297414,0.0,5,29
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,BMI,0.04040529768133531,29.4,4.39317652729776,0.0,5,30
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,PhysicalHealthDays,0.04043077369399233,30.0,5.0,0.0,5,31
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,TetanusLast10Tdap_Yes_received_Tdap,0.038550578063491624,30.4,2.073644135332772,0.0,5,32
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HIVTesting,0.037639157120289056,31.4,3.361547262794322,0.0,5,33
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadDiabetes_No,0.034514150443566746,33.0,1.0000000000000009,0.0,5,34
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_50_to_54,0.026371275821759833,37.4,3.361547262794322,0.0,5,35
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RemovedTeeth_All,0.026508847718814253,37.8,4.324349662087931,0.0,5,36
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,DeafOrHardOfHearing,0.024533240868700904,38.4,2.073644135332773,0.0,5,37
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RaceEthnicityCategory_Black_only_Non_Hispanic,0.025975320933810754,38.4,2.3021728866442674,0.0,5,38
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HeightInMeters,0.02656776516820361,38.6,2.60768096208106,0.0,5,39
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,GeneralHealth_Poor,0.023297355799214985,39.8,2.2803508501982757,0.0,5,40
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadKidneyDisease,0.022196456610271816,40.8,3.271085446759226,0.0,5,41
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,CovidPos_Tested_positive_using_home_test_without_a_health_professional,0.021338530579575493,41.6,6.618156843109719,0.0,5,42
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,CovidPos_No,0.02088329330366074,42.4,3.4351128074635335,0.0,5,43
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,PhysicalActivities,0.01826621901541735,44.6,3.4351128074635335,0.0,5,44
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_65_to_69,0.01789314258594791,45.0,2.5495097567963922,0.0,5,45
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,SmokerStatus_Current_smoker_now_smokes_every_day,0.01638719711770479,46.2,3.114482300479487,0.0,5,46
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,BlindOrVisionDifficulty,0.015186146974756832,46.6,3.049590136395382,0.0,5,47
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,FluVaxLast12,0.01643873325979343,47.0,3.082207001484488,0.0,5,48
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,PneumoVaxEver,0.014355885004956114,48.4,3.1304951684997055,0.0,5,49
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadDepressiveDisorder,0.0132722825384532,50.0,4.183300132670378,0.0,5,50
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,GeneralHealth_Good,0.011187287443407492,51.2,2.16794833886788,0.0,5,51
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,DifficultyConcentrating,0.01043896040204613,52.4,2.3021728866442683,0.0,5,52
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadAsthma,0.011194166142131633,52.4,4.505552130427524,0.0,5,53
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,LastCheckupTime_5_or_more_years_ago,0.007894698157009378,58.0,5.787918451395113,0.0,5,54
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Washington,0.007482858586116009,58.0,4.183300132670377,0.0,5,55
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_55_to_59,0.00797802744868443,58.2,4.969909455915671,0.0,5,56
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_New_Jersey,0.007297960021978677,59.6,5.458937625582472,0.0,5,57
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Maryland,0.006674105891074878,59.8,3.8340579025361623,0.0,5,58
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,AgeCategory_Age_60_to_64,0.006281959029765391,60.4,4.722287581247038,0.0,5,59
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RaceEthnicityCategory_White_only_Non_Hispanic,0.00617916804904744,61.8,5.06951674225463,0.0,5,60
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,TetanusLast10Tdap_Yes_received_tetanus_shot_but_not_sure_what_type,0.005964638884288328,64.6,11.970797801316337,0.0,5,61
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RaceEthnicityCategory_Multiracial_Non_Hispanic,0.004792869948662,65.6,7.1274118724821856,0.0,5,62
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Illinois,0.005210038194560912,65.6,9.396807968666806,0.0,5,63
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_New_York,0.004533240186976785,66.8,5.8906705900092575,0.0,5,64
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,DifficultyErrands,0.005893815882098122,67.6,12.157302332343306,0.0,5,65
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,ECigaretteUsage_Not_at_all_right_now_,0.004476567117121548,68.8,9.497368056467014,0.0,5,66
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,LastCheckupTime_Within_past_5_years_2_years_but_less_than_5_years_ago_,0.005389576336294463,69.0,17.204650534085257,0.0,5,67
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RemovedTeeth_6_or_more_but_not_all,0.004373497730901608,70.4,11.631852818876277,0.0,5,68
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RaceEthnicityCategory_Hispanic,0.0035327946558767454,72.0,3.391164991562633,0.0,5,69
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Colorado,0.003665552284266259,73.8,9.654014708917737,0.0,5,70
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadSkinCancer,0.003531005551222,75.0,13.038404810405298,0.0,5,71
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Puerto_Rico,0.003689210625223041,75.2,11.734564329364767,0.0,5,72
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Delaware,0.003126714677324942,76.6,5.412947441089744,0.0,5,73
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,ECigaretteUsage_Never_used_e_cigarettes_in_my_entire_life,0.003256423791609867,77.0,9.327379053088816,0.0,5,74
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,SmokerStatus_Former_smoker,0.002821442130603881,78.4,7.436396977031284,0.0,5,75
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_South_Carolina,0.003230437299687755,78.8,16.39207125411551,0.0,5,76
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Maine,0.002933539065521271,79.0,9.407443861113387,0.0,5,77
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_South_Dakota,0.0027398289197758463,79.2,7.1902712048990205,0.0,5,78
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Minnesota,0.0032846530668197414,82.2,20.885401600160815,0.0,5,79
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Oklahoma,0.0033263419135702047,83.0,20.91650066335189,0.0,5,80
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,RaceEthnicityCategory_Other_race_only_Non_Hispanic,0.002324593794921723,84.0,3.605551275463989,0.0,5,81
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Texas,0.0023503495468052693,85.0,8.215838362577491,0.0,5,82
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Hawaii,0.002217177592099116,85.4,9.289779329994872,0.0,5,83
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,DifficultyDressingBathing,0.002121613592049293,86.0,7.810249675906654,0.0,5,84
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Georgia,0.0029550281575168695,86.4,21.220273325289664,0.0,5,85
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Massachusetts,0.002124728952399123,89.0,11.379806676741042,0.0,5,86
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Mississippi,0.0024698374695179557,89.0,18.275666882497067,0.0,5,87
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,LastCheckupTime_Within_past_2_years_1_year_but_less_than_2_years_ago_,0.0022012253736403845,89.4,14.39791651594077,0.0,5,88
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,ECigaretteUsage_Use_them_every_day,0.0018814791883766829,90.2,5.449770637375483,0.0,5,89
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Tennessee,0.0019752325518383853,90.8,16.13071604114337,0.0,5,90
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,TetanusLast10Tdap_Yes_received_tetanus_shot_but_not_Tdap,0.001828636040788937,92.0,10.583005244258363,0.0,5,91
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Vermont,0.0018697137041107758,92.2,15.13935269422045,0.0,5,92
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Kansas,0.0019768089025526472,93.0,19.32614809008769,0.0,5,93
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_California,0.0017032308242509418,93.6,11.844830095868831,0.0,5,94
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Missouri,0.0017456764520265896,94.4,21.290843102141356,0.0,5,95
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Arizona,0.0018495113281662735,95.2,19.53714411064217,0.0,5,96
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Virginia,0.0017520441158857085,95.2,20.6688170924221,0.0,5,97
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,SmokerStatus_Current_smoker_now_smokes_some_days,0.0014624075786302416,96.8,7.529940238806681,0.0,5,98
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Wisconsin,0.001561746246266675,96.8,16.31563667161046,0.0,5,99
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HighRiskLastYear,0.00145398205306847,98.8,11.519548602267365,0.0,5,100
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Florida,0.0013135620435357443,100.0,12.509996003196804,0.0,5,101
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadDiabetes_No_pre_diabetes_or_borderline_diabetes,0.0014365441523322264,100.2,13.917614738165446,0.0,5,102
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_New_Hampshire,0.001227274519059717,102.4,12.739701723352868,0.0,5,103
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Connecticut,0.001237555648375794,102.6,10.310189135025604,0.0,5,104
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_District_of_Columbia,0.0012267292450355574,102.6,13.464768843169942,0.0,5,105
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,ECigaretteUsage_Use_them_some_days,0.0011405297205666278,104.8,14.75466028073842,0.0,5,106
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Indiana,0.0010589031248879998,105.4,11.013627921806693,0.0,5,107
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Nevada,0.0011059610493799974,107.0,18.398369492974098,0.0,5,108
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Ohio,0.0009557489124676497,108.6,11.304866208850061,0.0,5,109
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_North_Dakota,0.001042006164506115,110.2,18.99210362229524,0.0,5,110
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Oregon,0.0008378622065254084,111.0,12.349089035228468,0.0,5,111
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Iowa,0.0008527892528455473,111.6,11.0589330407594,0.0,5,112
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Utah,0.0008231102168864294,111.6,8.173126696681019,0.0,5,113
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_North_Carolina,0.0008530787670082484,113.4,13.277801022759757,0.0,5,114
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Kentucky,0.000718203183948093,113.6,8.384509526501834,0.0,5,115
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Rhode_Island,0.0007148799564522648,113.6,5.683308895353129,0.0,5,116
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Michigan,0.0006556840647906294,113.8,8.613942186943211,0.0,5,117
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Louisiana,0.0008023260752007377,114.0,12.000000000000002,0.0,5,118
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,HadDiabetes_Yes_but_only_during_pregnancy_female_,0.0007353681343345657,114.2,7.758865896508331,0.0,5,119
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Alabama,0.0008439438454324822,114.2,15.974980438172686,0.0,5,120
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Pennsylvania,0.000698278400877897,114.8,11.122050170719428,0.0,5,121
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Arkansas,0.0006479460752374345,118.0,16.15549442140351,0.0,5,122
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Montana,0.0005761067623421123,119.0,9.40744386111339,0.0,5,123
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Alaska,0.0005897562110178296,119.2,13.274034804836093,0.0,5,124
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_West_Virginia,0.0005511234712990067,119.8,9.884331034521255,0.0,5,125
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_New_Mexico,0.0004935378060171767,120.4,5.899152481501052,0.0,5,126
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Guam,0.000511305205623263,120.8,12.153188881935472,0.0,5,127
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Idaho,0.00046990389283466496,122.2,3.4928498393145966,0.0,5,128
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Wyoming,0.000410536545645548,123.8,6.870225614927068,0.0,5,129
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Nebraska,0.00041190069575362646,124.4,2.7018512172212583,0.0,5,130
+dataset1,Personal Key Indicators of Heart Disease (2022),lightgbm,LightGBM,State_Virgin_Islands,0.00027790482956880074,126.6,6.188699378706321,0.0,5,131
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadAngina,0.6971296906471253,1.0,0.0,1.0,5,1
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,ChestScan,0.30096218585968015,2.0,0.0,1.0,5,2
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,Sex,0.2855811476707458,3.0,0.0,1.0,5,3
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RemovedTeeth_None_of_them,0.17102624475955963,4.0,0.0,1.0,5,4
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadStroke,0.13595165610313414,5.4,0.894427190999916,1.0,5,5
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,GeneralHealth_Very_good,0.13669270277023315,5.8,0.44721359549995787,1.0,5,6
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_80_or_older,0.11058359444141388,7.8,0.8366600265340756,1.0,5,7
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,GeneralHealth_Excellent,0.11015335768461228,7.8,0.8366600265340757,1.0,5,8
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadDiabetes_Yes,0.09509707093238831,10.0,0.7071067811865477,0.8,5,9
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_18_to_24,0.09919819384813308,10.2,3.63318042491699,0.6,5,10
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,SmokerStatus_Never_smoked,0.09266699105501175,10.4,0.8944271909999157,0.4,5,11
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,DifficultyWalking,0.0826659306883812,12.4,1.816590212458495,0.2,5,12
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadArthritis,0.07494501024484634,13.4,2.3021728866442674,0.0,5,13
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_30_to_34,0.07653277516365051,14.2,1.6431676725154984,0.0,5,14
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_25_to_29,0.0666883796453476,15.8,2.863564212655271,0.0,5,15
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_40_to_44,0.06620507389307022,16.2,5.06951674225463,0.0,5,16
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_75_to_79,0.06078020036220551,17.8,2.949576240750525,0.0,5,17
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_35_to_39,0.05950746089220047,18.0,1.4142135623730951,0.0,5,18
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,LastCheckupTime_Within_past_year_anytime_less_than_12_months_ago_,0.05703536570072174,19.0,3.1622776601683795,0.0,5,19
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RemovedTeeth_1_to_5,0.056872031092643736,19.6,2.60768096208106,0.0,5,20
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_70_to_74,0.05359632149338722,20.6,2.6076809620810595,0.0,5,21
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadCOPD,0.05483415201306343,21.0,1.8708286933869707,0.0,5,22
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AlcoholDrinkers,0.050417179614305495,23.0,2.0,0.0,5,23
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,SleepHours,0.04922065213322639,23.4,1.1401754250991378,0.0,5,24
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,GeneralHealth_Fair,0.04205336645245552,25.6,4.03732584763727,0.0,5,25
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,MentalHealthDays,0.03554647527635098,28.8,2.6832815729997477,0.0,5,26
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,TetanusLast10Tdap_No_did_not_receive_any_tetanus_shot_in_the_past_10_years,0.03663043826818466,28.8,3.9623225512317894,0.0,5,27
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_45_to_49,0.033541401475667955,29.2,2.6832815729997472,0.0,5,28
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,PhysicalHealthDays,0.03584260977804661,29.4,3.7815340802378077,0.0,5,29
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RemovedTeeth_All,0.033212835714221,30.6,5.770615218501403,0.0,5,30
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,TetanusLast10Tdap_Yes_received_Tdap,0.03308187499642372,31.0,3.4641016151377553,0.0,5,31
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadDiabetes_No,0.031050047650933266,31.6,4.33589667773576,0.0,5,32
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,GeneralHealth_Poor,0.030127246305346488,33.0,5.7445626465380295,0.0,5,33
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadKidneyDisease,0.028273873031139374,33.4,3.209361307176242,0.0,5,34
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,DeafOrHardOfHearing,0.026723338663578032,34.8,3.033150177620621,0.0,5,35
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HIVTesting,0.027154695987701417,35.2,4.764451699828639,0.0,5,36
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,BMI,0.02451404742896557,37.0,3.741657386773941,0.0,5,37
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,WeightInKilograms,0.02403213530778885,37.8,3.114482300479487,0.0,5,38
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_50_to_54,0.02192741185426712,39.8,3.7682887362833544,0.0,5,39
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,GeneralHealth_Good,0.020048148185014724,40.8,8.105553651663778,0.0,5,40
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RaceEthnicityCategory_Black_only_Non_Hispanic,0.021442708000540732,41.2,3.1937438845342623,0.0,5,41
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,SmokerStatus_Current_smoker_now_smokes_every_day,0.019673088565468788,41.2,3.834057902536163,0.0,5,42
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HeightInMeters,0.018484020419418812,42.8,3.0331501776206196,0.0,5,43
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,BlindOrVisionDifficulty,0.01885179728269577,43.2,1.4832396974191326,0.0,5,44
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,CovidPos_Tested_positive_using_home_test_without_a_health_professional,0.015578700043261052,44.2,5.630275304103699,0.0,5,45
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,PhysicalActivities,0.016027593053877354,44.4,3.7815340802378072,0.0,5,46
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,CovidPos_No,0.014270254597067832,45.8,1.7888543819998322,0.0,5,47
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,PneumoVaxEver,0.011445123329758644,47.8,2.1679483388678804,0.0,5,48
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadDepressiveDisorder,0.009545416943728924,50.0,2.0,0.0,5,49
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,FluVaxLast12,0.00942476000636816,50.6,4.774934554525329,0.0,5,50
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_65_to_69,0.00920345433987677,51.8,6.760177512462228,0.0,5,51
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadAsthma,0.008293371740728616,52.0,3.4641016151377553,0.0,5,52
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,DifficultyConcentrating,0.0075336767360568045,52.6,1.6733200530681507,0.0,5,53
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_55_to_59,0.006798408273607492,54.8,5.403702434442518,0.0,5,54
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RaceEthnicityCategory_Multiracial_Non_Hispanic,0.004569451091811061,58.0,5.431390245600108,0.0,5,55
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,DifficultyErrands,0.006103769317269326,58.2,6.906518659932802,0.0,5,56
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RaceEthnicityCategory_White_only_Non_Hispanic,0.004340054793283343,58.8,3.7013511046643495,0.0,5,57
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Washington,0.004249141830950975,59.2,3.8987177379235853,0.0,5,58
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_New_Jersey,0.0044712291564792395,59.6,4.33589667773576,0.0,5,59
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_South_Dakota,0.003965155361220241,61.4,4.505552130427524,0.0,5,60
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Maryland,0.0035468495916575193,63.4,7.76530746332687,0.0,5,61
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Maine,0.003222618531435728,63.6,6.985699678629191,0.0,5,62
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_New_York,0.0026986268814653156,67.8,8.043631020876083,0.0,5,63
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Colorado,0.0027379348874092104,69.2,10.894952959971878,0.0,5,64
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Illinois,0.0025502323638647794,70.2,10.848963084092414,0.0,5,65
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RemovedTeeth_6_or_more_but_not_all,0.002357567544095218,71.4,10.188228501560022,0.0,5,66
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,AgeCategory_Age_60_to_64,0.0022628082893788814,72.0,6.519202405202647,0.0,5,67
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,TetanusLast10Tdap_Yes_received_tetanus_shot_but_not_sure_what_type,0.0024175877799279986,72.2,14.77159436215333,0.0,5,68
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Puerto_Rico,0.002089231600984931,72.8,10.521406750050108,0.0,5,69
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,LastCheckupTime_Within_past_5_years_2_years_but_less_than_5_years_ago_,0.0023823179537430404,74.6,16.592166826548002,0.0,5,70
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadSkinCancer,0.0020987237337976696,75.4,16.425589791541732,0.0,5,71
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,ECigaretteUsage_Not_at_all_right_now_,0.0019835597951896487,75.6,10.66770828247567,0.0,5,72
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,LastCheckupTime_5_or_more_years_ago,0.0020449222880415618,76.8,13.405222862750177,0.0,5,73
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RaceEthnicityCategory_Hispanic,0.0017941424623131752,76.8,7.694153624668537,0.0,5,74
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Oklahoma,0.002309497143141925,76.8,16.783920876839236,0.0,5,75
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,ECigaretteUsage_Never_used_e_cigarettes_in_my_entire_life,0.0018686743918806315,77.0,7.778174593052023,0.0,5,76
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_South_Carolina,0.001981947966851294,77.2,12.357184145265458,0.0,5,77
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,RaceEthnicityCategory_Other_race_only_Non_Hispanic,0.0015696953982114793,78.0,4.5276925690687095,0.0,5,78
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Texas,0.0018297648523002863,78.2,11.211601134539169,0.0,5,79
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Delaware,0.0015672242152504623,79.6,8.532291603080617,0.0,5,80
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,SmokerStatus_Former_smoker,0.001378327119164169,81.4,8.29457654133109,0.0,5,81
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Arizona,0.0019169281324138865,83.6,25.589060162499134,0.0,5,82
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Minnesota,0.0013424759614281355,84.4,11.653325705565772,0.0,5,83
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Massachusetts,0.0011810560943558812,86.4,13.758633653092156,0.0,5,84
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,LastCheckupTime_Within_past_2_years_1_year_but_less_than_2_years_ago_,0.001060751755721867,86.6,4.037325847637268,0.0,5,85
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Mississippi,0.0012476329691708087,89.8,18.240065789355036,0.0,5,86
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,SmokerStatus_Current_smoker_now_smokes_some_days,0.0010329100652597845,90.4,10.85357084097211,0.0,5,87
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Hawaii,0.0009141960181295872,91.2,10.592450141492288,0.0,5,88
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,DifficultyDressingBathing,0.0008932571741752327,91.4,10.358571330062848,0.0,5,89
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_New_Hampshire,0.0010415692537208087,91.8,20.873428084528907,0.0,5,90
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Vermont,0.0009159591631032526,92.4,12.177848742696717,0.0,5,91
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,TetanusLast10Tdap_Yes_received_tetanus_shot_but_not_Tdap,0.0009776017570402474,93.2,15.690761613127645,0.0,5,92
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,ECigaretteUsage_Use_them_every_day,0.0006966111250221729,96.4,9.016651263079883,0.0,5,93
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,ECigaretteUsage_Use_them_some_days,0.0008610095945186913,96.4,19.308029417835474,0.0,5,94
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_California,0.0007576089788926766,96.6,14.741099009232656,0.0,5,95
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HighRiskLastYear,0.0006439606891945005,96.8,10.034938963441682,0.0,5,96
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Kansas,0.0007449158816598356,97.0,11.575836902790224,0.0,5,97
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Kentucky,0.0006542552902828902,98.0,10.295630140987,0.0,5,98
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Ohio,0.000707672638236545,99.6,16.562004709575472,0.0,5,99
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_District_of_Columbia,0.0006718071643263101,100.6,19.282116066448722,0.0,5,100
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Florida,0.0006576690953806974,101.0,17.53567791675018,0.0,5,101
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Georgia,0.0006729418972099665,101.2,20.7533129885327,0.0,5,102
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_North_Dakota,0.0008356506004929543,101.8,24.7325696198353,0.0,5,103
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Pennsylvania,0.0005597230687271803,103.4,14.310835055998655,0.0,5,104
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Virginia,0.0004855966952163726,104.2,7.049822692805827,0.0,5,105
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Indiana,0.0005493019736604765,104.6,18.649396773086256,0.0,5,106
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Nevada,0.00043590340355876834,105.2,10.256705123966467,0.0,5,107
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Tennessee,0.0004256657346559223,108.0,14.370107863199914,0.0,5,108
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Connecticut,0.0004792585168615915,108.6,13.704014010500721,0.0,5,109
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Missouri,0.0005958919166005217,108.6,23.839043604977107,0.0,5,110
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadDiabetes_No_pre_diabetes_or_borderline_diabetes,0.00043179282220080496,109.4,14.046351839534708,0.0,5,111
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Utah,0.0004123597034777049,110.0,15.182226450688976,0.0,5,112
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,HadDiabetes_Yes_but_only_during_pregnancy_female_,0.0003096795073361136,113.0,11.067971810589327,0.0,5,113
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Michigan,0.00029596840613521636,113.0,10.63014581273465,0.0,5,114
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_North_Carolina,0.0003488035232294351,113.2,13.21741275741966,0.0,5,115
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Alaska,0.000299242324399529,113.4,13.612494260788505,0.0,5,116
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Oregon,0.0003059921902604401,113.6,9.476286192385706,0.0,5,117
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Nebraska,0.0002643287647515535,113.8,6.760177512462229,0.0,5,118
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_West_Virginia,0.0003008045314345509,113.8,12.070625501605127,0.0,5,119
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Alabama,0.0002756418864009902,114.0,7.141428428542849,0.0,5,120
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Iowa,0.0002506881952285767,114.0,4.123105625617661,0.0,5,121
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Wisconsin,0.00027585049538174643,115.2,8.467585252006618,0.0,5,122
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Louisiana,0.0002742130352999084,115.4,15.05988047761336,0.0,5,123
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Montana,0.00027101727755507454,115.4,11.717508267545622,0.0,5,124
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Guam,0.00027294009632896634,116.0,12.429802894656055,0.0,5,125
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Rhode_Island,0.0002564796974183992,116.2,6.760177512462229,0.0,5,126
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_New_Mexico,0.00017994621593970806,120.0,5.999999999999999,0.0,5,127
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Idaho,0.00015644559898646547,120.2,5.71839138219832,0.0,5,128
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Wyoming,9.275691450056911e-05,125.0,5.477225575051663,0.0,5,129
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Arkansas,6.95250919307e-05,127.4,5.319774431308155,0.0,5,130
+dataset1,Personal Key Indicators of Heart Disease (2022),xgboost,XGBoost,State_Virgin_Islands,3.340800758451223e-05,128.6,4.277849927241487,0.0,5,131
+dataset2,Heart Failure Prediction,adaboost,AdaBoost,ST_Slope_Up,0.10667682252391852,1.0,0.0,1.0,5,1
+dataset2,Heart Failure Prediction,adaboost,AdaBoost,ChestPainType_ASY,0.07615165104082189,2.0,0.0,1.0,5,2
+dataset2,Heart Failure Prediction,adaboost,AdaBoost,Sex,0.02960283330931292,3.4,0.8944271909999159,1.0,5,3
+dataset2,Heart Failure Prediction,adaboost,AdaBoost,ExerciseAngina,0.027212823136735464,4.2,0.8366600265340757,1.0,5,4
+dataset2,Heart Failure Prediction,adaboost,AdaBoost,FastingBS,0.023625819314160662,5.4,1.6733200530681513,1.0,5,5
+dataset2,Heart Failure Prediction,adaboost,AdaBoost,MaxHR,0.020873002212870296,5.8,1.0954451150103321,1.0,5,6
+dataset2,Heart Failure Prediction,adaboost,AdaBoost,Cholesterol,0.01663681561156719,6.6,0.894427190999916,1.0,5,7
+dataset2,Heart Failure Prediction,adaboost,AdaBoost,ST_Slope_Flat,0.009291474192978034,8.8,1.3038404810405297,0.8,5,8
+dataset2,Heart Failure Prediction,adaboost,AdaBoost,Oldpeak,0.009442778349942595,9.2,0.8366600265340753,1.0,5,9
+dataset2,Heart Failure Prediction,adaboost,AdaBoost,Age,0.005133454007994652,9.6,2.3021728866442674,0.6,5,10
+dataset2,Heart Failure Prediction,adaboost,AdaBoost,RestingBP,0.002713761515368253,11.0,1.224744871391589,0.2,5,11
+dataset2,Heart Failure Prediction,adaboost,AdaBoost,ChestPainType_ATA,0.0017105923536633017,12.0,1.224744871391589,0.2,5,12
 dataset2,Heart Failure Prediction,adaboost,AdaBoost,ChestPainType_NAP,0.0,13.4,0.5477225575051662,0.0,5,13
 dataset2,Heart Failure Prediction,adaboost,AdaBoost,ChestPainType_TA,0.0,14.4,0.5477225575051662,0.0,5,14
-dataset2,Heart Failure Prediction,adaboost,AdaBoost,RestingECG_LVH,0.0006483052651079401,14.8,1.0954451150103324,0.0,5,15
+dataset2,Heart Failure Prediction,adaboost,AdaBoost,RestingECG_LVH,0.0008379218744005944,14.4,1.9493588689617927,0.0,5,15
 dataset2,Heart Failure Prediction,adaboost,AdaBoost,RestingECG_Normal,0.00043826001468353986,14.8,2.6832815729997477,0.2,5,16
 dataset2,Heart Failure Prediction,adaboost,AdaBoost,RestingECG_ST,0.0,17.0,0.0,0.0,5,17
 dataset2,Heart Failure Prediction,adaboost,AdaBoost,ST_Slope_Down,0.0,18.0,0.0,0.0,5,18
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,ST_Slope_Up,1.2584050635403756,1.0,0.0,1.0,5,1
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,ChestPainType_ASY,0.9244496070222687,2.0,0.0,1.0,5,2
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,ST_Slope_Flat,0.5974280610414777,3.6,0.8944271909999159,1.0,5,3
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,Sex,0.5110462751314396,5.2,1.9235384061671343,1.0,5,4
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,Cholesterol,0.4881917002653192,5.8,2.16794833886788,1.0,5,5
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,MaxHR,0.4743964841235175,5.8,1.6431676725154984,1.0,5,6
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,Oldpeak,0.47320531150148926,6.0,1.5811388300841898,1.0,5,7
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,ExerciseAngina,0.4173094421176802,7.6,2.073644135332772,1.0,5,8
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,FastingBS,0.3882732820546825,8.6,1.5165750888103102,0.8,5,9
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,Age,0.3229164698949275,10.2,0.8366600265340757,0.6,5,10
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,RestingBP,0.342050415509623,10.2,0.8366600265340756,0.6,5,11
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,ChestPainType_NAP,0.12228094306350701,12.4,0.8944271909999157,0.0,5,12
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,RestingECG_LVH,0.0797472712357187,13.2,0.8366600265340757,0.0,5,13
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,RestingECG_Normal,0.08992319476159924,13.4,0.5477225575051662,0.0,5,14
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,RestingECG_ST,0.03568046746956244,15.4,0.5477225575051662,0.0,5,15
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,ChestPainType_ATA,0.027355867658376814,15.6,0.5477225575051662,0.0,5,16
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,ChestPainType_TA,0.011024055514378255,17.2,0.44721359549995787,0.0,5,17
-dataset2,Heart Failure Prediction,lightgbm,LightGBM,ST_Slope_Down,0.006082416103387097,17.8,0.44721359549995787,0.0,5,18
-dataset2,Heart Failure Prediction,xgboost,XGBoost,ST_Slope_Up,1.0907381892204284,1.0,0.0,1.0,5,1
-dataset2,Heart Failure Prediction,xgboost,XGBoost,ChestPainType_ASY,0.8485500931739807,2.0,0.0,1.0,5,2
-dataset2,Heart Failure Prediction,xgboost,XGBoost,ST_Slope_Flat,0.5566942572593689,3.8,1.3038404810405297,1.0,5,3
-dataset2,Heart Failure Prediction,xgboost,XGBoost,Sex,0.46630313992500305,5.0,1.8708286933869707,1.0,5,4
-dataset2,Heart Failure Prediction,xgboost,XGBoost,Cholesterol,0.42450207471847534,5.6,1.140175425099138,1.0,5,5
-dataset2,Heart Failure Prediction,xgboost,XGBoost,MaxHR,0.41252989172935484,6.0,2.345207879911715,1.0,5,6
-dataset2,Heart Failure Prediction,xgboost,XGBoost,Oldpeak,0.40889686346054077,6.6,2.302172886644268,1.0,5,7
-dataset2,Heart Failure Prediction,xgboost,XGBoost,ExerciseAngina,0.38463218212127687,7.4,1.816590212458495,1.0,5,8
-dataset2,Heart Failure Prediction,xgboost,XGBoost,FastingBS,0.3347733199596405,8.2,1.9235384061671343,0.8,5,9
-dataset2,Heart Failure Prediction,xgboost,XGBoost,RestingBP,0.30974929332733153,10.0,1.0,0.6,5,10
-dataset2,Heart Failure Prediction,xgboost,XGBoost,Age,0.2831577032804489,10.4,0.5477225575051662,0.6,5,11
-dataset2,Heart Failure Prediction,xgboost,XGBoost,ChestPainType_NAP,0.10061555802822113,12.6,0.8944271909999159,0.0,5,12
-dataset2,Heart Failure Prediction,xgboost,XGBoost,RestingECG_LVH,0.0944102644920349,12.8,0.8366600265340757,0.0,5,13
-dataset2,Heart Failure Prediction,xgboost,XGBoost,RestingECG_Normal,0.06230301782488823,14.0,1.224744871391589,0.0,5,14
-dataset2,Heart Failure Prediction,xgboost,XGBoost,RestingECG_ST,0.02921965401619673,15.4,0.8944271909999159,0.0,5,15
-dataset2,Heart Failure Prediction,xgboost,XGBoost,ChestPainType_ATA,0.023734427616000177,15.8,1.0954451150103324,0.0,5,16
-dataset2,Heart Failure Prediction,xgboost,XGBoost,ST_Slope_Down,0.009603144880384207,17.0,1.4142135623730947,0.0,5,17
-dataset2,Heart Failure Prediction,xgboost,XGBoost,ChestPainType_TA,0.01116041438654065,17.4,0.5477225575051664,0.0,5,18
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,ST_Slope_Up,1.2564946291450805,1.0,0.0,1.0,5,1
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,ChestPainType_ASY,0.9363465616457438,2.0,0.0,1.0,5,2
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,ST_Slope_Flat,0.6133730666037249,3.4,0.5477225575051661,1.0,5,3
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,Cholesterol,0.5110402543160502,5.4,0.5477225575051661,1.0,5,4
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,MaxHR,0.47656530178303325,5.8,1.9235384061671346,1.0,5,5
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,Oldpeak,0.4865442997565982,5.8,1.6431676725154984,1.0,5,6
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,Sex,0.5150111303699543,6.0,2.23606797749979,1.0,5,7
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,ExerciseAngina,0.41091429493211457,7.8,2.8635642126552705,0.8,5,8
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,FastingBS,0.3768161454660349,8.8,1.30384048104053,0.8,5,9
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,Age,0.32149698959129064,10.0,1.0,0.6,5,10
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,RestingBP,0.3442928300537319,10.0,0.7071067811865477,0.8,5,11
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,ChestPainType_NAP,0.11735850478525664,12.4,0.8944271909999157,0.0,5,12
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,RestingECG_LVH,0.08537313463876935,13.0,0.7071067811865476,0.0,5,13
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,RestingECG_Normal,0.08871456240528881,13.8,0.8366600265340755,0.0,5,14
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,RestingECG_ST,0.029445859717600924,15.4,0.5477225575051662,0.0,5,15
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,ChestPainType_ATA,0.029181299539652927,15.6,1.140175425099138,0.0,5,16
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,ST_Slope_Down,0.008477742112048216,17.2,0.8366600265340757,0.0,5,17
+dataset2,Heart Failure Prediction,lightgbm,LightGBM,ChestPainType_TA,0.009564409996449448,17.6,0.5477225575051662,0.0,5,18
+dataset2,Heart Failure Prediction,xgboost,XGBoost,ST_Slope_Up,1.097657310962677,1.0,0.0,1.0,5,1
+dataset2,Heart Failure Prediction,xgboost,XGBoost,ChestPainType_ASY,0.8445452094078064,2.0,0.0,1.0,5,2
+dataset2,Heart Failure Prediction,xgboost,XGBoost,ST_Slope_Flat,0.5517720222473145,3.6,0.8944271909999159,1.0,5,3
+dataset2,Heart Failure Prediction,xgboost,XGBoost,Sex,0.4665513813495636,5.0,2.0,1.0,5,4
+dataset2,Heart Failure Prediction,xgboost,XGBoost,Cholesterol,0.4572213709354401,5.6,0.5477225575051663,1.0,5,5
+dataset2,Heart Failure Prediction,xgboost,XGBoost,MaxHR,0.40230881571769717,6.4,2.3021728866442674,1.0,5,6
+dataset2,Heart Failure Prediction,xgboost,XGBoost,Oldpeak,0.3993930459022522,6.6,2.302172886644268,1.0,5,7
+dataset2,Heart Failure Prediction,xgboost,XGBoost,ExerciseAngina,0.3824251651763916,6.8,1.9235384061671346,1.0,5,8
+dataset2,Heart Failure Prediction,xgboost,XGBoost,FastingBS,0.32367228269577025,8.8,1.7888543819998322,0.8,5,9
+dataset2,Heart Failure Prediction,xgboost,XGBoost,RestingBP,0.30536605417728424,9.8,1.0954451150103326,0.6,5,10
+dataset2,Heart Failure Prediction,xgboost,XGBoost,Age,0.2791166305541992,10.4,0.5477225575051662,0.6,5,11
+dataset2,Heart Failure Prediction,xgboost,XGBoost,ChestPainType_NAP,0.10932696349918843,12.8,1.30384048104053,0.0,5,12
+dataset2,Heart Failure Prediction,xgboost,XGBoost,RestingECG_LVH,0.08936652094125748,12.8,0.8366600265340757,0.0,5,13
+dataset2,Heart Failure Prediction,xgboost,XGBoost,RestingECG_Normal,0.06851389557123184,14.0,1.224744871391589,0.0,5,14
+dataset2,Heart Failure Prediction,xgboost,XGBoost,RestingECG_ST,0.02932803574949503,15.0,0.7071067811865477,0.0,5,15
+dataset2,Heart Failure Prediction,xgboost,XGBoost,ChestPainType_ATA,0.02238219641149044,15.8,1.095445115010332,0.0,5,16
+dataset2,Heart Failure Prediction,xgboost,XGBoost,ST_Slope_Down,0.009871644712984563,17.2,1.3038404810405302,0.0,5,17
+dataset2,Heart Failure Prediction,xgboost,XGBoost,ChestPainType_TA,0.010291078314185142,17.4,0.5477225575051664,0.0,5,18
 dataset3,Heart Disease Health Indicators (BRFSS 2015),adaboost,AdaBoost,Age,0.07585352606620695,1.0,0.0,1.0,5,1
 dataset3,Heart Disease Health Indicators (BRFSS 2015),adaboost,AdaBoost,GenHlth,0.050114289171278414,2.0,0.0,1.0,5,2
 dataset3,Heart Disease Health Indicators (BRFSS 2015),adaboost,AdaBoost,Sex,0.03363299325718497,3.4,0.8944271909999159,1.0,5,3
@@ -490,25 +490,25 @@ dataset3,Heart Disease Health Indicators (BRFSS 2015),lightgbm,LightGBM,Fruits,0
 dataset3,Heart Disease Health Indicators (BRFSS 2015),lightgbm,LightGBM,Veggies,0.02216260469321892,19.4,0.8944271909999162,0.0,5,20
 dataset3,Heart Disease Health Indicators (BRFSS 2015),lightgbm,LightGBM,Diabetes_1_0,0.01074991029450743,21.2,0.44721359549995787,0.0,5,21
 dataset3,Heart Disease Health Indicators (BRFSS 2015),lightgbm,LightGBM,AnyHealthcare,0.007748385369238503,21.8,0.44721359549995787,0.0,5,22
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Age,0.7678080439567566,1.0,0.0,1.0,5,1
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,GenHlth,0.42704862356185913,2.0,0.0,1.0,5,2
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Sex,0.356147837638855,3.2,0.447213595499958,1.0,5,3
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,HighBP,0.3415413975715637,3.8,0.447213595499958,1.0,5,4
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,HighChol,0.2998856008052826,5.0,0.0,1.0,5,5
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Smoker,0.16891847550868988,6.0,0.0,1.0,5,6
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,DiffWalk,0.13439154922962188,7.2,0.44721359549995787,1.0,5,7
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Stroke,0.12560700625181198,7.8,0.44721359549995787,1.0,5,8
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Diabetes_0_0,0.10254314839839936,9.0,0.0,1.0,5,9
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Income,0.0899593248963356,10.0,0.0,1.0,5,10
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,PhysHlth,0.050313323736190796,11.2,0.44721359549995776,0.0,5,11
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,NoDocbcCost,0.039041630923748016,13.0,1.7320508075688772,0.0,5,12
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,BMI,0.03459550738334656,13.4,0.8944271909999161,0.0,5,13
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,CholCheck,0.03726099207997322,13.4,1.816590212458495,0.0,5,14
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,HvyAlcoholConsump,0.029019251093268396,15.2,1.3038404810405297,0.0,5,15
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Education,0.026841682195663453,16.4,2.0736441353327724,0.0,5,16
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,MentHlth,0.02383510209619999,16.8,0.8366600265340757,0.0,5,17
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,PhysActivity,0.02304171659052372,17.0,1.8708286933869707,0.0,5,18
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Veggies,0.01877901963889599,19.0,0.7071067811865474,0.0,5,19
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Fruits,0.01151357339695096,19.8,1.0954451150103324,0.0,5,20
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Diabetes_1_0,0.00875399261713028,20.8,0.44721359549995765,0.0,5,21
-dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,AnyHealthcare,0.005027396604418755,22.0,0.0,0.0,5,22
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Age,0.7682714581489563,1.0,0.0,1.0,5,1
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,GenHlth,0.42846876978874204,2.0,0.0,1.0,5,2
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Sex,0.35432047247886655,3.2,0.447213595499958,1.0,5,3
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,HighBP,0.3398674190044403,3.8,0.447213595499958,1.0,5,4
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,HighChol,0.3012286901473999,5.0,0.0,1.0,5,5
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Smoker,0.1691611588001251,6.0,0.0,1.0,5,6
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,DiffWalk,0.1339217722415924,7.4,0.547722557505166,1.0,5,7
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Stroke,0.12671971172094346,7.6,0.547722557505166,1.0,5,8
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Diabetes_0_0,0.10347810834646225,9.0,0.0,1.0,5,9
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Income,0.09159176647663117,10.0,0.0,1.0,5,10
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,PhysHlth,0.04884939938783646,11.2,0.44721359549995776,0.0,5,11
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,NoDocbcCost,0.038907263427972794,13.0,1.2247448713915892,0.0,5,12
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,BMI,0.03602266684174538,13.2,1.0954451150103321,0.0,5,13
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,CholCheck,0.037305230647325514,13.2,1.6431676725154984,0.0,5,14
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,HvyAlcoholConsump,0.029725149273872375,15.0,1.224744871391589,0.0,5,15
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Education,0.027642732486128807,16.6,1.9493588689617924,0.0,5,16
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,MentHlth,0.025349687412381174,17.0,1.0,0.0,5,17
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,PhysActivity,0.023609796166419984,17.4,1.1401754250991376,0.0,5,18
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Veggies,0.017496409080922603,19.0,0.7071067811865474,0.0,5,19
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Fruits,0.01309430506080389,19.4,1.3416407864998734,0.0,5,20
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,Diabetes_1_0,0.008571138884872199,21.0,0.0,0.0,5,21
+dataset3,Heart Disease Health Indicators (BRFSS 2015),xgboost,XGBoost,AnyHealthcare,0.00548468716442585,22.0,0.0,0.0,5,22
