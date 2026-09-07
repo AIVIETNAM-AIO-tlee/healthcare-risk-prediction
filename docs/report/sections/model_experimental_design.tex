@@ -39,10 +39,23 @@ search variability. The selected settings use conservative learning rates,
 moderate ensemble sizes, and regularization/subsampling for the gradient-
 boosted models.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
-\small
-\begin{tabular}{p{2.3cm}p{5.2cm}p{7.1cm}}
+\begin{minipage}{0.90\linewidth}
+\centering
+	\refstepcounter{table}
+	\begin{captionbelowboxaivn}
+		\captable{Fixed model configurations used for the cross-dataset comparison.}
+		\label{tab:model_hyperparameters}
+	\end{captionbelowboxaivn}
+
+	\renewcommand{\arraystretch}{1.1}
+	\small
+
+	\begin{tabularx}{\linewidth}{@{}
+        >{\raggedright\arraybackslash}X
+        >{\raggedright\arraybackslash}X
+        >{\raggedright\arraybackslash}X@{}}
 \textbf{Model} & \textbf{Selected hyperparameters} & \textbf{Rationale} \\
 \hline
 AdaBoost &
@@ -66,9 +79,8 @@ The number of leaves and depth cap constrain the leaf-wise tree growth. The
 minimum child size, subsampling, and regularization reduce overfitting while the
 small learning rate supports a smoother boosting process. Deterministic CPU
 settings and a fixed seed are enabled for reproducibility. \\
-\end{tabular}
-\caption{Fixed model configurations used for the cross-dataset comparison.}
-\label{tab:model_hyperparameters}
+		\end{tabularx}
+\end{minipage}
 \end{table}
 
 \subsection{Evaluation Metrics and Model Comparison}
