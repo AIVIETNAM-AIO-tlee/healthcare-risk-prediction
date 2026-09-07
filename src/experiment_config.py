@@ -15,6 +15,18 @@ REQUIRED_EXPERIMENT_KEYS = {
     "cv",
 }
 SUPPORTED_PRIMARY_METRICS = {"roc_auc", "pr_auc", "recall", "f1"}
+REQUIRED_PREPROCESSING_KEYS = {
+    "test_size",
+    "iqr_multiplier",
+    "feature_variance_threshold",
+    "feature_correlation_threshold",
+}
+DEFAULT_PREPROCESSING = {
+    "test_size": 0.2,
+    "iqr_multiplier": 1.5,
+    "feature_variance_threshold": 1e-4,
+    "feature_correlation_threshold": 0.9,
+}
 
 
 def load_experiment_config(config_path: str | Path) -> tuple[dict[str, Any], Path]:
@@ -43,6 +55,16 @@ def load_experiment_config(config_path: str | Path) -> tuple[dict[str, Any], Pat
     if missing:
         raise ValueError(f"Missing experiment config keys: {sorted(missing)}")
 
+    preprocessing = config.setdefault("preprocessing", dict(DEFAULT_PREPROCESSING))
+    if not isinstance(preprocessing, dict):
+        raise ValueError("Top-level 'preprocessing' configuration must be a mapping.")
+    missing = REQUIRED_PREPROCESSING_KEYS.difference(preprocessing)
+    if missing:
+        raise ValueError(f"Missing preprocessing config keys: {sorted(missing)}")
+    test_size = float(preprocessing["test_size"])
+    if not 0.0 < test_size < 1.0:
+        raise ValueError("preprocessing.test_size must be between 0 and 1.")
+
     cv = experiment["cv"]
     if int(cv.get("n_splits", 0)) < 2:
         raise ValueError("experiment.cv.n_splits must be at least 2.")
@@ -62,5 +84,22 @@ def load_experiment_config(config_path: str | Path) -> tuple[dict[str, Any], Pat
         raise ValueError("At least one dataset must be configured.")
     if not config["models"]:
         raise ValueError("At least one model must be configured.")
+
+    for dataset_key, dataset in config["datasets"].items():
+        required_dataset_keys = {"name", "train_path", "test_path", "target_column"}
+        missing = required_dataset_keys.difference(dataset)
+        if missing:
+            raise ValueError(
+                f"Dataset '{dataset_key}' is missing config keys: {sorted(missing)}"
+            )
+
+    shap = config.get("shap")
+    if shap is not None:
+        if not isinstance(shap, dict):
+            raise ValueError("Top-level 'shap' configuration must be a mapping.")
+        required_shap_keys = {"output_dir", "max_explain_samples", "background_samples", "top_k"}
+        missing = required_shap_keys.difference(shap)
+        if missing:
+            raise ValueError(f"Missing SHAP config keys: {sorted(missing)}")
 
     return config, path.parent

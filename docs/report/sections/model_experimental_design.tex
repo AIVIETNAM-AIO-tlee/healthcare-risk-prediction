@@ -4,9 +4,11 @@ The modeling stage consumes the processed development and test files produced by
 the upstream data pipeline. For each of the three datasets, the data pipeline
 creates a stratified 80/20 development--test split. The test partition is held
 out during model comparison and is used only after cross-validation has been
-completed. All three candidate algorithms receive the same processed feature
-matrix for a given dataset so that differences in results are attributable to
-the model rather than to different input representations.
+completed. All three candidate algorithms use the same raw development rows and
+persisted fold assignments for a given dataset. Within each fold, preprocessing
+is fit only on the fold-training rows and then applied to the validation rows,
+so model differences are not confounded by different input representations or
+validation-fold preprocessing statistics.
 
 Within the development partition, we apply stratified five-fold
 cross-validation with shuffling and a fixed random seed of 42. Stratification
@@ -15,8 +17,8 @@ particularly important when the positive healthcare outcome is less frequent
 \cite{pedregosa2011scikit}. The exact same fold-generation rule and random seed
 are used for AdaBoost, XGBoost, and LightGBM. For every fold, four folds are used
 for model fitting and the remaining fold is used for validation. Model objects
-are re-created from scratch for every fold to prevent fitted state from leaking
-between folds.
+and preprocessing objects are re-created from scratch for every fold to prevent
+fitted state or validation statistics from leaking between folds.
 
 To reduce the effect of class imbalance during fitting, balanced sample weights
 are computed from the training portion of each fold only. Validation and test

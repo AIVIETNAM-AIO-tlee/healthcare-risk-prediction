@@ -5,7 +5,9 @@ from dataclasses import dataclass
 import pandas as pd
 from sklearn.model_selection import StratifiedKFold, train_test_split
 
-from config import N_SPLITS, RANDOM_STATE, TEST_SIZE
+from pathlib import Path
+
+from src.experiment_config import load_experiment_config
 
 
 @dataclass(frozen=True)
@@ -17,8 +19,8 @@ class SplitData:
 def split_train_test(
 	df: pd.DataFrame,
 	target_column: str,
-	test_size: float = TEST_SIZE,
-	random_state: int = RANDOM_STATE,
+	test_size: float | None = None,
+	random_state: int | None = None,
 ) -> SplitData:
 	"""Stratified 80/20 train/test split.
 
@@ -27,6 +29,13 @@ def split_train_test(
 	``train_df`` in ``preprocessing.py`` does not leak information from the
 	test split.
 	"""
+	if test_size is None or random_state is None:
+		config, _ = load_experiment_config(Path(__file__).resolve().parents[2] / "config.yaml")
+		if test_size is None:
+			test_size = float(config["preprocessing"]["test_size"])
+		if random_state is None:
+			random_state = int(config["experiment"]["random_state"])
+
 	train_df, test_df = train_test_split(
 		df,
 		test_size=test_size,
@@ -42,8 +51,8 @@ def split_train_test(
 def stratified_kfold_splits(
 	train_df: pd.DataFrame,
 	target_column: str,
-	n_splits: int = N_SPLITS,
-	random_state: int = RANDOM_STATE,
+	n_splits: int | None = None,
+	random_state: int | None = None,
 ) -> list[tuple[pd.Index, pd.Index]]:
 	"""Generate shuffled stratified K-Fold (train_idx, val_idx) index pairs.
 
@@ -53,5 +62,19 @@ def stratified_kfold_splits(
 	close across folds. StratifiedKFold itself validates that ``n_splits``
 	does not exceed the minority-class size.
 	"""
-	skfold = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=random_state)
+	if n_splits is None or random_state is None:
+		config, _ = load_experiment_config(Path(__file__).resolve().parents[2] / "config.yaml")
+		if n_splits is None:
+			n_splits = int(config["experiment"]["cv"]["n_splits"])
+		if random_state is None:
+			random_state = int(config["experiment"]["random_state"])
+	shuffle = True
+	if n_splits is not None:
+		config, _ = load_experiment_config(Path(__file__).resolve().parents[2] / "config.yaml")
+		shuffle = bool(config["experiment"]["cv"].get("shuffle", True))
+	skfold = StratifiedKFold(
+		n_splits=n_splits,
+		shuffle=shuffle,
+		random_state=random_state if shuffle else None,
+	)
 	return list(skfold.split(train_df, train_df[target_column]))

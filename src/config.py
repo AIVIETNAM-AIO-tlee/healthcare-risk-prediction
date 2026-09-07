@@ -3,35 +3,26 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 
-# ---------------------------------------------------------------------------
-# Reproducibility
-# ---------------------------------------------------------------------------
-RANDOM_STATE = 42
 
-# ---------------------------------------------------------------------------
-# Train / test split
-# ---------------------------------------------------------------------------
-TEST_SIZE = 0.2
+def __getattr__(name: str):
+	"""Provide compatibility access to settings now owned by config.yaml."""
+	keys = {
+		"RANDOM_STATE": ("experiment", "random_state"),
+		"TEST_SIZE": ("preprocessing", "test_size"),
+		"N_SPLITS": ("experiment", "cv", "n_splits"),
+		"IQR_MULTIPLIER": ("preprocessing", "iqr_multiplier"),
+		"FEATURE_VARIANCE_THRESHOLD": ("preprocessing", "feature_variance_threshold"),
+		"FEATURE_CORRELATION_THRESHOLD": ("preprocessing", "feature_correlation_threshold"),
+	}
+	if name not in keys:
+		raise AttributeError(name)
+	import yaml
 
-# ---------------------------------------------------------------------------
-# Cross-validation (on the training split only; test split stays outside CV)
-# ---------------------------------------------------------------------------
-N_SPLITS = 5
-
-# ---------------------------------------------------------------------------
-# Outlier handling (Tukey/IQR clipping)
-# ---------------------------------------------------------------------------
-# See docs/qa-scope-methodology-review-handoff.md, finding F5: IQR clipping is
-# only appropriate for genuinely continuous measurements, and only where a
-# dataset's own config opts specific columns in via
-# ``DatasetConfig.iqr_outlier_columns`` (empty/off by default).
-IQR_MULTIPLIER = 1.5
-
-# ---------------------------------------------------------------------------
-# Feature reduction (fit on train only, applied identically to test)
-# ---------------------------------------------------------------------------
-FEATURE_VARIANCE_THRESHOLD = 1e-4
-FEATURE_CORRELATION_THRESHOLD = 0.9
+	with (Path(__file__).resolve().parents[1] / "config.yaml").open("r", encoding="utf-8") as stream:
+		value = yaml.safe_load(stream)
+	for key in keys[name]:
+		value = value[key]
+	return value
 
 # ---------------------------------------------------------------------------
 # Paths

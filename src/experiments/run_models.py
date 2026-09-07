@@ -15,6 +15,7 @@ import numpy as np
 import pandas as pd
 import sklearn
 import xgboost
+from sklearn.model_selection import StratifiedKFold
 from sklearn.utils.class_weight import compute_sample_weight
 
 from src.evaluation.metrics import (
@@ -25,6 +26,7 @@ from src.evaluation.metrics import (
     summarize_fold_metrics,
 )
 from src.experiment_config import load_experiment_config
+from src.data.pipeline import load_clean_raw_split, preprocess_fold, preprocess_full_split
 from src.models.factory import build_model
 
 
@@ -117,6 +119,8 @@ def _load_kfold_splits(
     dataset_config: dict[str, Any],
     n_rows: int,
     expected_n_splits: int,
+    y: pd.Series | None = None,
+    random_state: int = 42,
 ) -> list[tuple[np.ndarray, np.ndarray]]:
     """Load upstream fold assignments from data/processed/<dataset>/kfold_indices.csv.
 
@@ -124,6 +128,16 @@ def _load_kfold_splits(
     per development row. Each fold id marks that row as validation for that fold;
     all remaining rows form the fold's training subset.
     """
+    if "kfold_path" not in dataset_config:
+        if y is None:
+            raise ValueError("A target series is required when kfold_path is not configured.")
+        splitter = StratifiedKFold(
+            n_splits=expected_n_splits,
+            shuffle=True,
+            random_state=random_state,
+        )
+        return [(train_idx, validation_idx) for train_idx, validation_idx in splitter.split(np.zeros(n_rows), y)]
+
     kfold_path = project_root / dataset_config["kfold_path"]
     _assert_real_csv(kfold_path)
     fold_df = pd.read_csv(kfold_path)
@@ -192,11 +206,15 @@ def _run_one_model(
     X_test: pd.DataFrame,
     y_test: pd.Series,
     experiment_config: dict[str, Any],
+    raw_dev: pd.DataFrame | None = None,
+    raw_test: pd.DataFrame | None = None,
+    dataset_spec: Any | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     random_state = int(experiment_config["random_state"])
     threshold = float(experiment_config["decision_threshold"])
     balance_training = bool(experiment_config["balance_training"])
     cv_config = experiment_config["cv"]
+    preprocessing_config = experiment_config["preprocessing"]
     model_name = model_config.get("display_name", model_key)
 
     splits = _load_kfold_splits(
@@ -204,14 +222,30 @@ def _run_one_model(
         dataset_config=experiment_config["_dataset_config"],
         n_rows=len(X_dev),
         expected_n_splits=int(cv_config["n_splits"]),
+        y=y_dev,
+        random_state=random_state,
     )
 
     fold_rows: list[dict[str, Any]] = []
     for fold_index, (train_indices, validation_indices) in enumerate(splits, start=1):
-        X_fold_train = X_dev.iloc[train_indices]
-        y_fold_train = y_dev.iloc[train_indices]
-        X_fold_validation = X_dev.iloc[validation_indices]
-        y_fold_validation = y_dev.iloc[validation_indices]
+        if raw_dev is not None and dataset_spec is not None:
+            fold_train, fold_validation = preprocess_fold(
+                raw_dev.iloc[train_indices],
+                raw_dev.iloc[validation_indices],
+                dataset_spec,
+                preprocessing_config,
+            )
+            target = dataset_spec.target_column
+            X_fold_train, y_fold_train = fold_train.drop(columns=target), fold_train[target].astype(int)
+            X_fold_validation, y_fold_validation = (
+                fold_validation.drop(columns=target),
+                fold_validation[target].astype(int),
+            )
+        else:
+            X_fold_train = X_dev.iloc[train_indices]
+            y_fold_train = y_dev.iloc[train_indices]
+            X_fold_validation = X_dev.iloc[validation_indices]
+            y_fold_validation = y_dev.iloc[validation_indices]
 
         model = build_model(model_key, model_config, random_state=random_state)
         fit_seconds = _fit_model(
@@ -247,6 +281,16 @@ def _run_one_model(
             f"    Fold {fold_index}/{cv_config['n_splits']} | "
             f"{metric_text} | fit={fit_seconds:.2f}s"
         )
+
+    if raw_dev is not None and raw_test is not None and dataset_spec is not None:
+        final_train, final_test = preprocess_full_split(
+            raw_dev, raw_test, dataset_spec, preprocessing_config
+        )
+        target = dataset_spec.target_column
+        X_dev = final_train.drop(columns=target)
+        y_dev = final_train[target].astype(int)
+        X_test = final_test.drop(columns=target)
+        y_test = final_test[target].astype(int)
 
     final_model = build_model(model_key, model_config, random_state=random_state)
     final_fit_seconds = _fit_model(
@@ -332,6 +376,16 @@ def run_experiments(
     for dataset_key, dataset_config in datasets.items():
         print(f"\n=== {dataset_config['name']} ({dataset_key}) ===")
         X_dev, y_dev, X_test, y_test = _load_processed_split(project_root, dataset_config)
+        raw_dev = raw_test = dataset_spec = None
+        try:
+            raw_dev, raw_test, dataset_spec = load_clean_raw_split(
+                project_root,
+                dataset_key,
+                random_state=int(experiment["random_state"]),
+                test_size=float(config["preprocessing"]["test_size"]),
+            )
+        except (FileNotFoundError, KeyError):
+            pass
         print(
             f"Development: {X_dev.shape} | Test: {X_test.shape} | "
             f"positive rate={y_dev.mean():.4f}/{y_test.mean():.4f}"
@@ -350,9 +404,13 @@ def run_experiments(
                 y_test=y_test,
                 experiment_config={
                     **experiment,
+                    "preprocessing": config["preprocessing"],
                     "_project_root": project_root,
                     "_dataset_config": dataset_config,
                 },
+                raw_dev=raw_dev,
+                raw_test=raw_test,
+                dataset_spec=dataset_spec,
             )
             all_fold_rows.extend(fold_rows)
             all_test_rows.append(test_row)

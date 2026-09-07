@@ -9,6 +9,12 @@ experiment:
     n_splits: 5
     shuffle: true
 
+preprocessing:
+  test_size: 0.20
+  iqr_multiplier: 1.5
+  feature_variance_threshold: 0.0001
+  feature_correlation_threshold: 0.9
+
 # The upstream data pipeline already creates one development/train file and one
 # untouched test file per dataset. All model experiments consume those processed
 # numeric files so the three algorithms see exactly the same features and rows.

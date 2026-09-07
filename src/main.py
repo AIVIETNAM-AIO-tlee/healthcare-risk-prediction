@@ -2,16 +2,9 @@ from __future__ import annotations
 
 import pandas as pd
 
-from config import (
-	DATASETS,
-	FEATURE_CORRELATION_THRESHOLD,
-	FEATURE_VARIANCE_THRESHOLD,
-	IQR_MULTIPLIER,
-	N_SPLITS,
-	DatasetConfig,
-)
-from data.loader import infer_column_types, load_raw_dataset
-from data.preprocessing import (
+from src.config import DATASETS, DatasetConfig
+from src.data.loader import infer_column_types, load_raw_dataset
+from src.data.preprocessing import (
 	apply_feature_selector,
 	apply_outlier_bounds,
 	clean_target,
@@ -20,12 +13,19 @@ from data.preprocessing import (
 	fit_outlier_bounds,
 	fit_preprocessor,
 	mark_invalid_zeros_as_missing,
+	sanitize_feature_names,
 	transform_features,
 )
-from data.split import split_train_test, stratified_kfold_splits
+from src.data.split import split_train_test, stratified_kfold_splits
+from src.experiment_config import load_experiment_config
 
 
-def process_dataset(spec: DatasetConfig) -> None:
+def process_dataset(spec: DatasetConfig, experiment_config: dict | None = None) -> None:
+	if experiment_config is None:
+		config, _ = load_experiment_config("config.yaml")
+		experiment_config = config
+	preprocessing_config = experiment_config["preprocessing"]
+	experiment = experiment_config["experiment"]
 	print(f"\n=== {spec.name} ({spec.key}) ===")
 	print(f"Loading raw dataset from: {spec.raw_path}")
 	df = load_raw_dataset(spec.raw_path, target_column=spec.target_column)
@@ -54,7 +54,12 @@ def process_dataset(spec: DatasetConfig) -> None:
 	print(f"Numeric columns ({len(numeric_columns)}): {numeric_columns}")
 	print(f"Categorical columns ({len(categorical_columns)}): {categorical_columns}")
 
-	split_data = split_train_test(df, target_column=spec.target_column)
+	split_data = split_train_test(
+		df,
+		target_column=spec.target_column,
+		test_size=float(preprocessing_config["test_size"]),
+		random_state=int(experiment["random_state"]),
+	)
 	print(f"Train rows: {len(split_data.train_df)} | Test rows: {len(split_data.test_df)}")
 
 	train_df, test_df = split_data.train_df, split_data.test_df
@@ -62,7 +67,9 @@ def process_dataset(spec: DatasetConfig) -> None:
 		# Outlier handling (F5): bounds fit on the training split only, then
 		# applied identically to both splits.
 		outlier_bounds = fit_outlier_bounds(
-			train_df, spec.iqr_outlier_columns, multiplier=IQR_MULTIPLIER
+			train_df,
+			spec.iqr_outlier_columns,
+			multiplier=float(preprocessing_config["iqr_multiplier"]),
 		)
 		train_df = apply_outlier_bounds(train_df, outlier_bounds)
 		test_df = apply_outlier_bounds(test_df, outlier_bounds)
@@ -80,8 +87,8 @@ def process_dataset(spec: DatasetConfig) -> None:
 	selector = fit_feature_selector(
 		train_processed,
 		target_column=spec.target_column,
-		variance_threshold=FEATURE_VARIANCE_THRESHOLD,
-		correlation_threshold=FEATURE_CORRELATION_THRESHOLD,
+		variance_threshold=float(preprocessing_config["feature_variance_threshold"]),
+		correlation_threshold=float(preprocessing_config["feature_correlation_threshold"]),
 	)
 	if selector.dropped_columns:
 		print(
@@ -89,8 +96,14 @@ def process_dataset(spec: DatasetConfig) -> None:
 			f"{selector.dropped_low_variance} (low-variance), "
 			f"{selector.dropped_correlated} (correlated)"
 		)
-	train_processed = apply_feature_selector(train_processed, selector, target_column=spec.target_column)
-	test_processed = apply_feature_selector(test_processed, selector, target_column=spec.target_column)
+	train_processed = sanitize_feature_names(
+		apply_feature_selector(train_processed, selector, target_column=spec.target_column),
+		spec.target_column,
+	)
+	test_processed = sanitize_feature_names(
+		apply_feature_selector(test_processed, selector, target_column=spec.target_column),
+		spec.target_column,
+	)
 
 	print(f"Processed train shape: {train_processed.shape}")
 	print(f"Processed test shape: {test_processed.shape}")
@@ -111,7 +124,12 @@ def process_dataset(spec: DatasetConfig) -> None:
 	# written row-for-row in the same order as ``train_processed`` /
 	# ``train.csv``, so ``kfold_indices.csv`` can be loaded alongside
 	# ``train.csv`` and joined purely by row position.
-	folds = stratified_kfold_splits(train_processed, target_column=spec.target_column, n_splits=N_SPLITS)
+	folds = stratified_kfold_splits(
+		train_processed,
+		target_column=spec.target_column,
+		n_splits=int(experiment["cv"]["n_splits"]),
+		random_state=int(experiment["random_state"]),
+	)
 	fold_assignment = pd.Series(index=train_processed.index, dtype=int, name="fold")
 	for fold_number, (_, val_idx) in enumerate(folds):
 		fold_assignment.iloc[val_idx] = fold_number
@@ -126,8 +144,9 @@ def process_dataset(spec: DatasetConfig) -> None:
 
 
 def main() -> None:
+	config, _ = load_experiment_config("config.yaml")
 	for spec in DATASETS:
-		process_dataset(spec)
+		process_dataset(spec, config)
 	print("\nData processing complete for all datasets.")
 
 
