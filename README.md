@@ -161,6 +161,8 @@ Build the report from `docs/report/` with the project's LaTeX toolchain.
 
 Project planning and Definition of Done are managed through Jira. Changes affecting datasets, preprocessing, models, metrics, experiments, or report claims should be linked to a Jira task and reviewed by the relevant team role. See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for collaboration, review, dataset-provenance, and reporting expectations.
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow, validation commands, pull-request checklist, and research reproducibility requirements.
+
 ## Report and Presentation
 
 - Report source: [`docs/report/Research_Template_Report.tex`](docs/report/Research_Template_Report.tex)
