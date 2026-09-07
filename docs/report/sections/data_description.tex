@@ -1,0 +1,127 @@
+\subsection{Dataset Description}
+\label{subsec:data_description}
+
+\begin{sloppypar}
+
+Three publicly available Kaggle datasets are used, all framed around the same
+binary target: whether a respondent or patient has (or has had) heart disease
+or a heart attack. The datasets differ substantially in size, feature type, and
+data-quality characteristics, which is intentional: comparing AdaBoost, XGBoost,
+and LightGBM across three heterogeneous datasets, rather than a single one,
+lets RQ1--RQ3 be answered under different sample sizes, feature compositions,
+and class-imbalance regimes rather than for one dataset in isolation. Each
+dataset is loaded directly from its raw CSV file under \texttt{data/raw/} via a
+single shared \texttt{load\_raw\_dataset()} function, with no dataset-specific
+loading logic.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrrrrr}
+\textbf{Dataset} & \textbf{Rows} & \textbf{Numeric} & \textbf{Categorical} & \textbf{Missing} & \textbf{Positive rate} \\
+\hline
+Dataset 1 & 445{,}132 & 6 & 34 & 38/40 columns & 5.64\% \\
+Dataset 2 & 918 & 6 & 5 & none & 55.34\% \\
+Dataset 3 & 253{,}680 & 7 & 14 & none & 9.42\% \\
+\end{tabular}
+\caption{Raw shape, feature-type composition, missingness, and target
+positive rate for the three datasets before any preprocessing.}
+\label{tab:dataset_overview}
+\end{table}
+
+\textbf{Dataset 1 --- Personal Key Indicators of Heart Disease (2022):} sourced
+from the Kaggle 2022 BRFSS release \cite{kaggle2022heartindicators} and
+distributed as \texttt{heart\_2022\_with\_nans.\allowbreak csv}. This variant is used
+deliberately, rather than the pre-cleaned no-NaN release, so that the
+preprocessing pipeline demonstrates a realistic missing-value-handling
+workflow. The raw table has 445{,}132 rows and 40 columns: 34 categorical
+columns (\texttt{State}, \texttt{Sex}, \texttt{GeneralHealth}, and most of the
+Yes/No health-history flags such as \texttt{HadHeartAttack}, \texttt{HadDiabetes},
+\texttt{HadStroke}) and 6 numeric columns (\texttt{PhysicalHealthDays},
+\texttt{MentalHealthDays}, \texttt{SleepHours}, \texttt{HeightInMeters},
+\texttt{WeightInKilograms}, \texttt{BMI}). The target column,
+\texttt{HadHeartAttack}, is a Yes/No self-report that is mapped to a binary
+0/1 label during preprocessing; before cleaning, 93.67\% of respondents
+(416{,}959) answered "No", 5.64\% (25{,}108) answered "Yes", and 0.69\% (3{,}065)
+left the field blank, giving a roughly 17:1 imbalance between the majority and
+minority classes once the missing-target rows are dropped.
+
+Thirty-eight of the 40 columns contain at least one missing value; only
+\texttt{State} and \texttt{Sex} are fully populated. Table
+\ref{tab:d1_missing} lists the six most-affected columns, all
+vaccination/screening-history fields that respondents frequently skip or do
+not know the answer to. The core numeric health metrics have moderate
+missingness (\texttt{BMI} 10.96\%, \texttt{WeightInKilograms} 9.45\%,
+\texttt{HeightInMeters} 6.44\%), while the disease-history Yes/No flags and
+core demographics are the most complete, at well under 1\% missing --- a
+pattern typical of self-reported survey data, where harder-to-recall or less
+commonly asked questions accumulate more gaps.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lr}
+\textbf{Column} & \textbf{Missing rate} \\
+\hline
+TetanusLast10Tdap & 18.54\% \\
+PneumoVaxEver & 17.31\% \\
+HIVTesting & 14.86\% \\
+ChestScan & 12.59\% \\
+CovidPos & 11.40\% \\
+HighRiskLastYear & 11.37\% \\
+\end{tabular}
+\caption{The six most-missing columns in Dataset 1 (raw data, before imputation).}
+\label{tab:d1_missing}
+\end{table}
+
+\textbf{Dataset 2 --- Heart Failure Prediction:} sourced from the fedesoriano
+Kaggle release \cite{kaggle2020heartfailure} and distributed as
+\texttt{heart.csv}. This is the smallest and already mostly-clean table used
+in this study: 918 rows and 12 columns, combining 5 clinical/demographic
+categorical columns (\texttt{Sex}, \texttt{ChestPainType}, \texttt{RestingECG},
+\texttt{ExerciseAngina}, \texttt{ST\_Slope}) with 6 numeric columns
+(\texttt{Age}, \texttt{RestingBP}, \texttt{Cholesterol}, \texttt{FastingBS},
+\texttt{MaxHR}, \texttt{Oldpeak}) and the pre-encoded binary target
+\texttt{HeartDisease}. There are zero missing values across all 918 rows,
+so the dataset appears complete on the surface, but two of its numeric
+columns use \texttt{0} as an undocumented placeholder for "not measured"
+rather than a genuine reading: exactly 1 row has \texttt{RestingBP == 0} and
+172 rows (18.7\%) have \texttt{Cholesterol == 0}, far too many to be real
+zero-cholesterol readings given that a cholesterol or blood-pressure value of
+0 is not physiologically possible. \texttt{DatasetConfig.\allowbreak zero\_as\_missing\_columns}
+records both columns so that the preprocessing pipeline recodes these
+placeholder zeros as \texttt{NaN} before imputation rather than taking them at
+face value. Unlike Dataset 1, the target here is close to balanced: 508
+patients (55.34\%) have heart disease and 410 (44.66\%) do not, which is
+typical of a clinical dataset curated specifically for a heart-disease
+classification task rather than drawn from a general population survey.
+
+\textbf{Dataset 3 --- Heart Disease Health Indicators (BRFSS 2015):} sourced
+from the alexteboul Kaggle release \cite{kaggle2015brfssindicators} and
+distributed as \texttt{heart\_disease\_health\_indicators\_BRFSS2015.\allowbreak csv}. The
+raw table has 253{,}680 rows and 22 columns, all already numerically encoded
+as \texttt{float64} -- including conceptually binary flags (\texttt{HighBP},
+\texttt{Smoker}, \texttt{Sex}) and small ordinal scales
+(\texttt{GenHlth} 1--5, \texttt{Age} 1--13 brackets, \texttt{Education} 1--6,
+\texttt{Income} 1--8). Seven columns (\texttt{BMI}, \texttt{GenHlth},
+\texttt{MentHlth}, \texttt{PhysHlth}, \texttt{Age}, \texttt{Education},
+\texttt{Income}) are treated as numeric and the remaining 14 as categorical.
+There are zero missing values anywhere in the dataset, making it the cleanest
+of the three in terms of completeness. However, 23{,}899 rows (9.42\%) are
+exact duplicates of another row across all 22 columns -- plausible here
+because every feature is binary or a small discrete scale, so two distinct
+respondents can easily share an identical combination of answers. This is a
+data-quality issue distinct from missingness, and \texttt{DatasetConfig}
+flags Dataset 3 with \texttt{drop\_\allowbreak duplicate\_\allowbreak rows=True} so these rows are
+removed before the target is cleaned (Section~\ref{subsec:data_preprocessing}).
+The target, \texttt{HeartDiseaseorAttack}, is heavily imbalanced on the raw
+data: 229{,}787 respondents (90.58\%) report no heart disease/attack history
+and 23{,}893 (9.42\%) do, a roughly 1:9.6 minority-to-majority ratio, similar
+in shape to Dataset 1 but somewhat less extreme.
+
+Across all three datasets, the target definition, raw imbalance, and
+data-quality quirks summarized above directly motivate the dataset-specific
+preprocessing decisions described in Section~\ref{subsec:data_preprocessing}:
+the class-imbalance policy (F1), the zero-as-missing recoding restricted to
+Dataset 2, and the duplicate-row removal restricted to Dataset 3.
+\end{sloppypar}
