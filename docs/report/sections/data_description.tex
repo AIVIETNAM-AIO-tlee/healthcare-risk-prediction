@@ -14,19 +14,33 @@ dataset is loaded directly from its raw CSV file under \texttt{data/raw/} via a
 single shared \texttt{load\_raw\_dataset()} function, with no dataset-specific
 loading logic.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
-\small
-\begin{tabular}{lrrrrr}
+\begin{minipage}{\linewidth}
+\centering
+	\refstepcounter{table}
+	\begin{captionbelowboxaivn}
+		\captable{Raw shape, feature-type composition, missingness, and target positive rate for the three datasets before any preprocessing.}
+		\label{tab:dataset_overview}
+	\end{captionbelowboxaivn}
+
+	\renewcommand{\arraystretch}{1.1}
+	\small
+
+	\begin{tabularx}{\linewidth}{@{}
+	>{\raggedright\arraybackslash}X
+	>{\centering\arraybackslash}X
+	>{\centering\arraybackslash}X
+	>{\centering\arraybackslash}X
+	>{\centering\arraybackslash}X
+	>{\centering\arraybackslash}X@{}}
 \textbf{Dataset} & \textbf{Rows} & \textbf{Numeric} & \textbf{Categorical} & \textbf{Missing} & \textbf{Positive rate} \\
 \hline
 Dataset 1 & 445{,}132 & 6 & 34 & 38/40 columns & 5.64\% \\
 Dataset 2 & 918 & 6 & 5 & none & 55.34\% \\
 Dataset 3 & 253{,}680 & 7 & 14 & none & 9.42\% \\
-\end{tabular}
-\caption{Raw shape, feature-type composition, missingness, and target
-positive rate for the three datasets before any preprocessing.}
-\label{tab:dataset_overview}
+		\end{tabularx}
+\end{minipage}
 \end{table}
 
 \textbf{Dataset 1 --- Personal Key Indicators of Heart Disease (2022):} sourced
@@ -57,10 +71,22 @@ core demographics are the most complete, at well under 1\% missing --- a
 pattern typical of self-reported survey data, where harder-to-recall or less
 commonly asked questions accumulate more gaps.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
-\small
-\begin{tabular}{lr}
+\begin{minipage}{0.8\linewidth}
+\centering
+	\refstepcounter{table}
+	\begin{captionbelowboxaivn}
+		\captable{The six most-missing columns in Dataset 1 (raw data, before imputation).}
+		\label{tab:d1_missing}
+	\end{captionbelowboxaivn}
+
+	\renewcommand{\arraystretch}{1.3}
+	\footnotesize
+
+	\begin{tabularx}{\linewidth}{@{}
+        >{\raggedright\arraybackslash}X
+        >{\centering\arraybackslash}X@{}}
 \textbf{Column} & \textbf{Missing rate} \\
 \hline
 TetanusLast10Tdap & 18.54\% \\
@@ -69,9 +95,8 @@ HIVTesting & 14.86\% \\
 ChestScan & 12.59\% \\
 CovidPos & 11.40\% \\
 HighRiskLastYear & 11.37\% \\
-\end{tabular}
-\caption{The six most-missing columns in Dataset 1 (raw data, before imputation).}
-\label{tab:d1_missing}
+	\end{tabularx}
+\end{minipage}
 \end{table}
 
 \textbf{Dataset 2 --- Heart Failure Prediction:} sourced from the fedesoriano

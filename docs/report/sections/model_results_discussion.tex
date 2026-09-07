@@ -7,26 +7,41 @@ five validation folds. PR-AUC is treated as the primary comparison metric,
 while ROC-AUC, Recall, and F1-score provide complementary views of ranking and
 threshold-based performance.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
-\scriptsize
-\begin{tabular}{llcccc}
-\textbf{Dataset} & \textbf{Model} & \textbf{ROC-AUC} & \textbf{PR-AUC} & \textbf{Recall} & \textbf{F1} \\
+\begin{minipage}{0.90\linewidth}
+\centering
+    \refstepcounter{table}
+    \begin{captionbelowboxaivn}
+        \captable{Five-fold cross-validation performance (mean $\pm$ standard deviation).}
+        \label{tab:cv_model_results}
+    \end{captionbelowboxaivn}
+
+    \renewcommand{\arraystretch}{1.1}
+    \small
+
+    \begin{tabularx}{\linewidth}{@{}
+        >{\raggedright\arraybackslash}X
+        >{\raggedright\arraybackslash}X
+        >{\centering\arraybackslash}X
+        >{\centering\arraybackslash}X
+        >{\centering\arraybackslash}X
+        >{\centering\arraybackslash}X@{}}
+	extbf{Dataset} & \textbf{Model} & \textbf{ROC-AUC} & \textbf{PR-AUC} & \textbf{Recall} & \textbf{F1} \\
 \hline
-Dataset 1 & AdaBoost & $0.8716 \pm 0.0042$ & $0.3853 \pm 0.0087$ & $0.6794 \pm 0.0106$ & $0.3765 \pm 0.0082$ \\
- & XGBoost & $0.8872 \pm 0.0033$ & $0.4138 \pm 0.0084$ & $0.7782 \pm 0.0071$ & $0.3324 \pm 0.0026$ \\
- & LightGBM & $0.8873 \pm 0.0033$ & $0.4129 \pm 0.0088$ & $0.7771 \pm 0.0084$ & $0.3346 \pm 0.0031$ \\
+Dataset 1 & AdaBoost & $0.8715 \pm 0.0042$ & $0.3853 \pm 0.0087$ & $0.6794 \pm 0.0106$ & $0.3765 \pm 0.0082$ \\
+ & XGBoost & $0.8873 \pm 0.0031$ & $0.4138 \pm 0.0092$ & $0.7799 \pm 0.0071$ & $0.3328 \pm 0.0023$ \\
+ & LightGBM & $0.8871 \pm 0.0034$ & $0.4127 \pm 0.0090$ & $0.7760 \pm 0.0097$ & $0.3347 \pm 0.0029$ \\
 \hline
-Dataset 2 & AdaBoost & $0.9241 \pm 0.0419$ & $0.9226 \pm 0.0444$ & $0.8449 \pm 0.0294$ & $0.8578 \pm 0.0190$ \\
- & XGBoost & $0.9244 \pm 0.0322$ & $0.9214 \pm 0.0324$ & $0.8815 \pm 0.0381$ & $0.8785 \pm 0.0249$ \\
- & LightGBM & $0.9241 \pm 0.0333$ & $0.9152 \pm 0.0351$ & $0.8769 \pm 0.0366$ & $0.8726 \pm 0.0256$ \\
+Dataset 2 & AdaBoost & $0.9240 \pm 0.0429$ & $0.9228 \pm 0.0438$ & $0.8449 \pm 0.0294$ & $0.8587 \pm 0.0169$ \\
+ & XGBoost & $0.9274 \pm 0.0332$ & $0.9248 \pm 0.0338$ & $0.8794 \pm 0.0451$ & $0.8780 \pm 0.0234$ \\
+ & LightGBM & $0.9249 \pm 0.0303$ & $0.9169 \pm 0.0329$ & $0.8818 \pm 0.0235$ & $0.8787 \pm 0.0169$ \\
 \hline
-Dataset 3 & AdaBoost & $0.8324 \pm 0.0030$ & $0.3681 \pm 0.0074$ & $0.7743 \pm 0.0105$ & $0.3825 \pm 0.0027$ \\
- & XGBoost & $0.8386 \pm 0.0027$ & $0.3800 \pm 0.0053$ & $0.8016 \pm 0.0049$ & $0.3814 \pm 0.0020$ \\
- & LightGBM & $0.8381 \pm 0.0026$ & $0.3801 \pm 0.0057$ & $0.7970 \pm 0.0053$ & $0.3825 \pm 0.0021$ \\
-\end{tabular}
-\caption{Five-fold cross-validation performance (mean $\pm$ standard deviation).}
-\label{tab:cv_model_results}
+Dataset 3 & AdaBoost & $0.8324 \pm 0.0031$ & $0.3678 \pm 0.0078$ & $0.7727 \pm 0.0082$ & $0.3826 \pm 0.0030$ \\
+ & XGBoost & $0.8386 \pm 0.0026$ & $0.3803 \pm 0.0050$ & $0.8014 \pm 0.0075$ & $0.3805 \pm 0.0022$ \\
+ & LightGBM & $0.8378 \pm 0.0023$ & $0.3797 \pm 0.0059$ & $0.7955 \pm 0.0047$ & $0.3822 \pm 0.0021$ \\
+        \end{tabularx}
+\end{minipage}
 \end{table}
 
 On Dataset 1, XGBoost and LightGBM produced almost identical ROC-AUC, while
@@ -43,24 +58,39 @@ that no single model dominated every metric on this relatively small dataset.
 On Dataset 3, XGBoost and LightGBM again improved ROC-AUC and PR-AUC over
 AdaBoost. XGBoost achieved the highest mean Recall, while the three models had
 very similar F1 values. Across the three datasets, the aggregated comparison
-ranked XGBoost first with a mean dataset rank of 1.6667, followed by LightGBM at
-2.0000 and AdaBoost at 2.3333. XGBoost also achieved the highest cross-dataset
-mean ROC-AUC (0.8834), PR-AUC (0.5717), and Recall (0.8205). AdaBoost achieved
-the highest cross-dataset mean F1 (0.5389), emphasizing that the preferred model
+ranked XGBoost first with a mean dataset rank of 1.0000, followed by LightGBM at
+2.3333 and AdaBoost at 2.6667. XGBoost also achieved the highest cross-dataset
+mean ROC-AUC (0.8844), PR-AUC (0.5730), and Recall (0.8202). AdaBoost achieved
+the highest cross-dataset mean F1 (0.5392), emphasizing that the preferred model
 depends partly on the evaluation objective and decision threshold.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
-\small
-\begin{tabular}{lccccc}
+\begin{minipage}{0.90\linewidth}
+\centering
+    \refstepcounter{table}
+    \begin{captionbelowboxaivn}
+        \captable{Unweighted cross-dataset comparison based on the experiment outputs.}
+        \label{tab:overall_model_results}
+    \end{captionbelowboxaivn}
+
+    \renewcommand{\arraystretch}{1.1}
+    \small
+
+    \begin{tabularx}{\linewidth}{@{}
+        >{\raggedright\arraybackslash}X
+        >{\centering\arraybackslash}X
+        >{\centering\arraybackslash}X
+        >{\centering\arraybackslash}X
+        >{\centering\arraybackslash}X
+        >{\centering\arraybackslash}X@{}}
 \textbf{Model} & \textbf{Mean Rank} & \textbf{ROC-AUC} & \textbf{PR-AUC} & \textbf{Recall} & \textbf{F1} \\
 \hline
-XGBoost & \textbf{1.6667} & \textbf{0.8834} & \textbf{0.5717} & \textbf{0.8205} & 0.5308 \\
-LightGBM & 2.0000 & 0.8832 & 0.5694 & 0.8170 & 0.5299 \\
-AdaBoost & 2.3333 & 0.8760 & 0.5587 & 0.7662 & \textbf{0.5389} \\
-\end{tabular}
-\caption{Unweighted cross-dataset comparison based on the experiment outputs.}
-\label{tab:overall_model_results}
+    XGBoost & \textbf{1.0000} & \textbf{0.8844} & \textbf{0.5730} & \textbf{0.8202} & 0.5305 \\
+    LightGBM & 2.3333 & 0.8833 & 0.5698 & 0.8178 & 0.5319 \\
+    AdaBoost & 2.6667 & 0.8760 & 0.5586 & 0.7657 & \textbf{0.5392} \\
+        \end{tabularx}
+\end{minipage}
 \end{table}
 
 These results answer RQ1 by showing that XGBoost provides the strongest overall
@@ -69,10 +99,46 @@ on several ranking metrics and AdaBoost retains a small advantage in aggregate
 F1. Therefore, the comparison does not support a claim that one algorithm is
 uniformly superior on every metric and dataset.
 
-\begin{table}[h]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Figures/roc_curves_all_datasets.png}
+    \begin{minipage}{0.95\linewidth}
+        \begin{figurecaptionmodern}
+        \centering
+        \capfig{ROC curves for the three models on the untouched hold-out test sets across the three healthcare datasets.}
+        \label{fig:roc-all-datasets}
+        \end{figurecaptionmodern}
+    \end{minipage}
+\end{figure}
+
+The ROC visualization is consistent with the tabulated test results. The curves
+are close on Dataset 1 and Dataset 3, where XGBoost and LightGBM provide similar
+ranking performance. Dataset 2 has the highest test AUC values overall, but its
+step-shaped curves also reflect the smaller test sample and therefore should not
+be interpreted as evidence of uniformly better clinical performance across
+datasets. The figure supports comparing ranking behavior within each dataset,
+not pooling patients from different prediction tasks.
+
+\begin{table}[H]
 \centering
-\scriptsize
-\begin{tabular}{llcccc}
+\begin{minipage}{0.90\linewidth}
+\centering
+    \refstepcounter{table}
+    \begin{captionbelowboxaivn}
+        \captable{Performance on the untouched hold-out test partitions after refitting on the full development data.}
+        \label{tab:holdout_model_results}
+    \end{captionbelowboxaivn}
+
+        $\rho=0.9324$ but Kendall $\tau=0.7990$. Both values indicate positive and
+    \small
+
+    \begin{tabularx}{\linewidth}{@{}
+        >{\raggedright\arraybackslash}X
+        >{\raggedright\arraybackslash}X
+        >{\centering\arraybackslash}X
+        >{\centering\arraybackslash}X
+        >{\centering\arraybackslash}X
+        >{\centering\arraybackslash}X@{}}
 \textbf{Dataset} & \textbf{Model} & \textbf{ROC-AUC} & \textbf{PR-AUC} & \textbf{Recall} & \textbf{F1} \\
 \hline
 Dataset 1 & AdaBoost & 0.8695 & 0.3860 & 0.6705 & 0.3657 \\
@@ -86,9 +152,8 @@ Dataset 2 & AdaBoost & 0.9256 & 0.9394 & 0.8529 & 0.8832 \\
 Dataset 3 & AdaBoost & 0.8326 & 0.3672 & 0.7674 & 0.3788 \\
  & XGBoost & 0.8384 & 0.3756 & 0.7963 & 0.3773 \\
  & LightGBM & 0.8385 & 0.3763 & 0.7925 & 0.3789 \\
-\end{tabular}
-\caption{Performance on the untouched hold-out test partitions after refitting on the full development data.}
-\label{tab:holdout_model_results}
+        \end{tabularx}
+\end{minipage}
 \end{table}
 
 \subsection{Predictive Stability Across Cross-Validation Folds (RQ2)}
@@ -110,8 +175,8 @@ composition of a single fold has a greater influence on the measured score.
 
 The final hold-out results were generally close to the corresponding
 cross-validation means. For example, Dataset 1 XGBoost achieved a mean CV
-ROC-AUC of 0.8872 and a hold-out ROC-AUC of 0.8850, while Dataset 3 XGBoost
-achieved 0.8386 in CV and 0.8384 on the hold-out set. This agreement provides
+ROC-AUC of 0.8873 and a hold-out ROC-AUC of 0.8851, while Dataset 3 XGBoost
+achieved 0.8386 in CV and 0.8385 on the hold-out set. This agreement provides
 additional evidence that the reported cross-validation estimates are not driven
 by a single unusually favorable split.
 
@@ -134,60 +199,73 @@ $\tau$, Spearman's $\rho$, and top-10 Jaccard similarity.
 
 Table~\ref{tab:shap_stability_results} shows that the SHAP feature rankings are
 generally stable across folds for all nine dataset--model combinations.
-Mean Spearman correlations range from 0.9332 to 0.9700, indicating strong
+Mean Spearman correlations range from 0.9324 to 0.9921, indicating strong
 agreement in the complete feature ordering. Mean Kendall coefficients range
-from 0.8004 to 0.9599, providing additional evidence that most pairwise feature
+from 0.7990 to 0.9636, providing additional evidence that most pairwise feature
 ordering relationships are preserved across folds. Top-10 Jaccard similarity
-ranges from 0.7455 to 1.0000, indicating that the most influential feature sets
+ranges from 0.7758 to 1.0000, indicating that the most influential feature sets
 are also largely consistent.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
-\scriptsize
-\begin{tabular}{llccc}
+\begin{minipage}{0.90\linewidth}
+\centering
+    \refstepcounter{table}
+    \begin{captionbelowboxaivn}
+        \captable{Mean SHAP feature-ranking stability across the ten pairwise comparisons of five cross-validation folds.}
+        \label{tab:shap_stability_results}
+    \end{captionbelowboxaivn}
+
+    \renewcommand{\arraystretch}{1.1}
+    \small
+
+    \begin{tabularx}{\linewidth}{@{}
+        >{\raggedright\arraybackslash}X
+        >{\raggedright\arraybackslash}X
+        >{\centering\arraybackslash}X
+        >{\centering\arraybackslash}X
+        >{\centering\arraybackslash}X@{}}
 \textbf{Dataset} &
 \textbf{Model} &
 \textbf{Kendall $\tau$} &
 \textbf{Spearman $\rho$} &
 \textbf{Top-10 Jaccard} \\
 \hline
-Dataset 1 & AdaBoost & 0.9599 & 0.9652 & 0.9273 \\
-          & XGBoost  & 0.8004 & 0.9332 & 0.8545 \\
-          & LightGBM & 0.8198 & 0.9479 & 0.7455 \\
+Dataset 1 & AdaBoost & 0.9593 & 0.9644 & 0.9273 \\
+          & XGBoost  & 0.7990 & 0.9324 & 0.8273 \\
+          & LightGBM & 0.8057 & 0.9368 & 0.7758 \\
 \hline
-Dataset 2 & AdaBoost & 0.8562 & 0.9467 & 0.8061 \\
-          & XGBoost  & 0.8222 & 0.9389 & 0.8727 \\
-          & LightGBM & 0.8170 & 0.9348 & 0.8364 \\
+Dataset 2 & AdaBoost & 0.8536 & 0.9410 & 0.8061 \\
+          & XGBoost  & 0.8118 & 0.9346 & 0.8545 \\
+          & LightGBM & 0.8301 & 0.9422 & 0.8364 \\
 \hline
-Dataset 3 & AdaBoost & 0.9130 & 0.9599 & \textbf{1.0000} \\
-          & XGBoost  & 0.9004 & 0.9686 & \textbf{1.0000} \\
-          & LightGBM & 0.8988 & \textbf{0.9700} & 0.8727 \\
-\end{tabular}
-\caption{Mean SHAP feature-ranking stability across the ten pairwise comparisons
-of five cross-validation folds.}
-\label{tab:shap_stability_results}
+Dataset 3 & AdaBoost & 0.9636 & 0.9921 & \textbf{1.0000} \\
+          & XGBoost  & 0.9255 & 0.9814 & \textbf{1.0000} \\
+          & LightGBM & 0.8996 & 0.9735 & 0.9273 \\
+        \end{tabularx}
+\end{minipage}
 \end{table}
 
 Dataset 3 demonstrates particularly strong explanation stability. AdaBoost and
 XGBoost both obtain a mean top-10 Jaccard score of 1.0000, indicating that the
 same set of ten most influential features is retained across every fold pair.
-LightGBM achieves the highest overall mean Spearman correlation of 0.9700,
+LightGBM achieves the highest overall mean Spearman correlation of 0.9735,
 showing that its complete feature ranking is also highly consistent. The high
 Kendall coefficients for all three models further confirm that the relative
 ordering of feature pairs changes only modestly across partitions.
 
 Dataset 1 also exhibits strong overall stability, although the different
 metrics reveal some variation near the top of the ranking. AdaBoost achieves
-the strongest agreement on this dataset, with mean Kendall $\tau=0.9599$,
-Spearman $\rho=0.9652$, and top-10 Jaccard similarity of 0.9273. LightGBM,
-however, obtains a high Spearman correlation of 0.9479 while its top-10 Jaccard
-similarity is lower at 0.7455. This result indicates that the complete ranking
+the strongest agreement on this dataset, with mean Kendall $\tau=0.9593$,
+Spearman $\rho=0.9644$, and top-10 Jaccard similarity of 0.9273. LightGBM,
+however, obtains a high Spearman correlation of 0.9368 while its top-10 Jaccard
+similarity is lower at 0.7758. This result indicates that the complete ranking
 remains similar across folds even though several features near the top-10
 boundary exchange positions or move into and out of the top feature set.
 
 The difference between the Kendall and Spearman measurements is also
 informative. For example, Dataset 1 XGBoost achieves Spearman
-$\rho=0.9332$ but Kendall $\tau=0.8004$. Both values indicate positive and
+$\rho=0.9324$ but Kendall $\tau=0.7990$. Both values indicate positive and
 strong ranking agreement, but Kendall's lower value suggests that some
 pairwise feature orderings change across folds even though the overall ranking
 structure remains similar. Reporting both statistics therefore provides a more
@@ -196,8 +274,8 @@ measure.
 
 Dataset 2 remains reasonably stable despite being substantially smaller than
 Datasets 1 and 3. All three models obtain mean Spearman correlations greater
-than 0.93, while mean Kendall coefficients range from 0.8170 to 0.8562.
-Top-10 Jaccard similarity ranges from 0.8061 to 0.8727. These values indicate
+than 0.93, while mean Kendall coefficients range from 0.8118 to 0.8536.
+Top-10 Jaccard similarity ranges from 0.8061 to 0.8545. These values indicate
 that the majority of important features remain consistently ranked even though
 some movement occurs between folds.
 
@@ -252,6 +330,65 @@ permutation SHAP while XGBoost and LightGBM use TreeSHAP, raw SHAP magnitudes
 are not used for direct cross-model comparisons. RQ3 therefore focuses on
 within-model fold-to-fold ranking stability, which remains comparable across
 the experimental protocol.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figures/dataset1_xgboost_beeswarm.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figures/dataset2_xgboost_beeswarm.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figures/dataset3_xgboost_beeswarm.png}
+    \end{minipage}
+    \begin{minipage}{0.95\linewidth}
+        \begin{figurecaptionmodern}
+        \centering
+        \capfig{SHAP beeswarm plots for XGBoost on Dataset 1, Dataset 2, and Dataset 3, respectively.}
+        \label{fig:xgboost-beeswarm-datasets}
+        \end{figurecaptionmodern}
+    \end{minipage}
+\end{figure}
+
+The beeswarm plots show that the most influential features are dataset-specific.
+For Dataset 1, \texttt{HadAngina}, \texttt{ChestScan}, and \texttt{Sex} occupy
+the leading positions. Dataset 2 is dominated by \texttt{ST\_Slope\_Up},
+\texttt{ChestPainType\_ASY}, and \texttt{ST\_Slope\_Flat}, whereas Dataset 3
+is led by \texttt{Age}, \texttt{GenHlth}, and \texttt{Sex}. The horizontal
+position indicates contribution direction and magnitude, while color encodes
+the feature value. These patterns show why a single cross-dataset feature
+interpretation would be misleading even when the same model family is used.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figures/dataset1_xgboost_ranking_heatmap.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figures/dataset2_xgboost_fold_correlation_heatmap.png}
+    \end{minipage}
+    \begin{minipage}{0.95\linewidth}
+        \begin{figurecaptionmodern}
+        \centering
+        \capfig{Representative SHAP stability visualizations: feature-ranking heatmap for Dataset 1 and fold-correlation heatmap for Dataset 2 using XGBoost.}
+        \label{fig:shap-stability-visualizations}
+        \end{figurecaptionmodern}
+    \end{minipage}
+\end{figure}
+
+The ranking heatmap makes the fold-level movement of individual features
+visible, while the correlation heatmap summarizes agreement between complete
+rankings. The high off-diagonal correlations in the Dataset 2 example are
+consistent with its mean Spearman value of 0.9346, even though its smaller
+sample produces larger predictive variability. Together, the plots clarify
+that explanation stability concerns reproducibility of model rankings, not
+causal importance or clinical validity.
 
 
 

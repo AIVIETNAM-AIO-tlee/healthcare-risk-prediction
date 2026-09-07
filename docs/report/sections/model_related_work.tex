@@ -60,14 +60,26 @@ has demonstrated their use in medical prediction settings
 performance across cross-validation folds but also whether feature-importance
 rankings remain consistent as the training sample changes.
 
+However, healthcare prediction studies are difficult to compare directly when
+they use different datasets, preprocessing choices, class-balance strategies,
+train--test partitions, or evaluation metrics. A reported advantage for one
+model may therefore reflect the experimental setup rather than a stable property
+of the algorithm. Explainability studies also commonly report a single global
+ranking, which does not establish whether that ranking persists when the training
+sample changes. These limitations leave two related questions open: whether
+model performance is stable across folds and datasets, and whether the features
+used to explain that performance are stable under the same changes.
+
 \subsection{Research Gap and Motivation}
 \label{subsec:rw_gap}
 
-The goal of this study is therefore broader than identifying a single model with
-the highest average score. AdaBoost, XGBoost, and LightGBM are evaluated under a
-common preprocessing, cross-validation, metric, and hold-out testing protocol
-across multiple healthcare datasets. The study then examines two forms of
-stability: fold-to-fold variation in predictive performance and fold-to-fold
-variation in SHAP-based feature rankings. This design supports the three research
-questions by separating average predictive strength from sensitivity to the
-particular training sample and from the stability of model explanations.
+The gap addressed by this study is therefore methodological rather than a claim
+that one boosting algorithm is universally best. AdaBoost, XGBoost, and LightGBM
+are evaluated under one documented preprocessing, fold-generation, metric, and
+hold-out protocol across three healthcare datasets. The same persisted folds are
+used for model evaluation and SHAP analysis, while preprocessing is fitted only
+on each fold's training rows. The study consequently separates average
+predictive strength (RQ1), fold-to-fold predictive variability (RQ2), and
+fold-to-fold explanation variability (RQ3). This controlled design does not
+eliminate differences between the datasets, but it makes those differences
+explicit rather than conflating them with different evaluation procedures.

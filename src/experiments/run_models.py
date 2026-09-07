@@ -25,6 +25,7 @@ from src.evaluation.metrics import (
     compute_binary_metrics,
     summarize_fold_metrics,
 )
+from src.evaluation.roc_curve import plot_dataset_roc_curves
 from src.experiment_config import load_experiment_config
 from src.data.pipeline import load_clean_raw_split, preprocess_fold, preprocess_full_split
 from src.models.factory import build_model
@@ -209,6 +210,7 @@ def _run_one_model(
     raw_dev: pd.DataFrame | None = None,
     raw_test: pd.DataFrame | None = None,
     dataset_spec: Any | None = None,
+    roc_curves: dict[str, dict[str, dict[str, Any]]] | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     random_state = int(experiment_config["random_state"])
     threshold = float(experiment_config["decision_threshold"])
@@ -300,6 +302,11 @@ def _run_one_model(
         balance_training=balance_training,
     )
     test_score = _positive_class_probability(final_model, X_test)
+    if roc_curves is not None:
+        roc_curves.setdefault(dataset_key, {})[model_name] = {
+            "y_true": y_test.to_numpy(),
+            "y_score": test_score,
+        }
     test_metrics = compute_binary_metrics(y_test, test_score, threshold=threshold)
     test_row = {
         "dataset_key": dataset_key,
@@ -372,6 +379,7 @@ def run_experiments(
 
     all_fold_rows: list[dict[str, Any]] = []
     all_test_rows: list[dict[str, Any]] = []
+    roc_curves: dict[str, dict[str, dict[str, Any]]] = {}
 
     for dataset_key, dataset_config in datasets.items():
         print(f"\n=== {dataset_config['name']} ({dataset_key}) ===")
@@ -411,6 +419,7 @@ def run_experiments(
                 raw_dev=raw_dev,
                 raw_test=raw_test,
                 dataset_spec=dataset_spec,
+                roc_curves=roc_curves,
             )
             all_fold_rows.extend(fold_rows)
             all_test_rows.append(test_row)
@@ -435,6 +444,8 @@ def run_experiments(
     test_metrics.to_csv(paths["test_metrics"], index=False)
     model_comparison.to_csv(paths["model_comparison"], index=False)
     overall_comparison.to_csv(paths["overall_model_comparison"], index=False)
+    roc_paths = plot_dataset_roc_curves(roc_curves, output_dir)
+    paths.update({f"roc_{key}": path for key, path in roc_paths.items()})
     _write_metadata(Path(config_path).expanduser().resolve(), output_dir)
 
     print("\n=== Cross-dataset comparison ===")
