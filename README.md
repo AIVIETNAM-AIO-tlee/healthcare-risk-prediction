@@ -166,5 +166,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow, validation 
 ## Report and Presentation
 
 - Report source: [`docs/report/Research_Template_Report.tex`](docs/report/Research_Template_Report.tex)
-- Demo video: https://youtu.be/a0pVMnRgGaE
-- Presentation: https://drive.google.com/file/d/1foDtkD4MwgivJIOTOfVh2aazJ1p3nHq/view?usp=sharing
+- Demo video: https://www.youtube.com/watch?v=iwFmqRy-ldU
+- Presentation: https://drive.google.com/file/d/19ftotvEal-7DuOh9jbJ-8TdZjnsm8Tqi/view?usp=sharing
