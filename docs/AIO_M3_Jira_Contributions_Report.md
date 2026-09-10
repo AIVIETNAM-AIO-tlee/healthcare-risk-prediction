@@ -77,7 +77,7 @@ Nguyen Van Vi was responsible for designing the end-to-end machine learning pipe
 
 ### Completed work
 
-- **ACM3-7 - Design ML pipeline workflow:** Designed the end-to-end experiment workflow and pipeline diagrams; revised and approved by Le Quang Thanh[cite: 1, 4].
+- **ACM3-7 - Design ML pipeline workflow:** Designed the end-to-end experiment workflow and pipeline diagrams; revised and approved by Le Quang Thanh.
 - **ACM3-14 - Implement dataset splitting and stratified K-fold CV:** Built 80/20 splits and 5-fold CV generating persisted fold indices (`kfold_indices.csv`).
 - **ACM3-16 - K-Fold validation & SHAP analysis:** Led Epic 4 coordinating cross-validation and SHAP stability execution; supervised by Le Quang Thanh and integrated model outputs from Pham Minh Dang Tran.
 - **ACM3-26 - Implement SHAP stability analysis across CV folds:** Built the fold-ranking comparison module (Kendall's $\tau$, Spearman's $\rho$, Top-10 Jaccard) and heatmaps; supported by Pham Minh Dang Tran.
